@@ -1,7 +1,7 @@
 ﻿namespace FF7R2.DataObject.Properties;
 
 public class ByteProperty(FrozenObject obj, Property property) : PropertyValue<byte>(obj, property) {
-    protected override byte Data { get; set; }
+    public override byte Data { get; set; }
 
     internal override void Read(BinaryReader reader) {
         Offset = reader.BaseStream.Position;

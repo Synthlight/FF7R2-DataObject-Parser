@@ -11,13 +11,13 @@ public sealed class Tests {
 
     [DynamicData(nameof(GetFilesToTest), DynamicDataSourceType.Method)]
     [DataTestMethod]
-    public void TestReadUserFile(string file) {
+    public void TestReadFiles(string file) {
         IoStoreAsset.Load(file);
     }
 
     [DynamicData(nameof(GetFilesToTest), DynamicDataSourceType.Method)]
     [DataTestMethod]
-    public void TestWriteUserFile(string file) {
+    public void TestWriteThenReadParsedFiles(string file) {
         IoStoreAsset asset;
         try {
             asset = IoStoreAsset.Load(file);
@@ -27,18 +27,23 @@ public sealed class Tests {
         }
         // Just write to a temp file for easy comparison.
         var tempFile = file.Replace(PathHelper.BASE_PATH, PathHelper.TEST_WRITE_PATH);
-        asset.Save(tempFile);
+        asset.Save(tempFile, IoStoreAsset.Mode.WRITE_PARSED_DATA);
         IoStoreAsset.Load(tempFile);
-        /*
-        using var memoryStream = new MemoryStream();
-        using var writer       = new BinaryWriter(memoryStream);
+    }
+
+    [DynamicData(nameof(GetFilesToTest), DynamicDataSourceType.Method)]
+    [DataTestMethod]
+    public void TestWriteFileBytes(string file) {
+        IoStoreAsset asset;
         try {
-            asset.Write(writer);
-        } catch (Exception) {
-            // Redo but to a temp file output so they can be compared in hex.
-            // Should rethrow the same error as `Write`.
-            asset.Save(file.Replace(PathHelper.BASE_PATH, PathHelper.TEST_WRITE_PATH));
+            asset = IoStoreAsset.Load(file);
+        } catch (Exception e) {
+            Assert.Inconclusive($"{e.Message}\n{e.StackTrace}");
+            return;
         }
-        */
+        // Just write to a temp file for easy comparison.
+        var tempFile = file.Replace(PathHelper.BASE_PATH, PathHelper.TEST_WRITE_PATH);
+        asset.Save(tempFile, IoStoreAsset.Mode.OG_MODIFIED_BYTES);
+        IoStoreAsset.Load(tempFile);
     }
 }

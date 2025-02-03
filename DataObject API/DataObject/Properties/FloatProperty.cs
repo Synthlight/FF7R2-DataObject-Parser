@@ -1,7 +1,7 @@
 ﻿namespace FF7R2.DataObject.Properties;
 
 public class FloatProperty(FrozenObject obj, Property property) : PropertyValue<float>(obj, property) {
-    protected override float Data { get; set; }
+    public override float Data { get; set; }
 
     internal override void Read(BinaryReader reader) {
         reader.BaseStream.Position = reader.BaseStream.Position.Align(4, obj.frozenObjectStart);

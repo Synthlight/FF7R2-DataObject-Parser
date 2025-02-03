@@ -16,10 +16,10 @@ public abstract class PropertyValue(FrozenObject obj, Property property) {
 }
 
 public abstract class PropertyValue<T>(FrozenObject obj, Property property) : PropertyValue(obj, property) {
-    protected abstract T?      Data        { get; set; }
+    public abstract T?      Data        { get; set; }
     protected override object? GenericData => Data;
 
-    public virtual T? PublicData {
+    public virtual T? DataAsByteProxy {
         get {
             var length = TypeSize<T>.Size;
             var buffer = new byte[length];
@@ -33,7 +33,7 @@ public abstract class PropertyValue<T>(FrozenObject obj, Property property) : Pr
     }
 
     public override string ToString() =>
-        PublicData != null
-            ? $"{property.Name}: {PublicData.ToString()} ({property.UnderlyingType}) ------ {Offset}"
+        DataAsByteProxy != null
+            ? $"{property.Name}: {DataAsByteProxy.ToString()} ({property.UnderlyingType}) ------ {Offset}"
             : $"{property.Name}: (null) ({property.UnderlyingType}) ------ {Offset}";
 }

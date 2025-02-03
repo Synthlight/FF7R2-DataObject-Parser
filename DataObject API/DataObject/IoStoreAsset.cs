@@ -42,11 +42,32 @@ public class IoStoreAsset {
         return asset;
     }
 
-    public void Save(string file) {
-        Directory.CreateDirectory(Path.GetDirectoryName(file)!);
-        var       stream = File.Open(file, FileMode.Create, FileAccess.Write, FileShare.None);
-        using var writer = new BinaryWriter(stream);
-        Write(writer);
+    /// <summary>
+    /// There's two modes of saving.
+    /// <see cref="Mode.OG_MODIFIED_BYTES"/> works in conjunction with the `DataAsByteProxy` property and just reads/writes to/from the bytes at specific offsets.
+    /// This works, at the cost of immutable array sizes.
+    /// <see cref="Mode.WRITE_PARSED_DATA"/>
+    /// This tries to write out the parsed file, and results are buggy in-game at best.
+    /// Tests pass for few files, and the ones that do (like equipment) just result in the items being gone in-game.
+    /// </summary>
+    /// <param name="file"></param>
+    /// <param name="mode"></param>
+    public void Save(string file, Mode mode) {
+        switch (mode) {
+            case Mode.OG_MODIFIED_BYTES: {
+                Directory.CreateDirectory(Path.GetDirectoryName(file)!);
+                File.WriteAllBytes(file, bytes);
+                break;
+            }
+            case Mode.WRITE_PARSED_DATA: {
+                Directory.CreateDirectory(Path.GetDirectoryName(file)!);
+                var       stream = File.Open(file, FileMode.Create, FileAccess.Write, FileShare.None);
+                using var writer = new BinaryWriter(stream);
+                Write(writer);
+                break;
+            }
+            default: throw new ArgumentOutOfRangeException(nameof(mode), mode, null);
+        }
     }
 
     internal void Read(BinaryReader reader) {
@@ -183,10 +204,8 @@ public class IoStoreAsset {
         writer.Write(packageSummary.GetBytes());
     }
 
-    private void WriteExports(BinaryWriter writer) {
-        packageSummary.ExportMapOffset = (int) writer.BaseStream.Position;
-        foreach (var export in exports) {
-            writer.Write(export.GetBytes());
-        }
+    public enum Mode {
+        OG_MODIFIED_BYTES,
+        WRITE_PARSED_DATA
     }
 }

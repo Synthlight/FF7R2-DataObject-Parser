@@ -1,7 +1,7 @@
 ﻿namespace FF7R2.DataObject.Properties;
 
 public class UInt32Property(FrozenObject obj, Property property) : PropertyValue<uint>(obj, property) {
-    protected override uint Data { get; set; }
+    public override uint Data { get; set; }
 
     internal override void Read(BinaryReader reader) {
         reader.BaseStream.Position = reader.BaseStream.Position.Align(4, obj.frozenObjectStart);

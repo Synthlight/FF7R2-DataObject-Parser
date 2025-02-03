@@ -4,9 +4,9 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace FF7R2.DataObject.Properties;
 
 public class NameProperty(FrozenObject obj, Property property) : PropertyValue<FName?>(obj, property) {
-    protected override FName? Data { get; set; }
+    public override FName? Data { get; set; }
 
-    public override FName? PublicData => Data;
+    public override FName? DataAsByteProxy => Data;
 
     internal override void Read(BinaryReader reader) {
         reader.BaseStream.Position = reader.BaseStream.Position.Align(4, obj.frozenObjectStart);

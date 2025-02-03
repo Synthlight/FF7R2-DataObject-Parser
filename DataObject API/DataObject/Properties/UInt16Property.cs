@@ -1,7 +1,7 @@
 ﻿namespace FF7R2.DataObject.Properties;
 
 public class UInt16Property(FrozenObject obj, Property property) : PropertyValue<ushort>(obj, property) {
-    protected override ushort Data { get; set; }
+    public override ushort Data { get; set; }
 
     internal override void Read(BinaryReader reader) {
         Offset = reader.BaseStream.Position;

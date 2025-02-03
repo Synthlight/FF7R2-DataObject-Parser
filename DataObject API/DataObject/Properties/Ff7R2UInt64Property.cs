@@ -1,7 +1,7 @@
 ﻿namespace FF7R2.DataObject.Properties;
 
 public class Ff7R2UInt64Property(FrozenObject obj, Property property) : PropertyValue<ulong>(obj, property) {
-    protected override ulong Data { get; set; }
+    public override ulong Data { get; set; }
 
     internal override void Read(BinaryReader reader) {
         Offset = reader.BaseStream.Position;

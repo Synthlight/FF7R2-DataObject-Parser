@@ -2,12 +2,12 @@
 
 public class StrProperty(FrozenObject obj, Property property) : PropertyValue<string>(obj, property) {
     private FStringProxy internalData = new();
-    protected override string? Data {
+    public override string? Data {
         get => internalData.data;
         set => internalData.data = value;
     }
 
-    public override string? PublicData => Data;
+    public override string? DataAsByteProxy => Data;
 
     internal override void Read(BinaryReader reader) {
         reader.BaseStream.Position = reader.BaseStream.Position.Align(8, obj.frozenObjectStart);

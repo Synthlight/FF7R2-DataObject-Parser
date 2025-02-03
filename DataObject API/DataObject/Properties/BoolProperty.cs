@@ -1,7 +1,7 @@
 ﻿namespace FF7R2.DataObject.Properties;
 
 public class BoolProperty(FrozenObject obj, Property property) : PropertyValue<bool>(obj, property) {
-    protected override bool Data { get; set; }
+    public override bool Data { get; set; }
 
     internal override void Read(BinaryReader reader) {
         Offset = reader.BaseStream.Position;
