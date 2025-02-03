@@ -7,6 +7,8 @@ public class FStringProxy {
     internal string?        data;
     private  int            charMax;
 
+    private long headerPos;
+
     internal void Read(BinaryReader reader) {
         var initialPos = reader.BaseStream.Position;
         dataPtr = new();
@@ -26,16 +28,18 @@ public class FStringProxy {
     }
 
     internal void WriteHeader(BinaryWriter writer) {
+        headerPos = writer.BaseStream.Position;
         writer.Write(dataPtr); // Update later.
         writer.Write(data?.Length ?? 0);
         writer.Write(charMax);
     }
 
-    internal void WriteData(BinaryWriter writer, long headerPos) {
+    internal void WriteData(BinaryWriter writer) {
         if (data == null || data?.Length == 0) return;
 
         var initialPos = writer.BaseStream.Position;
 
+        if (headerPos == 0) throw new("Header position not set.");
         writer.BaseStream.Position = headerPos;
         dataPtr.OffsetFromThis     = initialPos - headerPos;
         writer.Write(dataPtr);
@@ -53,7 +57,7 @@ public static class FStringProxyExtensions {
         obj.WriteHeader(writer);
     }
 
-    internal static void WriteData(this BinaryWriter writer, FStringProxy obj, long headerPos) {
-        obj.WriteData(writer, headerPos);
+    internal static void WriteData(this BinaryWriter writer, FStringProxy obj) {
+        obj.WriteData(writer);
     }
 }

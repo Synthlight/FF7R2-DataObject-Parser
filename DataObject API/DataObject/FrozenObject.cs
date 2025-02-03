@@ -110,26 +110,22 @@ public class FrozenObject(InnerAsset asset) {
         writer.BaseStream.Position += padding;
         frozenObjectStart          =  writer.BaseStream.Position;
 
-        var keyHeaderPos = writer.BaseStream.Position;
         writer.WriteHeader(keys);
-        var indexesHeaderPos = writer.BaseStream.Position;
         writer.WriteHeader(indexes);
-        var propertiesHeaderPos = writer.BaseStream.Position;
         writer.WriteHeader(properties);
-        var entriesHeaderPos = writer.BaseStream.Position;
         writer.WriteHeader(entries);
 
         // TODO: How names are done break my brain. Just write them as-is and make it readonly for now.
-        writer.WriteData(keys, keyHeaderPos, writer.Write);
-        writer.WriteData(indexes, indexesHeaderPos, writer.Write);
-        writer.WriteData(properties, propertiesHeaderPos, writer.Write);
+        writer.WriteData(keys, writer.Write);
+        writer.WriteData(indexes, writer.Write);
+        writer.WriteData(properties, writer.Write);
 
         // Write all the base entries, *then* go back and write all the array data.
-        writer.WriteData(entries, entriesHeaderPos, entry => writer.Write(entry, PropertyWriteMode.MAIN_OBJ_ONLY));
+        writer.WriteData(entries, entry => writer.Write(entry, PropertyWriteMode.MAIN_OBJ_ONLY));
         foreach (var entry in entries.data) {
             writer.Write(entry, PropertyWriteMode.SUB_OBJECTS_ONLY);
         }
-        //writer.WriteData(entries, entriesHeaderPos, entry => writer.Write(entry, PropertyWriteMode.SUB_OBJECTS_ONLY));
+        //writer.WriteData(entries, entry => writer.Write(entry, PropertyWriteMode.SUB_OBJECTS_ONLY));
 
         var frozenEnd = writer.BaseStream.Position;
         frozenSize                 = (int) (frozenEnd - frozenSizePos - 20); // TODO: Figure out why 20.

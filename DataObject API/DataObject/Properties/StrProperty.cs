@@ -9,8 +9,6 @@ public class StrProperty(FrozenObject obj, Property property) : PropertyValue<st
 
     public override string? PublicData => Data;
 
-    private long headerPos;
-
     internal override void Read(BinaryReader reader) {
         reader.BaseStream.Position = reader.BaseStream.Position.Align(8, obj.frozenObjectStart);
         Offset                     = reader.BaseStream.Position;
@@ -22,11 +20,10 @@ public class StrProperty(FrozenObject obj, Property property) : PropertyValue<st
         switch (mode) {
             case PropertyWriteMode.MAIN_OBJ_ONLY:
                 writer.BaseStream.Position = writer.BaseStream.Position.Align(8, obj.frozenObjectStart);
-                headerPos                  = writer.BaseStream.Position;
                 writer.WriteHeader(internalData);
                 break;
             case PropertyWriteMode.SUB_OBJECTS_ONLY:
-                writer.WriteData(internalData, headerPos);
+                writer.WriteData(internalData);
                 break;
             default: throw new ArgumentOutOfRangeException(nameof(mode), mode, null);
         }
