@@ -10,7 +10,7 @@ public class Entry(FrozenObject obj, Property[] properties) {
         propertyValues = [];
         foreach (var property in properties) {
             if (property.Name.ToString().EndsWith("_Array")) {
-                var propertyValue = new Ff7R2ArrayPropertyValue(obj, property);
+                var propertyValue = new ArrayPropertyValue(obj, property);
                 propertyValue.Read(reader);
                 propertyValues.Add(propertyValue);
             } else {

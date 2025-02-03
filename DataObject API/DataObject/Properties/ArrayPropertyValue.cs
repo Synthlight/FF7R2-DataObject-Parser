@@ -2,7 +2,7 @@
 
 namespace FF7R2.DataObject.Properties;
 
-public class Ff7R2ArrayPropertyValue(FrozenObject obj, Property property) : PropertyValue<PropertyValue[]>(obj, property) {
+public class ArrayPropertyValue(FrozenObject obj, Property property) : PropertyValue<PropertyValue[]>(obj, property) {
     protected ArrayProxy<PropertyValue> data = new();
     public override PropertyValue[]? Data {
         get => data.data;

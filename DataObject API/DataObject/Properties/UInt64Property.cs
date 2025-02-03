@@ -1,6 +1,6 @@
 ﻿namespace FF7R2.DataObject.Properties;
 
-public class Ff7R2UInt64Property(FrozenObject obj, Property property) : PropertyValue<ulong>(obj, property) {
+public class UInt64Property(FrozenObject obj, Property property) : PropertyValue<ulong>(obj, property) {
     public override ulong Data { get; set; }
 
     internal override void Read(BinaryReader reader) {
