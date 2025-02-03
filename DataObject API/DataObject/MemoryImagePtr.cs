@@ -1,15 +1,28 @@
-﻿namespace FF7R2.DataObject;
+﻿using Org.BouncyCastle.Bcpg;
 
-public class MemoryImagePtr(InnerAsset asset) {
+namespace FF7R2.DataObject;
+
+public class MemoryImagePtr {
     public ulong packed;
-    public long  OffsetFromThis => (long) packed >> 1;
+
+    private ulong isFrozen => packed & 1;
+
+    public long OffsetFromThis {
+        get => (long) packed >> 1;
+        set => packed = isFrozen | (ulong) (value << 1);
+    }
 
     internal void Read(BinaryReader reader) {
         packed = reader.ReadUInt64();
     }
 
     internal void Write(BinaryWriter writer) {
-        // TODO
-        throw new NotImplementedException();
+        writer.Write(packed);
+    }
+}
+
+public static class MemoryImagePtrExtensions {
+    public static void Write(this BinaryWriter writer, MemoryImagePtr obj) {
+        obj.Write(writer);
     }
 }

@@ -3,8 +3,12 @@
 namespace FF7R2.DataObject.Properties;
 
 public class Ff7R2ArrayPropertyValue(FrozenObject obj, Property property) : PropertyValue<PropertyValue[]>(obj, property) {
-    protected override PropertyValue[]? Data { get; set; }
-    public             long[]?          Offsets;
+    protected ArrayProxy<PropertyValue> data = new();
+    protected override PropertyValue[]? Data {
+        get => data.data;
+        set {
+        }
+    }
 
     public override PropertyValue[]? PublicData => Data;
 
@@ -19,13 +23,12 @@ public class Ff7R2ArrayPropertyValue(FrozenObject obj, Property property) : Prop
             FF7propertyType.Int16Property => 2,
             _ => 4
         };
-        Data = reader.ReadArrayProxy(obj.asset, (count, index) => {
-            Offsets ??= new long[count];
-            var propertyValue = property.Create(obj);
-            Offsets[index] = reader.BaseStream.Position;
+        data = new();
+        data.Read(reader, () => {
+            var propertyValue = property.Create();
             propertyValue.Read(reader);
             return propertyValue;
-        }, align);
+        }, align, obj.frozenObjectStart);
     }
 
     public override void Write(BinaryWriter writer) {

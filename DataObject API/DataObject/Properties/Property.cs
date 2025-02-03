@@ -15,15 +15,15 @@ public class Property(FrozenObject obj) {
     }
 
     public void Write(BinaryWriter writer) {
-        // TODO
-        throw new NotImplementedException();
+        writer.BaseStream.Seek(8, SeekOrigin.Current); // Skip the placeholder FName bytes.
+        writer.Write((int) UnderlyingType);
     }
 
     public override string ToString() {
         return $"{Name} :: {UnderlyingType}";
     }
 
-    public PropertyValue Create(FrozenObject obj) {
+    public PropertyValue Create() {
         return UnderlyingType switch {
             FF7propertyType.BoolProperty => new BoolProperty(obj, this),
             FF7propertyType.ByteProperty => new ByteProperty(obj, this),
@@ -38,5 +38,11 @@ public class Property(FrozenObject obj) {
             FF7propertyType.NameProperty => new NameProperty(obj, this),
             _ => throw new ParserException($"Unknown property type {UnderlyingType}")
         };
+    }
+}
+
+public static class PropertyExtensions {
+    public static void Write(this BinaryWriter writer, Property obj) {
+        obj.Write(writer);
     }
 }

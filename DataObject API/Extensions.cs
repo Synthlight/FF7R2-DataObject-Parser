@@ -20,29 +20,9 @@ public static class Extensions {
         writer.Write(name.Number);
     }
 
-    public static T[] ReadArrayProxy<T>(this BinaryReader reader, InnerAsset asset, Func<int, int, T> readEntry, int? align = null) {
-        var initialPos = reader.BaseStream.Position;
-        var dataPtr    = new MemoryImagePtr(asset);
-        dataPtr.Read(reader);
-        var arrayNum = reader.ReadInt32();
-        var arrayMax = reader.ReadInt32();
-
-        var continuePos = reader.BaseStream.Position;
-        reader.BaseStream.Position = initialPos + dataPtr.OffsetFromThis;
-        var data = new T[arrayNum];
-        for (var i = 0; i < data.Length; i++) {
-            data[i] = readEntry(arrayNum, i);
-            if (align != null) {
-                reader.BaseStream.Position = reader.BaseStream.Position.Align((int) align, asset.frozenObject.frozenObjectStart);
-            }
-        }
-        reader.BaseStream.Position = continuePos;
-        return data;
-    }
-
     public static string? ReadFStringProxy(this BinaryReader reader, InnerAsset asset) {
         var initialPos = reader.BaseStream.Position;
-        var dataPtr    = new MemoryImagePtr(asset);
+        var dataPtr    = new MemoryImagePtr();
         dataPtr.Read(reader);
         var arrayNum = reader.ReadInt32();
         // ReSharper disable once UnusedVariable

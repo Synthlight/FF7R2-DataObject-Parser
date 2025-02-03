@@ -3,20 +3,33 @@
 namespace FF7R2.DataObject;
 
 public class Key(FrozenObject obj) {
-    public FName Name;
-    public int   Index;
-    public int   type;
-    public uint  unk1;
+    public FName name;
+    public int   index;
+    public int   nextIndex;
+    public uint  priority;
 
-    public void Read(BinaryReader reader) {
-        Name = obj.OffsetToNameLookup[reader.BaseStream.Position - obj.frozenObjectStart];
+    internal void Read(BinaryReader reader) {
+        name = obj.OffsetToNameLookup[reader.BaseStream.Position - obj.frozenObjectStart];
         reader.BaseStream.Seek(8, SeekOrigin.Current); // Skip the placeholder FName bytes.
-        Index = reader.ReadInt32();
-        type  = reader.ReadInt32();
-        unk1  = reader.ReadUInt32();
+        index     = reader.ReadInt32();
+        nextIndex = reader.ReadInt32();
+        priority  = reader.ReadUInt32();
+    }
+
+    internal void Write(BinaryWriter writer) {
+        writer.BaseStream.Seek(8, SeekOrigin.Current); // Skip the placeholder FName bytes.
+        writer.Write(index);
+        writer.Write(nextIndex);
+        writer.Write(priority);
     }
 
     public override string ToString() {
-        return $"{Name}";
+        return $"{name}";
+    }
+}
+
+public static class KeyExtensions {
+    public static void Write(this BinaryWriter writer, Key obj) {
+        obj.Write(writer);
     }
 }

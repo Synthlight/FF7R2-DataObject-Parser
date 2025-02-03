@@ -13,10 +13,6 @@ public abstract class PropertyValue(FrozenObject obj, Property property) {
     public T? As<T>() where T : class {
         return this as T;
     }
-
-    public static PropertyValue Create(FrozenObject obj, Property property) {
-        return property.Create(obj);
-    }
 }
 
 public abstract class PropertyValue<T>(FrozenObject obj, Property property) : PropertyValue(obj, property) {

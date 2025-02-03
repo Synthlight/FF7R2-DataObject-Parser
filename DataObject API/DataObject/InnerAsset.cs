@@ -13,7 +13,8 @@ public class InnerAsset(IoStoreAsset ioStoreAsset, FExportMapEntry export) {
     internal readonly IoStoreAsset ioStoreAsset = ioStoreAsset;
 
     private FName        tag;
-    public  FrozenObject frozenObject;
+    private int          someBool;
+    public  FrozenObject frozenObject = null!;
 
     // ReSharper disable ParameterHidesMember
     public void Read(BinaryReader reader) {
@@ -24,7 +25,8 @@ public class InnerAsset(IoStoreAsset ioStoreAsset, FExportMapEntry export) {
             throw new NotImplementedException("Inner asset tags found. Not supported yet.");
         }
 
-        if (!export.ObjectFlags.HasFlag(EObjectFlags.RF_ClassDefaultObject) && reader.ReadInt32() == 1) {
+        someBool = reader.ReadInt32();
+        if (!export.ObjectFlags.HasFlag(EObjectFlags.RF_ClassDefaultObject) && someBool == 1) {
             // TODO: Add support for GUIDs.
             throw new NotImplementedException("Inner asset GUID found. Not supported yet.");
         }
@@ -36,6 +38,7 @@ public class InnerAsset(IoStoreAsset ioStoreAsset, FExportMapEntry export) {
     public void Write(BinaryWriter writer) {
         // TODO: Add tag support.
         writer.Write(tag);
+        writer.Write(someBool);
 
         writer.Write(frozenObject);
     }

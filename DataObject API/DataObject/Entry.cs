@@ -14,7 +14,7 @@ public class Entry(FrozenObject obj, Property[] properties) {
                 propertyValue.Read(reader);
                 propertyValues.Add(propertyValue);
             } else {
-                var propertyValue = property.Create(obj);
+                var propertyValue = property.Create();
                 propertyValue.Read(reader);
                 propertyValues.Add(propertyValue);
             }
