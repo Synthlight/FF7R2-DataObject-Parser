@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataObject API", "DataObject API\DataObject API.csproj", "{03A4B95F-F787-4258-9A83-2C8045F1F600}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{8F43A739-8A79-42FA-8AEC-B69430A7891F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Property-Writer", "Property-Writer\Property-Writer.csproj", "{65086DCB-074B-46E0-AFC9-42B919D850B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{8F43A739-8A79-42FA-8AEC-B69430A7891F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F43A739-8A79-42FA-8AEC-B69430A7891F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F43A739-8A79-42FA-8AEC-B69430A7891F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65086DCB-074B-46E0-AFC9-42B919D850B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65086DCB-074B-46E0-AFC9-42B919D850B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65086DCB-074B-46E0-AFC9-42B919D850B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65086DCB-074B-46E0-AFC9-42B919D850B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

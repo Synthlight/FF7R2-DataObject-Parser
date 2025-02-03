@@ -1,9 +1,9 @@
 ﻿namespace FF7R2.DataObject;
 
 public class ArrayProxy<T> {
-    private  MemoryImagePtr dataPtr = new();
-    internal T[]            data    = [];
-    private  int            dataMax;
+    private MemoryImagePtr dataPtr = new();
+    public  T[]            data    = [];
+    private int            dataMax;
 
     private long headerPos;
 

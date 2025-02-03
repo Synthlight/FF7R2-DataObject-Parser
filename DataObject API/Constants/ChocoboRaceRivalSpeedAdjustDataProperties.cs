@@ -1,0 +1,50 @@
+// ReSharper disable All
+namespace FF7R2.Constants;
+
+public static class ChocoboRaceRivalSpeedAdjustDataProperties {
+    public const string GoalTimeDiff_Middle = "GoalTimeDiff_Middle";
+    public const string GoalTimeDiff_Low = "GoalTimeDiff_Low";
+    public const string ForwardPlayerTimeDiff_High = "ForwardPlayerTimeDiff_High";
+    public const string ForwardPlayerTimeDiff_Middle = "ForwardPlayerTimeDiff_Middle";
+    public const string ForwardPlayerTimeDiff_Low = "ForwardPlayerTimeDiff_Low";
+    public const string BackPlayerTimeDiff_High = "BackPlayerTimeDiff_High";
+    public const string BackPlayerTimeDiff_Middle = "BackPlayerTimeDiff_Middle";
+    public const string BackPlayerTimeDiff_Low = "BackPlayerTimeDiff_Low";
+    public const string RankSpeedAdjust = "RankSpeedAdjust";
+    public const string GoalTimeSpeedAdjust = "GoalTimeSpeedAdjust";
+    public const string ForwardPlayerTimeSpeedAdjust = "ForwardPlayerTimeSpeedAdjust";
+    public const string BackPlayerTimeSpeedAdjust = "BackPlayerTimeSpeedAdjust";
+    public const string PaceAdjustModeDuration = "PaceAdjustModeDuration";
+    public const string PaceAdjustFinishTimeDiff = "PaceAdjustFinishTimeDiff";
+    public const string SpeedAdjustDuration = "SpeedAdjustDuration";
+    public const string SpeedAdjustInterval = "SpeedAdjustInterval";
+    public const string AttackModeSpeedAdjust0 = "AttackModeSpeedAdjust0";
+    public const string AttackModeSpeedAdjust1 = "AttackModeSpeedAdjust1";
+    public const string AttackModeSpeedAdjustDuration = "AttackModeSpeedAdjustDuration";
+    public const string AttackModeSpeedAdjustInterval = "AttackModeSpeedAdjustInterval";
+    public const string AttackModeCheckRange = "AttackModeCheckRange";
+    public const string AttackModeCheckTime = "AttackModeCheckTime";
+    public const string AttackModeDuration = "AttackModeDuration";
+    public const string StaminaIntarval = "StaminaIntarval";
+    public const string AttackModeTargetRangeMax = "AttackModeTargetRangeMax";
+    public const string AttackModeTargetRangeMin = "AttackModeTargetRangeMin";
+    public const string AttackModeCancelRangeMax = "AttackModeCancelRangeMax";
+    public const string AttackModeCancelRangeMin = "AttackModeCancelRangeMin";
+    public const string ApproachModeDuration = "ApproachModeDuration";
+    public const string ApproachModeSpeedAdjustInterval = "ApproachModeSpeedAdjustInterval";
+    public const string EarlyAdjustTime = "EarlyAdjustTime";
+    public const string EarlyAdjustSpeedMax_High = "EarlyAdjustSpeedMax_High";
+    public const string EarlyAdjustSpeedMin_High = "EarlyAdjustSpeedMin_High";
+    public const string EarlyAdjustAccelerationMax_High = "EarlyAdjustAccelerationMax_High";
+    public const string EarlyAdjustAccelerationMin_High = "EarlyAdjustAccelerationMin_High";
+    public const string EarlyAdjustSpeedMax_Middle = "EarlyAdjustSpeedMax_Middle";
+    public const string EarlyAdjustSpeedMin_Middle = "EarlyAdjustSpeedMin_Middle";
+    public const string EarlyAdjustAccelerationMax_Middle = "EarlyAdjustAccelerationMax_Middle";
+    public const string EarlyAdjustAccelerationMin_Middle = "EarlyAdjustAccelerationMin_Middle";
+    public const string EarlyAdjustSpeedMax_Low = "EarlyAdjustSpeedMax_Low";
+    public const string EarlyAdjustSpeedMin_Low = "EarlyAdjustSpeedMin_Low";
+    public const string EarlyAdjustAccelerationMax_Low = "EarlyAdjustAccelerationMax_Low";
+    public const string EarlyAdjustAccelerationMin_Low = "EarlyAdjustAccelerationMin_Low";
+    public const string GoalTimeDiff_High = "GoalTimeDiff_High";
+    public const string AttackModeCapacity = "AttackModeCapacity";
+}

@@ -17,7 +17,7 @@ public class FrozenObject(InnerAsset asset) {
     private List<MemoryImageName>   minimalNames = [];
     private SparseArrayProxy<Key>   keys         = new();
     private ArrayProxy<int>         indexes      = new();
-    private ArrayProxy<Property>    properties   = new();
+    public  ArrayProxy<Property>    properties   = new();
     private ArrayProxy<Entry>       entries      = new();
 
     public Dictionary<long, FName> OffsetToNameLookup = [];

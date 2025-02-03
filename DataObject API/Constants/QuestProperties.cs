@@ -1,0 +1,51 @@
+// ReSharper disable All
+namespace FF7R2.Constants;
+
+public static class QuestProperties {
+    public const string GroupItemName_Array = "GroupItemName_Array";
+    public const string GroupDescription_Array = "GroupDescription_Array";
+    public const string OverrideNumerator_Array = "OverrideNumerator_Array";
+    public const string OverrideDenominator_Array = "OverrideDenominator_Array";
+    public const string GroupImageName_Array = "GroupImageName_Array";
+    public const string QuestTask_Array = "QuestTask_Array";
+    public const string Condition_Array = "Condition_Array";
+    public const string BoardDescription = "BoardDescription";
+    public const string Description = "Description";
+    public const string ClearedDescription = "ClearedDescription";
+    public const string ClientNameTextID = "ClientNameTextID";
+    public const string ClientLocationNameTextID = "ClientLocationNameTextID";
+    public const string ImageName = "ImageName";
+    public const string ClearedImageName = "ClearedImageName";
+    public const string FavoriteCharacterImageName = "FavoriteCharacterImageName";
+    public const string ItemName = "ItemName";
+    public const string BranchStoryFlagID = "BranchStoryFlagID";
+    public const string BranchQuestID = "BranchQuestID";
+    public const string ViewCharacterImageStoryFlag = "ViewCharacterImageStoryFlag";
+    public const string LocationId = "LocationId";
+    public const string QuestResetID = "QuestResetID";
+    public const string QuestClearID = "QuestClearID";
+    public const string ExclusiveObjectID = "ExclusiveObjectID";
+    public const string ObjectListID = "ObjectListID";
+    public const string SuspendStoryFlag = "SuspendStoryFlag";
+    public const string MenuOpenStoryFlag = "MenuOpenStoryFlag";
+    public const string CanAcceptStoryFlag = "CanAcceptStoryFlag";
+    public const string AcceptedStoryFlag = "AcceptedStoryFlag";
+    public const string CompleteStoryFlag = "CompleteStoryFlag";
+    public const string CompleteAssignStateChange = "CompleteAssignStateChange";
+    public const string BronzeRankStoryFlag = "BronzeRankStoryFlag";
+    public const string BronzRankSnapStoryFlag = "BronzRankSnapStoryFlag";
+    public const string BronzeRankHistoryStoryFlag = "BronzeRankHistoryStoryFlag";
+    public const string SilverRankSotryFlag = "SilverRankSotryFlag";
+    public const string SilverRankSnapStoryFlag = "SilverRankSnapStoryFlag";
+    public const string SilverRankHistorySotryFlag = "SilverRankHistorySotryFlag";
+    public const string GoldRankStoryFlag = "GoldRankStoryFlag";
+    public const string GoldRankSnapStoryFlag = "GoldRankSnapStoryFlag";
+    public const string GoldRankHistoryStoryFlag = "GoldRankHistoryStoryFlag";
+    public const string ClearHistoryStoryFlag = "ClearHistoryStoryFlag";
+    public const string ClearStateSaveStoryFlag = "ClearStateSaveStoryFlag";
+    public const string CompleteStateTriggerIDAfterMessage = "CompleteStateTriggerIDAfterMessage";
+    public const string StoryJumpID = "StoryJumpID";
+    public const string OrderIndexForUI = "OrderIndexForUI";
+    public const string UniqueIndex = "UniqueIndex";
+    public const string IsBranch = "IsBranch";
+}
