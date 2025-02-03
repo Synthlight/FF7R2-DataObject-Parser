@@ -1,41 +1,38 @@
-﻿using System.Collections;
-using CUE4Parse.Utils;
+﻿using System.Text;
 
 namespace FF7R2.DataObject;
 
-public class BitArrayData {
+public class FStringProxy {
     private  MemoryImagePtr dataPtr = new();
-    internal BitArray       Data    = new(0);
-    private  int            numBits;
-    private  int            maxBits;
+    internal string?        data;
+    private  int            charMax;
 
     internal void Read(BinaryReader reader) {
         var initialPos = reader.BaseStream.Position;
         dataPtr = new();
         dataPtr.Read(reader);
-        numBits = reader.ReadInt32();
-        maxBits = reader.ReadInt32();
+        var charNum = reader.ReadInt32();
+        charMax = reader.ReadInt32();
 
-        if (numBits == 0) return;
+        if (charNum < 1) return;
 
         var continuePos = reader.BaseStream.Position;
         reader.BaseStream.Position = initialPos + dataPtr.OffsetFromThis;
 
-        var data = reader.ReadBytes(numBits.DivideAndRoundUp(8));
-        reader.BaseStream.Position = continuePos;
-        Data                       = new(data) {Length = numBits};
+        var bytes = reader.ReadBytes(charNum * 2);
+        data = Encoding.Unicode.GetString(bytes, 0, bytes.Length - 2);
 
         reader.BaseStream.Position = continuePos;
     }
 
     internal void WriteHeader(BinaryWriter writer) {
         writer.Write(dataPtr); // Update later.
-        writer.Write(numBits);
-        writer.Write(maxBits);
+        writer.Write(data?.Length ?? 0);
+        writer.Write(charMax);
     }
 
     internal void WriteData(BinaryWriter writer, long headerPos) {
-        if (numBits == 0) return;
+        if (data == null || data?.Length == 0) return;
 
         var initialPos = writer.BaseStream.Position;
 
@@ -45,18 +42,18 @@ public class BitArrayData {
 
         writer.BaseStream.Position = headerPos + dataPtr.OffsetFromThis;
 
-        var bytes = new byte[numBits.DivideAndRoundUp(8)];
-        Data.CopyTo(bytes, 0);
+        var bytes = Encoding.Unicode.GetBytes(data!);
+        Array.Resize(ref bytes, bytes.Length + 2);
         writer.Write(bytes);
     }
 }
 
-public static class BitArrayDataExtensions {
-    internal static void WriteHeader(this BinaryWriter writer, BitArrayData obj) {
+public static class FStringProxyExtensions {
+    internal static void WriteHeader(this BinaryWriter writer, FStringProxy obj) {
         obj.WriteHeader(writer);
     }
 
-    internal static void WriteData(this BinaryWriter writer, BitArrayData obj, long headerPos) {
+    internal static void WriteData(this BinaryWriter writer, FStringProxy obj, long headerPos) {
         obj.WriteData(writer, headerPos);
     }
 }

@@ -22,7 +22,7 @@ public class MemoryImagePtr {
 }
 
 public static class MemoryImagePtrExtensions {
-    public static void Write(this BinaryWriter writer, MemoryImagePtr obj) {
+    internal static void Write(this BinaryWriter writer, MemoryImagePtr obj) {
         obj.Write(writer);
     }
 }

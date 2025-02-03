@@ -12,7 +12,13 @@ public class MemoryImageVTablePatch(InnerAsset asset) {
     }
 
     internal void Write(BinaryWriter writer) {
-        // TODO
-        throw new NotImplementedException();
+        writer.Write(vTableOffset);
+        writer.Write(offset);
+    }
+}
+
+public static class MemoryImageVTablePatchExtensions {
+    internal static void Write(this BinaryWriter writer, MemoryImageVTablePatch obj) {
+        obj.Write(writer);
     }
 }

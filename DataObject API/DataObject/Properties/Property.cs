@@ -8,13 +8,13 @@ public class Property(FrozenObject obj) {
     public FName           Name;
     public FF7propertyType UnderlyingType;
 
-    public void Read(BinaryReader reader) {
+    internal void Read(BinaryReader reader) {
         Name = obj.OffsetToNameLookup[reader.BaseStream.Position - obj.frozenObjectStart];
         reader.BaseStream.Seek(8, SeekOrigin.Current); // Skip the placeholder FName bytes.
         UnderlyingType = (FF7propertyType) reader.ReadInt32();
     }
 
-    public void Write(BinaryWriter writer) {
+    internal void Write(BinaryWriter writer) {
         writer.BaseStream.Seek(8, SeekOrigin.Current); // Skip the placeholder FName bytes.
         writer.Write((int) UnderlyingType);
     }
@@ -42,7 +42,7 @@ public class Property(FrozenObject obj) {
 }
 
 public static class PropertyExtensions {
-    public static void Write(this BinaryWriter writer, Property obj) {
+    internal static void Write(this BinaryWriter writer, Property obj) {
         obj.Write(writer);
     }
 }

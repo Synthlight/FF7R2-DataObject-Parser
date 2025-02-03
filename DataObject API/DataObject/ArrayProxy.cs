@@ -56,11 +56,11 @@ public class ArrayProxy<T> {
 }
 
 public static class ArrayProxyExtensions {
-    public static void WriteHeader<T>(this BinaryWriter writer, ArrayProxy<T> obj) {
+    internal static void WriteHeader<T>(this BinaryWriter writer, ArrayProxy<T> obj) {
         obj.WriteHeader(writer);
     }
 
-    public static void WriteData<T>(this BinaryWriter writer, ArrayProxy<T> obj, long headerPos, Action<T> writeEntry, int? align = null, int alignOffset = 0) {
+    internal static void WriteData<T>(this BinaryWriter writer, ArrayProxy<T> obj, long headerPos, Action<T> writeEntry, int? align = null, long alignOffset = 0) {
         obj.WriteData(writer, headerPos, writeEntry, align, alignOffset);
     }
 }

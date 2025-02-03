@@ -21,7 +21,19 @@ public class Entry(FrozenObject obj, Property[] properties) {
         }
     }
 
+    internal void Write(BinaryWriter writer, PropertyWriteMode mode) {
+        foreach (var propertyValue in propertyValues) {
+            propertyValue.Write(writer, mode);
+        }
+    }
+
     public class PropertyValues : List<PropertyValue> {
         public PropertyValue? this[string key] => this.FirstOrDefault(value => value.property.Name.Text == key);
+    }
+}
+
+public static class EntryExtensions {
+    internal static void Write(this BinaryWriter writer, Entry obj, PropertyWriteMode mode) {
+        obj.Write(writer, mode);
     }
 }

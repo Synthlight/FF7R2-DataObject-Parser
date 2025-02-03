@@ -3,13 +3,12 @@
 public class BoolProperty(FrozenObject obj, Property property) : PropertyValue<bool>(obj, property) {
     protected override bool Data { get; set; }
 
-    public override void Read(BinaryReader reader) {
+    internal override void Read(BinaryReader reader) {
         Offset = reader.BaseStream.Position;
         Data   = reader.ReadBoolean();
     }
 
-    public override void Write(BinaryWriter writer) {
-        // TODO
-        throw new NotImplementedException();
+    internal override void Write(BinaryWriter writer, PropertyWriteMode mode) {
+        writer.Write(Data);
     }
 }

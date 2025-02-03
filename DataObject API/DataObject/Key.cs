@@ -29,7 +29,7 @@ public class Key(FrozenObject obj) {
 }
 
 public static class KeyExtensions {
-    public static void Write(this BinaryWriter writer, Key obj) {
+    internal static void Write(this BinaryWriter writer, Key obj) {
         obj.Write(writer);
     }
 }

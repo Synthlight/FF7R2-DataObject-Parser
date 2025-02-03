@@ -18,7 +18,16 @@ public class MemoryImageVTable(InnerAsset asset) {
     }
 
     internal void Write(BinaryWriter writer) {
-        // TODO
-        throw new NotImplementedException();
+        writer.Write(name);
+        writer.Write(patches.Count);
+        foreach (var patch in patches) {
+            writer.Write(patch);
+        }
+    }
+}
+
+public static class MemoryImageVTableExtensions {
+    internal static void Write(this BinaryWriter writer, MemoryImageVTable obj) {
+        obj.Write(writer);
     }
 }

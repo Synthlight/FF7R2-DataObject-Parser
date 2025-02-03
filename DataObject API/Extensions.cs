@@ -20,25 +20,6 @@ public static class Extensions {
         writer.Write(name.Number);
     }
 
-    public static string? ReadFStringProxy(this BinaryReader reader, InnerAsset asset) {
-        var initialPos = reader.BaseStream.Position;
-        var dataPtr    = new MemoryImagePtr();
-        dataPtr.Read(reader);
-        var arrayNum = reader.ReadInt32();
-        // ReSharper disable once UnusedVariable
-        var arrayMax = reader.ReadInt32();
-        if (arrayNum <= 1) return null;
-
-        var continuePos = reader.BaseStream.Position;
-        reader.BaseStream.Position = initialPos + dataPtr.OffsetFromThis;
-        var ucs2Bytes = reader.ReadBytes(arrayNum * 2);
-        reader.BaseStream.Position = continuePos;
-#if !NO_STRING_NULL_TERMINATION_VALIDATION
-        if (ucs2Bytes[^1] != 0 || ucs2Bytes[^2] != 0) throw new ParserException("Serialized FString is not null terminated");
-#endif
-        return Encoding.Unicode.GetString(ucs2Bytes, 0, ucs2Bytes.Length - 2);
-    }
-
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static long Align(this long ptr, int alignment, long offset = 0) {
         ptr -= offset;

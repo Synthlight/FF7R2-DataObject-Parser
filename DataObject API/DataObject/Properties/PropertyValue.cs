@@ -1,14 +1,14 @@
 ﻿namespace FF7R2.DataObject.Properties;
 
 public abstract class PropertyValue(FrozenObject obj, Property property) {
-    public readonly FrozenObject obj      = obj;
-    public readonly Property     property = property;
+    protected readonly FrozenObject obj      = obj;
+    public readonly    Property     property = property;
 
     protected abstract object? GenericData { get; }
-    public             long    Offset      { get; set; }
+    protected          long    Offset      { get; set; }
 
-    public abstract void Read(BinaryReader  reader);
-    public abstract void Write(BinaryWriter writer);
+    internal abstract void Read(BinaryReader  reader);
+    internal abstract void Write(BinaryWriter writer, PropertyWriteMode mode);
 
     public T? As<T>() where T : class {
         return this as T;

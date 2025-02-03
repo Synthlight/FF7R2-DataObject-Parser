@@ -25,6 +25,11 @@ public sealed class Tests {
             Assert.Inconclusive($"{e.Message}\n{e.StackTrace}");
             return;
         }
+        // Just write to a temp file for easy comparison.
+        var tempFile = file.Replace(PathHelper.BASE_PATH, PathHelper.TEST_WRITE_PATH);
+        asset.Save(tempFile);
+        IoStoreAsset.Load(tempFile);
+        /*
         using var memoryStream = new MemoryStream();
         using var writer       = new BinaryWriter(memoryStream);
         try {
@@ -34,5 +39,6 @@ public sealed class Tests {
             // Should rethrow the same error as `Write`.
             asset.Save(file.Replace(PathHelper.BASE_PATH, PathHelper.TEST_WRITE_PATH));
         }
+        */
     }
 }

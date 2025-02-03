@@ -104,7 +104,7 @@ public class IoStoreAsset {
         packages = new FPackageId[packageCount];
         for (var i = 0; i < packageCount; i++) {
             packages[i] = reader.Read<FPackageId>();
-            // TODO: I think there's more here. A bundle count maybe. Not sure what to do with it. Haven't seen a sample yet.
+            // TODO: I think there's more here. A bundle count, maybe. Not sure what to do with it. Haven't seen a sample yet.
         }
 
         // Read inner asset.
@@ -141,7 +141,10 @@ public class IoStoreAsset {
         }
 
         // Write exports.
-        WriteExports(writer);
+        packageSummary.ExportMapOffset = (int) writer.BaseStream.Position;
+        foreach (var export in exports) {
+            writer.Write(export.GetBytes());
+        }
 
         // Write bundles.
         packageSummary.ExportBundlesOffset = (int) writer.BaseStream.Position;
@@ -170,7 +173,10 @@ public class IoStoreAsset {
         exports[0].CookedSerialSize = (ulong) innerAssetSize;
 
         // Update exports.
-        WriteExports(writer);
+        writer.BaseStream.Position = packageSummary.ExportMapOffset;
+        foreach (var export in exports) {
+            writer.Write(export.GetBytes());
+        }
 
         // Finally, update the header.
         writer.BaseStream.Seek(0, SeekOrigin.Begin);

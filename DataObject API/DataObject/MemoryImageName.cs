@@ -4,7 +4,7 @@ namespace FF7R2.DataObject;
 
 public class MemoryImageName(InnerAsset asset) {
     public FName                      name;
-    public List<MemoryImageNamePatch> patches;
+    public List<MemoryImageNamePatch> patches = [];
 
     internal void Read(BinaryReader reader) {
         name = reader.ReadFName(asset.ioStoreAsset.names);
@@ -18,11 +18,20 @@ public class MemoryImageName(InnerAsset asset) {
     }
 
     internal void Write(BinaryWriter writer) {
-        // TODO
-        throw new NotImplementedException();
+        writer.Write(name);
+        writer.Write(patches.Count);
+        foreach (var patch in patches) {
+            writer.Write(patch);
+        }
     }
 
     public override string ToString() {
         return name.ToString();
+    }
+}
+
+public static class MemoryImageNameExtensions {
+    internal static void Write(this BinaryWriter writer, MemoryImageName obj) {
+        obj.Write(writer);
     }
 }

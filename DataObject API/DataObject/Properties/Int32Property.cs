@@ -3,14 +3,14 @@
 public class Int32Property(FrozenObject obj, Property property) : PropertyValue<int>(obj, property) {
     protected override int Data { get; set; }
 
-    public override void Read(BinaryReader reader) {
+    internal override void Read(BinaryReader reader) {
         reader.BaseStream.Position = reader.BaseStream.Position.Align(4, obj.frozenObjectStart);
         Offset                     = reader.BaseStream.Position;
         Data                       = reader.ReadInt32();
     }
 
-    public override void Write(BinaryWriter writer) {
-        // TODO
-        throw new NotImplementedException();
+    internal override void Write(BinaryWriter writer, PropertyWriteMode mode) {
+        writer.BaseStream.Position = writer.BaseStream.Position.Align(4, obj.frozenObjectStart);
+        writer.Write(Data);
     }
 }

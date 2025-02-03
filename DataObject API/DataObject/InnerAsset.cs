@@ -17,7 +17,7 @@ public class InnerAsset(IoStoreAsset ioStoreAsset, FExportMapEntry export) {
     public  FrozenObject frozenObject = null!;
 
     // ReSharper disable ParameterHidesMember
-    public void Read(BinaryReader reader) {
+    internal void Read(BinaryReader reader) {
         tag = reader.ReadFName(ioStoreAsset.names);
 
         if (tag.Text != "None") {
@@ -35,7 +35,7 @@ public class InnerAsset(IoStoreAsset ioStoreAsset, FExportMapEntry export) {
         frozenObject.Read(reader);
     }
 
-    public void Write(BinaryWriter writer) {
+    internal void Write(BinaryWriter writer) {
         // TODO: Add tag support.
         writer.Write(tag);
         writer.Write(someBool);
@@ -45,7 +45,7 @@ public class InnerAsset(IoStoreAsset ioStoreAsset, FExportMapEntry export) {
 }
 
 public static class InnerAssetExtensions {
-    public static void Write(this BinaryWriter writer, InnerAsset asset) {
+    internal static void Write(this BinaryWriter writer, InnerAsset asset) {
         asset.Write(writer);
     }
 }

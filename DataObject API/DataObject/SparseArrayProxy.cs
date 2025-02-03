@@ -75,11 +75,11 @@ public class SparseArrayProxy<T> {
 }
 
 public static class SparseArrayProxyExtensions {
-    public static void WriteHeader<T>(this BinaryWriter writer, SparseArrayProxy<T> obj) {
+    internal static void WriteHeader<T>(this BinaryWriter writer, SparseArrayProxy<T> obj) {
         obj.WriteHeader(writer);
     }
 
-    public static void WriteData<T>(this BinaryWriter writer, SparseArrayProxy<T> obj, long headerPos, Action<T> writeEntry) {
+    internal static void WriteData<T>(this BinaryWriter writer, SparseArrayProxy<T> obj, long headerPos, Action<T> writeEntry) {
         obj.WriteData(writer, headerPos, writeEntry);
     }
 }

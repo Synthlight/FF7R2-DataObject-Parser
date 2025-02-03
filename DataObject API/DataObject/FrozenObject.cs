@@ -24,7 +24,7 @@ public class FrozenObject(InnerAsset asset) {
     [SuppressMessage("ReSharper", "CollectionNeverQueried.Global")]
     public Dictionary<Key, Entry> DataTable = [];
 
-    public void Read(BinaryReader reader) {
+    internal void Read(BinaryReader reader) {
         var frozenSize = reader.ReadUInt32();
         size                       =  reader.ReadUInt32();
         unk1                       =  reader.ReadUInt16();
@@ -62,7 +62,7 @@ public class FrozenObject(InnerAsset asset) {
             imageName.Read(reader);
             minimalNames.Add(imageName);
             foreach (var patch in imageName.patches) {
-                OffsetToNameLookup[patch.Offset] = imageName.name;
+                OffsetToNameLookup[patch.offset] = imageName.name;
             }
         }
 
@@ -98,7 +98,7 @@ public class FrozenObject(InnerAsset asset) {
         }
     }
 
-    public void Write(BinaryWriter writer) {
+    internal void Write(BinaryWriter writer) {
         // Ends where the vTable count begins.
         var frozenSizePos = writer.BaseStream.Position;
         var frozenSize    = 0;
@@ -120,24 +120,41 @@ public class FrozenObject(InnerAsset asset) {
         writer.WriteHeader(entries);
 
         // TODO: How names are done break my brain. Just write them as-is and make it readonly for now.
-        writer.BaseStream.Seek(frozenSize, SeekOrigin.Current);
         writer.WriteData(keys, keyHeaderPos, writer.Write);
+        writer.WriteData(indexes, indexesHeaderPos, writer.Write);
+        writer.WriteData(properties, propertiesHeaderPos, writer.Write);
 
-        indexes.WriteData(writer, indexesHeaderPos, writer.Write);
-        properties.WriteData(writer, propertiesHeaderPos, writer.Write);
+        // Write all the base entries, *then* go back and write all the array data.
+        writer.WriteData(entries, entriesHeaderPos, entry => writer.Write(entry, PropertyWriteMode.MAIN_OBJ_ONLY));
+        foreach (var entry in entries.data) {
+            writer.Write(entry, PropertyWriteMode.SUB_OBJECTS_ONLY);
+        }
+        //writer.WriteData(entries, entriesHeaderPos, entry => writer.Write(entry, PropertyWriteMode.SUB_OBJECTS_ONLY));
 
-        writer.BaseStream.Seek(frozenSize, SeekOrigin.Current);
-        //writer.Write(vTables.Count);
-        //writer.Write(scriptNames.Count);
-        //writer.Write(minimalNames.Count);
+        var frozenEnd = writer.BaseStream.Position;
+        frozenSize                 = (int) (frozenEnd - frozenSizePos - 20); // TODO: Figure out why 20.
+        writer.BaseStream.Position = frozenSizePos;
+        writer.Write(frozenSize);
 
-        // TODO
-        throw new NotImplementedException();
+        writer.BaseStream.Seek(frozenEnd, SeekOrigin.Begin);
+        writer.Write(vTables.Count);
+        writer.Write(scriptNames.Count);
+        writer.Write(minimalNames.Count);
+
+        foreach (var vTable in vTables) {
+            writer.Write(vTable);
+        }
+        foreach (var scriptName in scriptNames) {
+            writer.Write(scriptName);
+        }
+        foreach (var minimalName in minimalNames) {
+            writer.Write(minimalName);
+        }
     }
 }
 
 public static class FrozenObjectExtensions {
-    public static void Write(this BinaryWriter writer, FrozenObject obj) {
+    internal static void Write(this BinaryWriter writer, FrozenObject obj) {
         obj.Write(writer);
     }
 }
