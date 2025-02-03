@@ -3,8 +3,8 @@
 namespace FF7R2.DataObject;
 
 public class Entry(FrozenObject obj, Property[] properties) {
-    public readonly Property[]     properties = properties;
-    public          PropertyValues propertyValues;
+    public readonly Property[]     properties     = properties;
+    public          PropertyValues propertyValues = [];
 
     public void Read(BinaryReader reader) {
         propertyValues = [];

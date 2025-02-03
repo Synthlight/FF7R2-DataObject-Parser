@@ -1,6 +1,6 @@
 ﻿namespace FF7R2.DataObject;
 
-public class MemoryImageNamePatch(InnerAsset asset) {
+public class MemoryImageNamePatch {
     public uint offset;
 
     internal void Read(BinaryReader reader) {

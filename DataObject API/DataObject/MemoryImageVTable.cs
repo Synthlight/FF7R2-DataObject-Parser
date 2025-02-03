@@ -4,7 +4,7 @@ namespace FF7R2.DataObject;
 
 public class MemoryImageVTable(InnerAsset asset) {
     public FName                        name;
-    public List<MemoryImageVTablePatch> patches;
+    public List<MemoryImageVTablePatch> patches = [];
 
     internal void Read(BinaryReader reader) {
         name = reader.ReadFName(asset.ioStoreAsset.names);

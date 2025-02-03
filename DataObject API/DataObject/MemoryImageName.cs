@@ -11,7 +11,7 @@ public class MemoryImageName(InnerAsset asset) {
         var count = reader.ReadUInt32();
         patches = [];
         for (var i = 0; i < count; i++) {
-            var patch = new MemoryImageNamePatch(asset);
+            var patch = new MemoryImageNamePatch();
             patch.Read(reader);
             patches.Add(patch);
         }
