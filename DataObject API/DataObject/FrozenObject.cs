@@ -22,7 +22,7 @@ public class FrozenObject(InnerAsset asset) {
 
     public Dictionary<long, FName> OffsetToNameLookup = [];
     [SuppressMessage("ReSharper", "CollectionNeverQueried.Global")]
-    public Dictionary<Key, Entry> DataTable = [];
+    public Dictionary<FName, Entry> DataTable = [];
 
     internal void Read(BinaryReader reader) {
         var frozenSize = reader.ReadUInt32();
@@ -94,7 +94,7 @@ public class FrozenObject(InnerAsset asset) {
 
         DataTable = [];
         for (var i = 0; i < keys.data.Length; i++) {
-            DataTable[keys.data[i]] = entries.data[i];
+            DataTable[keys.data[i].name] = entries.data[i];
         }
     }
 

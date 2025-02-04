@@ -25,7 +25,7 @@ public static class Program {
             CreateConstantsFile(props, Path.GetFileNameWithoutExtension(file) + "Properties");
 
             var rows = (from key in data.innerAsset.frozenObject.DataTable.Keys
-                        let name = key.name.Text
+                        let name = key.Text
                         where name != "." && name != "None"
                         orderby name
                         select name).Distinct();
