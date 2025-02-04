@@ -19,9 +19,18 @@ public static class Program {
             }
 
             var props = from property in data.innerAsset.frozenObject.properties.data
+                        orderby property.Name.Text
                         select property.Name.Text;
 
             CreateConstantsFile(props, Path.GetFileNameWithoutExtension(file) + "Properties");
+
+            if (file.Contains("ResidentParameter")) {
+                var rows = from key in data.innerAsset.frozenObject.DataTable.Keys
+                           where key.index != 1339 && key.index != 1342
+                           orderby key.name.Text
+                           select key.name.Text;
+                CreateConstantsFile(rows, Path.GetFileNameWithoutExtension(file) + "Rows");
+            }
         }
     }
 

@@ -2,8 +2,8 @@
 namespace FF7R2.Constants;
 
 public static class ShootingCoasterMiniGameProperties {
-    public const string StringParam_Array = "StringParam_Array";
     public const string AssetID = "AssetID";
+    public const string FloatParam00 = "FloatParam00";
     public const string FloatParam01 = "FloatParam01";
     public const string FloatParam02 = "FloatParam02";
     public const string FloatParam03 = "FloatParam03";
@@ -15,7 +15,7 @@ public static class ShootingCoasterMiniGameProperties {
     public const string FloatParam09 = "FloatParam09";
     public const string FloatParam10 = "FloatParam10";
     public const string FloatParam11 = "FloatParam11";
-    public const string FloatParam00 = "FloatParam00";
+    public const string IntParam00 = "IntParam00";
     public const string IntParam01 = "IntParam01";
     public const string IntParam02 = "IntParam02";
     public const string IntParam03 = "IntParam03";
@@ -25,5 +25,5 @@ public static class ShootingCoasterMiniGameProperties {
     public const string IntParam07 = "IntParam07";
     public const string IntParam08 = "IntParam08";
     public const string IntParam09 = "IntParam09";
-    public const string IntParam00 = "IntParam00";
+    public const string StringParam_Array = "StringParam_Array";
 }

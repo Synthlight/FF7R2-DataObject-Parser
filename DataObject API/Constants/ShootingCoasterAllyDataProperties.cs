@@ -2,16 +2,18 @@
 namespace FF7R2.Constants;
 
 public static class ShootingCoasterAllyDataProperties {
-    public const string StringParam00 = "StringParam00";
     public const string BlendType = "BlendType";
-    public const string UnfollowPlayerSpline = "UnfollowPlayerSpline";
-    public const string IntParam00 = "IntParam00";
+    public const string CollisionLifetime = "CollisionLifetime";
+    public const string EvadeInvulnerabilityTime = "EvadeInvulnerabilityTime";
+    public const string FinalForwardDistance = "FinalForwardDistance";
+    public const string FinalHorizontalDistance = "FinalHorizontalDistance";
+    public const string FinalVerticalDistance = "FinalVerticalDistance";
+    public const string FloatParam00 = "FloatParam00";
     public const string FloatParam01 = "FloatParam01";
     public const string FloatParam02 = "FloatParam02";
     public const string FloatParam03 = "FloatParam03";
     public const string FloatParam04 = "FloatParam04";
     public const string FloatParam05 = "FloatParam05";
-    public const string CollisionLifetime = "CollisionLifetime";
     public const string FloatParam06 = "FloatParam06";
     public const string FloatParam07 = "FloatParam07";
     public const string FloatParam08 = "FloatParam08";
@@ -28,18 +30,6 @@ public static class ShootingCoasterAllyDataProperties {
     public const string FloatParam19 = "FloatParam19";
     public const string FloatParam20 = "FloatParam20";
     public const string FloatParam21 = "FloatParam21";
-    public const string FloatParam32 = "FloatParam32";
-    public const string FloatParam33 = "FloatParam33";
-    public const string FloatParam34 = "FloatParam34";
-    public const string FloatParam35 = "FloatParam35";
-    public const string FloatParam36 = "FloatParam36";
-    public const string PlayerPhaseChangeHorizontalDistance = "PlayerPhaseChangeHorizontalDistance";
-    public const string PlayerPhaseChangeVerticalDistance = "PlayerPhaseChangeVerticalDistance";
-    public const string PhaseTwoForwardDistance = "PhaseTwoForwardDistance";
-    public const string FinalHorizontalDistance = "FinalHorizontalDistance";
-    public const string FinalVerticalDistance = "FinalVerticalDistance";
-    public const string FinalForwardDistance = "FinalForwardDistance";
-    public const string EvadeInvulnerabilityTime = "EvadeInvulnerabilityTime";
     public const string FloatParam24 = "FloatParam24";
     public const string FloatParam25 = "FloatParam25";
     public const string FloatParam26 = "FloatParam26";
@@ -48,5 +38,15 @@ public static class ShootingCoasterAllyDataProperties {
     public const string FloatParam29 = "FloatParam29";
     public const string FloatParam30 = "FloatParam30";
     public const string FloatParam31 = "FloatParam31";
-    public const string FloatParam00 = "FloatParam00";
+    public const string FloatParam32 = "FloatParam32";
+    public const string FloatParam33 = "FloatParam33";
+    public const string FloatParam34 = "FloatParam34";
+    public const string FloatParam35 = "FloatParam35";
+    public const string FloatParam36 = "FloatParam36";
+    public const string IntParam00 = "IntParam00";
+    public const string PhaseTwoForwardDistance = "PhaseTwoForwardDistance";
+    public const string PlayerPhaseChangeHorizontalDistance = "PlayerPhaseChangeHorizontalDistance";
+    public const string PlayerPhaseChangeVerticalDistance = "PlayerPhaseChangeVerticalDistance";
+    public const string StringParam00 = "StringParam00";
+    public const string UnfollowPlayerSpline = "UnfollowPlayerSpline";
 }
