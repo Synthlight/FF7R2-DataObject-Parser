@@ -1,0 +1,55 @@
+// ReSharper disable All
+namespace FF7R2.Constants;
+
+public static class CardGameAnomalyRuleRows {
+    public const string abomalyrule_skillcheck_buff = "abomalyrule_skillcheck_buff";
+    public const string abomalyrule_skillcheck_debuff = "abomalyrule_skillcheck_debuff";
+    public const string abomalyrule_test_3Rounds = "abomalyrule_test_3Rounds";
+    public const string abomalyrule_test_Addcard = "abomalyrule_test_Addcard";
+    public const string abomalyrule_test_Allcard = "abomalyrule_test_Allcard";
+    public const string abomalyrule_test_cardtest = "abomalyrule_test_cardtest";
+    public const string abomalyrule_test_changeBoard = "abomalyrule_test_changeBoard";
+    public const string abomalyrule_test_Gimmick = "abomalyrule_test_Gimmick";
+    public const string abomalyrule_test_TreasureBox = "abomalyrule_test_TreasureBox";
+    public const string abomalyrule_test_tsumeQB = "abomalyrule_test_tsumeQB";
+    public const string Costa_TsumeQB_1 = "Costa_TsumeQB_1";
+    public const string Costa_TsumeQB_10 = "Costa_TsumeQB_10";
+    public const string Costa_TsumeQB_11 = "Costa_TsumeQB_11";
+    public const string Costa_TsumeQB_12 = "Costa_TsumeQB_12";
+    public const string Costa_TsumeQB_13 = "Costa_TsumeQB_13";
+    public const string Costa_TsumeQB_14 = "Costa_TsumeQB_14";
+    public const string Costa_TsumeQB_2 = "Costa_TsumeQB_2";
+    public const string Costa_TsumeQB_21 = "Costa_TsumeQB_21";
+    public const string Costa_TsumeQB_22 = "Costa_TsumeQB_22";
+    public const string Costa_TsumeQB_23 = "Costa_TsumeQB_23";
+    public const string Costa_TsumeQB_24 = "Costa_TsumeQB_24";
+    public const string Costa_TsumeQB_25 = "Costa_TsumeQB_25";
+    public const string Costa_TsumeQB_26 = "Costa_TsumeQB_26";
+    public const string Costa_TsumeQB_27 = "Costa_TsumeQB_27";
+    public const string Costa_TsumeQB_28 = "Costa_TsumeQB_28";
+    public const string Costa_TsumeQB_29 = "Costa_TsumeQB_29";
+    public const string Costa_TsumeQB_3 = "Costa_TsumeQB_3";
+    public const string Costa_TsumeQB_31 = "Costa_TsumeQB_31";
+    public const string Costa_TsumeQB_32 = "Costa_TsumeQB_32";
+    public const string Costa_TsumeQB_33 = "Costa_TsumeQB_33";
+    public const string Costa_TsumeQB_34 = "Costa_TsumeQB_34";
+    public const string Costa_TsumeQB_35 = "Costa_TsumeQB_35";
+    public const string GS_3DIfrit = "GS_3DIfrit";
+    public const string GS_3DShiva = "GS_3DShiva";
+    public const string GS_HiScore_1 = "GS_HiScore_1";
+    public const string GS_HiScore_2 = "GS_HiScore_2";
+    public const string GS_HiScore_3 = "GS_HiScore_3";
+    public const string GS_opponent_1 = "GS_opponent_1";
+    public const string GS_opponent_11 = "GS_opponent_11";
+    public const string GS_opponent_12 = "GS_opponent_12";
+    public const string GS_opponent_13 = "GS_opponent_13";
+    public const string GS_opponent_14 = "GS_opponent_14";
+    public const string GS_opponent_15 = "GS_opponent_15";
+    public const string GS_opponent_2 = "GS_opponent_2";
+    public const string GS_opponent_3 = "GS_opponent_3";
+    public const string GS_opponent_4 = "GS_opponent_4";
+    public const string GS_opponent_5 = "GS_opponent_5";
+    public const string GS_Shinra = "GS_Shinra";
+    public const string Tutorial = "Tutorial";
+    public const string vsQueen = "vsQueen";
+}

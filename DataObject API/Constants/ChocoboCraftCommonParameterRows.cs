@@ -1,0 +1,52 @@
+// ReSharper disable All
+namespace FF7R2.Constants;
+
+public static class ChocoboCraftCommonParameterRows {
+    public const string ANGLE_DETECT_SMELL = "ANGLE_DETECT_SMELL";
+    public const string CLIFF_DISTANCE = "CLIFF_DISTANCE";
+    public const string CLOSE_HEIGHT_RANGE = "CLOSE_HEIGHT_RANGE";
+    public const string CLOSE_RANGE_HOLE_EFFECT = "CLOSE_RANGE_HOLE_EFFECT";
+    public const string CLOSE_RANGE_SMELL = "CLOSE_RANGE_SMELL";
+    public const string DIG_FORWARD_OFFSET = "DIG_FORWARD_OFFSET";
+    public const string DIG_MAX_ANGLE = "DIG_MAX_ANGLE";
+    public const string DIG_MIN_ANGLE = "DIG_MIN_ANGLE";
+    public const string DIG_ROTATION_SPEED = "DIG_ROTATION_SPEED";
+    public const string DigMotion = "DigMotion";
+    public const string DigRangeMode = "DigRangeMode";
+    public const string DISCOVER_RELAY_DISTANCE = "DISCOVER_RELAY_DISTANCE";
+    public const string DISTANCE_PER_SEGMENT = "DISTANCE_PER_SEGMENT";
+    public const string DOWNWARDS_RANGE = "DOWNWARDS_RANGE";
+    public const string FAR_RANGE_HOLE_EFFECT = "FAR_RANGE_HOLE_EFFECT";
+    public const string FAR_RANGE_SMELL = "FAR_RANGE_SMELL";
+    public const string FIRST_DISCOVERY_SPEED = "FIRST_DISCOVERY_SPEED";
+    public const string HEIGHT_CORRECTION_DISTANCE_TO_TARGET = "HEIGHT_CORRECTION_DISTANCE_TO_TARGET";
+    public const string HUB_WAIT_ADD_ITEM_TIME = "HUB_WAIT_ADD_ITEM_TIME";
+    public const string HUB_WAIT_COMPLETE_TIME = "HUB_WAIT_COMPLETE_TIME";
+    public const string HubPartyIdleDurationMax = "HubPartyIdleDurationMax";
+    public const string HubPartyIdleDurationMin = "HubPartyIdleDurationMin";
+    public const string HubPartySmellDurationMax = "HubPartySmellDurationMax";
+    public const string HubPartySmellDurationMin = "HubPartySmellDurationMin";
+    public const string ICON_DISTANCE_FROM_LINE = "ICON_DISTANCE_FROM_LINE";
+    public const string ICON_DISTANCE_FROM_TARGET = "ICON_DISTANCE_FROM_TARGET";
+    public const string ICON_OFFSET_FORWARD = "ICON_OFFSET_FORWARD";
+    public const string ICON_OFFSET_UPWARD = "ICON_OFFSET_UPWARD";
+    public const string LONG_EFFECT_CARVE_COUNT = "LONG_EFFECT_CARVE_COUNT";
+    public const string LONG_EFFECT_RANGE = "LONG_EFFECT_RANGE";
+    public const string MEDIUM_RANGE_HOLE_EFFECT = "MEDIUM_RANGE_HOLE_EFFECT";
+    public const string MEDIUM_RANGE_SMELL = "MEDIUM_RANGE_SMELL";
+    public const string MESSAGE_DELAY_SMELL = "MESSAGE_DELAY_SMELL";
+    public const string NOT_IN_RANGE_SMELL = "NOT_IN_RANGE_SMELL";
+    public const string NotRidingChocoboLimit = "NotRidingChocoboLimit";
+    public const string NotRidingChocoboTrigger = "NotRidingChocoboTrigger";
+    public const string NotUsingSmellLimit = "NotUsingSmellLimit";
+    public const string NotUsingSmellTrigger = "NotUsingSmellTrigger";
+    public const string POINTS_PER_SEGMENT = "POINTS_PER_SEGMENT";
+    public const string SHORT_EFFECT_CARVE_COUNT = "SHORT_EFFECT_CARVE_COUNT";
+    public const string SHORT_EFFECT_RANGE = "SHORT_EFFECT_RANGE";
+    public const string SINE_WAVE_AMPLITUDE = "SINE_WAVE_AMPLITUDE";
+    public const string SINE_WAVE_FREQUENCY = "SINE_WAVE_FREQUENCY";
+    public const string SmellEffectLifeTime = "SmellEffectLifeTime";
+    public const string SMELLING_DISCOVERY_SPEED = "SMELLING_DISCOVERY_SPEED";
+    public const string SmellMotion = "SmellMotion";
+    public const string UPWARDS_RANGE = "UPWARDS_RANGE";
+}

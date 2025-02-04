@@ -1,0 +1,53 @@
+// ReSharper disable All
+namespace FF7R2.Constants;
+
+public static class ActionLimitRows {
+    public const string Ipt1300_WorldStory02_Party_Stay = "Ipt1300_WorldStory02_Party_Stay";
+    public const string lim_AutoWalkType = "lim_AutoWalkType";
+    public const string lim_AutoWalkType_NoAwayLimit = "lim_AutoWalkType_NoAwayLimit";
+    public const string lim_Cam = "lim_Cam";
+    public const string lim_CamLook = "lim_CamLook";
+    public const string lim_CamLookWalk = "lim_CamLookWalk";
+    public const string lim_CamLookWalk_OverCinema = "lim_CamLookWalk_OverCinema";
+    public const string lim_CamWalk = "lim_CamWalk";
+    public const string lim_HighWalk = "lim_HighWalk";
+    public const string lim_HighWalk_disableDashBtn = "lim_HighWalk_disableDashBtn";
+    public const string lim_HighWalkLook = "lim_HighWalkLook";
+    public const string lim_Jog = "lim_Jog";
+    public const string lim_Jog_disableDashBtn = "lim_Jog_disableDashBtn";
+    public const string lim_JogLook = "lim_JogLook";
+    public const string lim_Look = "lim_Look";
+    public const string lim_Run = "lim_Run";
+    public const string lim_Run_disableDashBtn = "lim_Run_disableDashBtn";
+    public const string lim_RunLook = "lim_RunLook";
+    public const string lim_Walk = "lim_Walk";
+    public const string lim_Walk_disableDashBtn = "lim_Walk_disableDashBtn";
+    public const string lim_WalkLook = "lim_WalkLook";
+    public const string lim2200_cq_Yuffie_Stay = "lim2200_cq_Yuffie_Stay";
+    public const string lim2400_WorldStory04_AutoWalkType_In = "lim2400_WorldStory04_AutoWalkType_In";
+    public const string lim2500_WorldStory_01_In = "lim2500_WorldStory_01_In";
+    public const string lim2500_WorldStory_03_In = "lim2500_WorldStory_03_In";
+    public const string lim2500_WorldStory05_Aerith_Stay = "lim2500_WorldStory05_Aerith_Stay";
+    public const string lim2500_WorldStory05_Tifa_Stay = "lim2500_WorldStory05_Tifa_Stay";
+    public const string limCmn_Aerith_Follow = "limCmn_Aerith_Follow";
+    public const string limCmn_Aerith_Follow_Qst15 = "limCmn_Aerith_Follow_Qst15";
+    public const string limCmn_Aerith_FollowLeave = "limCmn_Aerith_FollowLeave";
+    public const string limCmn_Aerith_FollowLow_Qst15 = "limCmn_Aerith_FollowLow_Qst15";
+    public const string limCmn_Barret_Follow = "limCmn_Barret_Follow";
+    public const string limCmn_Barret_FollowLeave = "limCmn_Barret_FollowLeave";
+    public const string limCmn_Barret_Stay_Qst15 = "limCmn_Barret_Stay_Qst15";
+    public const string limCmn_CaitSith_FollowLeave = "limCmn_CaitSith_FollowLeave";
+    public const string limCmn_CaitSith_Stay_Qst15 = "limCmn_CaitSith_Stay_Qst15";
+    public const string limCmn_RedXIII_Follow = "limCmn_RedXIII_Follow";
+    public const string limCmn_RedXIII_FollowLeave = "limCmn_RedXIII_FollowLeave";
+    public const string limCmn_ReidXIII_Stay_Qst15 = "limCmn_ReidXIII_Stay_Qst15";
+    public const string limCmn_Tifa_Follow = "limCmn_Tifa_Follow";
+    public const string limCmn_Tifa_Follow_Qst16 = "limCmn_Tifa_Follow_Qst16";
+    public const string limCmn_Tifa_FollowLeave = "limCmn_Tifa_FollowLeave";
+    public const string limCmn_Tifa_Stay_Qst15 = "limCmn_Tifa_Stay_Qst15";
+    public const string limCmn_Yuffie_Follow = "limCmn_Yuffie_Follow";
+    public const string limCmn_Yuffie_FollowLeave = "limCmn_Yuffie_FollowLeave";
+    public const string limCmn_Yuffie_Stay_Qst14 = "limCmn_Yuffie_Stay_Qst14";
+    public const string limCmn_Yuffie_Stay_Qst15 = "limCmn_Yuffie_Stay_Qst15";
+    public const string limCmn_Yuffie_Stay_Qst19 = "limCmn_Yuffie_Stay_Qst19";
+}

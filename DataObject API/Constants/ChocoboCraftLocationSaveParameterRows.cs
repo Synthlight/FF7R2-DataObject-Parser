@@ -1,0 +1,50 @@
+// ReSharper disable All
+namespace FF7R2.Constants;
+
+public static class ChocoboCraftLocationSaveParameterRows {
+    public const string _1100_Story03_TargetPoint_1_6 = "1100_Story03_TargetPoint_1_6";
+    public const string _1200_Quest04_TargetPoint_1_1 = "1200_Quest04_TargetPoint_1_1";
+    public const string _1200_Quest04_TargetPoint_1_20 = "1200_Quest04_TargetPoint_1_20";
+    public const string _1200_Quest04_TargetPoint_1_45 = "1200_Quest04_TargetPoint_1_45";
+    public const string _1200_test_WildAnimal_Point_001 = "1200_test_WildAnimal_Point_001";
+    public const string _1300_Quest07_TargetPoint_1_Craft = "1300_Quest07_TargetPoint_1_Craft";
+    public const string _1300_Quest07_TargetPoint_2_Craft = "1300_Quest07_TargetPoint_2_Craft";
+    public const string _1300_Quest07_TargetPoint_3_Craft = "1300_Quest07_TargetPoint_3_Craft";
+    public const string _1300_Quest10_TargetPoint_1_1 = "1300_Quest10_TargetPoint_1_1";
+    public const string _1300_Quest10_TargetPoint_1_Craft = "1300_Quest10_TargetPoint_1_Craft";
+    public const string _1300_Quest10_TargetPoint_2_1 = "1300_Quest10_TargetPoint_2_1";
+    public const string _1300_Quest10_TargetPoint_2_Craft = "1300_Quest10_TargetPoint_2_Craft";
+    public const string _1300_Quest10_TargetPoint_3_1 = "1300_Quest10_TargetPoint_3_1";
+    public const string _1300_Quest10_TargetPoint_3_Craft = "1300_Quest10_TargetPoint_3_Craft";
+    public const string _1300_Quest13_TargetPoint_1_1 = "1300_Quest13_TargetPoint_1_1";
+    public const string _1300_Quest13_TargetPoint_1_Craft = "1300_Quest13_TargetPoint_1_Craft";
+    public const string _1300_Quest13_TargetPoint_2_1 = "1300_Quest13_TargetPoint_2_1";
+    public const string _1300_Quest13_TargetPoint_2_Craft = "1300_Quest13_TargetPoint_2_Craft";
+    public const string _2200_Quest15_TargetPoint01 = "2200_Quest15_TargetPoint01";
+    public const string _2200_Quest15_TargetPoint02 = "2200_Quest15_TargetPoint02";
+    public const string _2200_Quest15_TargetPoint03 = "2200_Quest15_TargetPoint03";
+    public const string _2200_Quest15_TargetPoint04 = "2200_Quest15_TargetPoint04";
+    public const string _2200_Quest15_TargetPoint05 = "2200_Quest15_TargetPoint05";
+    public const string _2200_Quest15_TargetPoint06 = "2200_Quest15_TargetPoint06";
+    public const string _2200_Quest15_TargetPoint07 = "2200_Quest15_TargetPoint07";
+    public const string _2200_Quest15_TargetPoint08 = "2200_Quest15_TargetPoint08";
+    public const string _2200_Quest15_TargetPoint09 = "2200_Quest15_TargetPoint09";
+    public const string _2200_Quest15_TargetPoint10 = "2200_Quest15_TargetPoint10";
+    public const string _2400_Quest24_TargetPoint_1 = "2400_Quest24_TargetPoint_1";
+    public const string _2400_Quest24_TargetPoint_1_1 = "2400_Quest24_TargetPoint_1_1";
+    public const string _2400_Quest24_TargetPoint_12 = "2400_Quest24_TargetPoint_12";
+    public const string _2400_Quest24_TargetPoint_2_1 = "2400_Quest24_TargetPoint_2_1";
+    public const string _2400_Quest24_TargetPoint_26 = "2400_Quest24_TargetPoint_26";
+    public const string _2400_Quest24_TargetPoint_3_1 = "2400_Quest24_TargetPoint_3_1";
+    public const string _2400_Quest24_TargetPoint_3_2 = "2400_Quest24_TargetPoint_3_2";
+    public const string Area_1200_Hub_1_3 = "Area_1200_Hub_1_3";
+    public const string Area_1200_Hub_1_4 = "Area_1200_Hub_1_4";
+    public const string Area_1200_Hub_2_4 = "Area_1200_Hub_2_4";
+    public const string Area_1200_Hub_4_4_G = "Area_1200_Hub_4_4_G";
+    public const string Area_1300_Hub_1_1 = "Area_1300_Hub_1_1";
+    public const string Area_1300_Hub_3_4 = "Area_1300_Hub_3_4";
+    public const string Area_2500_Hub_1_1 = "Area_2500_Hub_1_1";
+    public const string Area_2500_Hub_4_3 = "Area_2500_Hub_4_3";
+    public const string Area_2500_Hub_6_2 = "Area_2500_Hub_6_2";
+    public const string Area_2600_Hub_1_1 = "Area_2600_Hub_1_1";
+}

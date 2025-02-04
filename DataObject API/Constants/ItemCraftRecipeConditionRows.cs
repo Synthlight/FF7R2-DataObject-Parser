@@ -1,0 +1,56 @@
+// ReSharper disable All
+namespace FF7R2.Constants;
+
+public static class ItemCraftRecipeConditionRows {
+    public const string rc_lv_1 = "rc_lv_1";
+    public const string rc_lv_1_book_001 = "rc_lv_1_book_001";
+    public const string rc_lv_1_book_002 = "rc_lv_1_book_002";
+    public const string rc_lv_1_book_003 = "rc_lv_1_book_003";
+    public const string rc_lv_1_book_004 = "rc_lv_1_book_004";
+    public const string rc_lv_1_book_005 = "rc_lv_1_book_005";
+    public const string rc_lv_1_book_006 = "rc_lv_1_book_006";
+    public const string rc_lv_1_book_007 = "rc_lv_1_book_007";
+    public const string rc_lv_1_book_008 = "rc_lv_1_book_008";
+    public const string rc_lv_1_book_009 = "rc_lv_1_book_009";
+    public const string rc_lv_1_book_010 = "rc_lv_1_book_010";
+    public const string rc_lv_1_book_011 = "rc_lv_1_book_011";
+    public const string rc_lv_1_book_012 = "rc_lv_1_book_012";
+    public const string rc_lv_1_book_013 = "rc_lv_1_book_013";
+    public const string rc_lv_1_book_014 = "rc_lv_1_book_014";
+    public const string rc_lv_1_book_016 = "rc_lv_1_book_016";
+    public const string rc_lv_1_book_017 = "rc_lv_1_book_017";
+    public const string rc_lv_1_book_018 = "rc_lv_1_book_018";
+    public const string rc_lv_1_book_019 = "rc_lv_1_book_019";
+    public const string rc_lv_1_book_020 = "rc_lv_1_book_020";
+    public const string rc_lv_1_book_021 = "rc_lv_1_book_021";
+    public const string rc_lv_1_book_022 = "rc_lv_1_book_022";
+    public const string rc_lv_1_book_023 = "rc_lv_1_book_023";
+    public const string rc_lv_1_book_024 = "rc_lv_1_book_024";
+    public const string rc_lv_1_book_025 = "rc_lv_1_book_025";
+    public const string rc_lv_1_book_026 = "rc_lv_1_book_026";
+    public const string rc_lv_1_book_027 = "rc_lv_1_book_027";
+    public const string rc_lv_1_book_028 = "rc_lv_1_book_028";
+    public const string rc_lv_1_book_029 = "rc_lv_1_book_029";
+    public const string rc_lv_1_book_030 = "rc_lv_1_book_030";
+    public const string rc_lv_1_book_031 = "rc_lv_1_book_031";
+    public const string rc_lv_1_book_032 = "rc_lv_1_book_032";
+    public const string rc_lv_1_book_033 = "rc_lv_1_book_033";
+    public const string rc_lv_1_book_034 = "rc_lv_1_book_034";
+    public const string rc_lv_1_DEMO = "rc_lv_1_DEMO";
+    public const string rc_lv_10 = "rc_lv_10";
+    public const string rc_lv_11 = "rc_lv_11";
+    public const string rc_lv_12 = "rc_lv_12";
+    public const string rc_lv_13 = "rc_lv_13";
+    public const string rc_lv_14 = "rc_lv_14";
+    public const string rc_lv_15 = "rc_lv_15";
+    public const string rc_lv_2 = "rc_lv_2";
+    public const string rc_lv_2_DEMO = "rc_lv_2_DEMO";
+    public const string rc_lv_3 = "rc_lv_3";
+    public const string rc_lv_3_DEMO = "rc_lv_3_DEMO";
+    public const string rc_lv_4 = "rc_lv_4";
+    public const string rc_lv_5 = "rc_lv_5";
+    public const string rc_lv_6 = "rc_lv_6";
+    public const string rc_lv_7 = "rc_lv_7";
+    public const string rc_lv_8 = "rc_lv_8";
+    public const string rc_lv_9 = "rc_lv_9";
+}

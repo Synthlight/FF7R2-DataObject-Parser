@@ -1,0 +1,51 @@
+// ReSharper disable All
+namespace FF7R2.Constants;
+
+public static class ChocoboRaceSkillEffectRows {
+    public const string Effect_AbilityUp_000 = "Effect_AbilityUp_000";
+    public const string Effect_AccelerationUp_000 = "Effect_AccelerationUp_000";
+    public const string Effect_AccelerationUp_001 = "Effect_AccelerationUp_001";
+    public const string Effect_AccelerationUp_002 = "Effect_AccelerationUp_002";
+    public const string Effect_AccelerationUp_003 = "Effect_AccelerationUp_003";
+    public const string Effect_AddAbilityPoint_000 = "Effect_AddAbilityPoint_000";
+    public const string Effect_AddDashStock_000 = "Effect_AddDashStock_000";
+    public const string Effect_CorneringUp_000 = "Effect_CorneringUp_000";
+    public const string Effect_CorneringUp_001 = "Effect_CorneringUp_001";
+    public const string Effect_CorneringUp_002 = "Effect_CorneringUp_002";
+    public const string Effect_CourseOutPenaltyDown_000 = "Effect_CourseOutPenaltyDown_000";
+    public const string Effect_DamagePenaltyDown_000 = "Effect_DamagePenaltyDown_000";
+    public const string Effect_DashDurationUp_000 = "Effect_DashDurationUp_000";
+    public const string Effect_DashFloorUp_000 = "Effect_DashFloorUp_000";
+    public const string Effect_DashSpeedUp_000 = "Effect_DashSpeedUp_000";
+    public const string Effect_DashStockMaxUp_000 = "Effect_DashStockMaxUp_000";
+    public const string Effect_DriftTurboDurationUp_000 = "Effect_DriftTurboDurationUp_000";
+    public const string Effect_DriftTurboSpeedUp_000 = "Effect_DriftTurboSpeedUp_000";
+    public const string Effect_GripUp_000 = "Effect_GripUp_000";
+    public const string Effect_GripUp_001 = "Effect_GripUp_001";
+    public const string Effect_GripUp_002 = "Effect_GripUp_002";
+    public const string Effect_IntelligenceUp_000 = "Effect_IntelligenceUp_000";
+    public const string Effect_IntelligenceUp_001 = "Effect_IntelligenceUp_001";
+    public const string Effect_IntelligenceUp_002 = "Effect_IntelligenceUp_002";
+    public const string Effect_ItemUp_000 = "Effect_ItemUp_000";
+    public const string Effect_RandomAbilitySet_000 = "Effect_RandomAbilitySet_000";
+    public const string Effect_RocketStartInput_000 = "Effect_RocketStartInput_000";
+    public const string Effect_RocketStartSpeedUp_000 = "Effect_RocketStartSpeedUp_000";
+    public const string Effect_RunOffPenaltyDown_000 = "Effect_RunOffPenaltyDown_000";
+    public const string Effect_SpeedUp_000 = "Effect_SpeedUp_000";
+    public const string Effect_SpeedUp_001 = "Effect_SpeedUp_001";
+    public const string Effect_SpeedUp_002 = "Effect_SpeedUp_002";
+    public const string Effect_SpeedUp_003 = "Effect_SpeedUp_003";
+    public const string Effect_SpeedUp_004 = "Effect_SpeedUp_004";
+    public const string Effect_SpeedUp_005 = "Effect_SpeedUp_005";
+    public const string Effect_SpeedUp_006 = "Effect_SpeedUp_006";
+    public const string Effect_SpeedUp_007 = "Effect_SpeedUp_007";
+    public const string Effect_SpeedUp_008 = "Effect_SpeedUp_008";
+    public const string Effect_SpeedUp_009 = "Effect_SpeedUp_009";
+    public const string Effect_SpeedUp_010 = "Effect_SpeedUp_010";
+    public const string Effect_SpeedUp_011 = "Effect_SpeedUp_011";
+    public const string Effect_SpeedUpEx_000 = "Effect_SpeedUpEx_000";
+    public const string Effect_WaterPenaltyDown_000 = "Effect_WaterPenaltyDown_000";
+    public const string Effect_WeightUp_000 = "Effect_WeightUp_000";
+    public const string Effect_WeightUp_001 = "Effect_WeightUp_001";
+    public const string Effect_WeightUp_002 = "Effect_WeightUp_002";
+}

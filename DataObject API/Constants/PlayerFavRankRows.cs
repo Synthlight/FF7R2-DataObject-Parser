@@ -1,0 +1,57 @@
+// ReSharper disable All
+namespace FF7R2.Constants;
+
+public static class PlayerFavRankRows {
+    public const string PlayerFavPoint_Aerith_0 = "PlayerFavPoint_Aerith_0";
+    public const string PlayerFavPoint_Aerith_1 = "PlayerFavPoint_Aerith_1";
+    public const string PlayerFavPoint_Aerith_2 = "PlayerFavPoint_Aerith_2";
+    public const string PlayerFavPoint_Aerith_3 = "PlayerFavPoint_Aerith_3";
+    public const string PlayerFavPoint_Aerith_4 = "PlayerFavPoint_Aerith_4";
+    public const string PlayerFavPoint_Aerith_5 = "PlayerFavPoint_Aerith_5";
+    public const string PlayerFavPoint_Aerith_6 = "PlayerFavPoint_Aerith_6";
+    public const string PlayerFavPoint_Barret_0 = "PlayerFavPoint_Barret_0";
+    public const string PlayerFavPoint_Barret_1 = "PlayerFavPoint_Barret_1";
+    public const string PlayerFavPoint_Barret_2 = "PlayerFavPoint_Barret_2";
+    public const string PlayerFavPoint_Barret_3 = "PlayerFavPoint_Barret_3";
+    public const string PlayerFavPoint_Barret_4 = "PlayerFavPoint_Barret_4";
+    public const string PlayerFavPoint_Barret_5 = "PlayerFavPoint_Barret_5";
+    public const string PlayerFavPoint_Barret_6 = "PlayerFavPoint_Barret_6";
+    public const string PlayerFavPoint_CaitSith_0_Mid = "PlayerFavPoint_CaitSith_0_Mid";
+    public const string PlayerFavPoint_CaitSith_1_Height = "PlayerFavPoint_CaitSith_1_Height";
+    public const string PlayerFavPoint_Cid_0_Mid = "PlayerFavPoint_Cid_0_Mid";
+    public const string PlayerFavPoint_Cid_1_Height = "PlayerFavPoint_Cid_1_Height";
+    public const string PlayerFavPoint_Cloud_0 = "PlayerFavPoint_Cloud_0";
+    public const string PlayerFavPoint_Cloud_1 = "PlayerFavPoint_Cloud_1";
+    public const string PlayerFavPoint_Cloud_2 = "PlayerFavPoint_Cloud_2";
+    public const string PlayerFavPoint_Cloud_3 = "PlayerFavPoint_Cloud_3";
+    public const string PlayerFavPoint_Cloud_4 = "PlayerFavPoint_Cloud_4";
+    public const string PlayerFavPoint_Cloud_5 = "PlayerFavPoint_Cloud_5";
+    public const string PlayerFavPoint_Cloud_6 = "PlayerFavPoint_Cloud_6";
+    public const string PlayerFavPoint_RedXIII_0 = "PlayerFavPoint_RedXIII_0";
+    public const string PlayerFavPoint_RedXIII_1 = "PlayerFavPoint_RedXIII_1";
+    public const string PlayerFavPoint_RedXIII_2 = "PlayerFavPoint_RedXIII_2";
+    public const string PlayerFavPoint_RedXIII_3 = "PlayerFavPoint_RedXIII_3";
+    public const string PlayerFavPoint_RedXIII_4 = "PlayerFavPoint_RedXIII_4";
+    public const string PlayerFavPoint_RedXIII_5 = "PlayerFavPoint_RedXIII_5";
+    public const string PlayerFavPoint_RedXIII_6 = "PlayerFavPoint_RedXIII_6";
+    public const string PlayerFavPoint_Sephiroth_0_Mid = "PlayerFavPoint_Sephiroth_0_Mid";
+    public const string PlayerFavPoint_Sephiroth_1_Height = "PlayerFavPoint_Sephiroth_1_Height";
+    public const string PlayerFavPoint_Tifa_0 = "PlayerFavPoint_Tifa_0";
+    public const string PlayerFavPoint_Tifa_1 = "PlayerFavPoint_Tifa_1";
+    public const string PlayerFavPoint_Tifa_2 = "PlayerFavPoint_Tifa_2";
+    public const string PlayerFavPoint_Tifa_3 = "PlayerFavPoint_Tifa_3";
+    public const string PlayerFavPoint_Tifa_4 = "PlayerFavPoint_Tifa_4";
+    public const string PlayerFavPoint_Tifa_5 = "PlayerFavPoint_Tifa_5";
+    public const string PlayerFavPoint_Tifa_6 = "PlayerFavPoint_Tifa_6";
+    public const string PlayerFavPoint_Vincent_0_Mid = "PlayerFavPoint_Vincent_0_Mid";
+    public const string PlayerFavPoint_Vincent_1_Height = "PlayerFavPoint_Vincent_1_Height";
+    public const string PlayerFavPoint_Yuffie_0 = "PlayerFavPoint_Yuffie_0";
+    public const string PlayerFavPoint_Yuffie_1 = "PlayerFavPoint_Yuffie_1";
+    public const string PlayerFavPoint_Yuffie_2 = "PlayerFavPoint_Yuffie_2";
+    public const string PlayerFavPoint_Yuffie_3 = "PlayerFavPoint_Yuffie_3";
+    public const string PlayerFavPoint_Yuffie_4 = "PlayerFavPoint_Yuffie_4";
+    public const string PlayerFavPoint_Yuffie_5 = "PlayerFavPoint_Yuffie_5";
+    public const string PlayerFavPoint_Yuffie_6 = "PlayerFavPoint_Yuffie_6";
+    public const string PlayerFavPoint_Zack_0_Height = "PlayerFavPoint_Zack_0_Height";
+    public const string PlayerFavPoint_Zack_0_Mid = "PlayerFavPoint_Zack_0_Mid";
+}

@@ -1,0 +1,54 @@
+// ReSharper disable All
+namespace FF7R2.Constants;
+
+public static class CutSceneCatenaListRows {
+    public const string EV_COMON_2110 = "EV_COMON_2110";
+    public const string EV_CORLE_0900 = "EV_CORLE_0900";
+    public const string EV_COSME_1260 = "EV_COSME_1260";
+    public const string EV_FOREE_7500 = "EV_FOREE_7500";
+    public const string EV_FOREE_7500_1 = "EV_FOREE_7500#1";
+    public const string EV_FOREE_7500_2 = "EV_FOREE_7500#2";
+    public const string EV_FOREE_7630 = "EV_FOREE_7630";
+    public const string EV_FOREE_8505 = "EV_FOREE_8505";
+    public const string EV_FOREE_8610 = "EV_FOREE_8610";
+    public const string EV_FOREE_8790 = "EV_FOREE_8790";
+    public const string EV_GOLDE_3560 = "EV_GOLDE_3560";
+    public const string EV_GOLDE_4140 = "EV_GOLDE_4140";
+    public const string EV_GOLDE_4820 = "EV_GOLDE_4820";
+    public const string EV_GOLDE_4825 = "EV_GOLDE_4825";
+    public const string EV_GOLDE_4830 = "EV_GOLDE_4830";
+    public const string EV_GOLDE_4835 = "EV_GOLDE_4835";
+    public const string EV_GOLDE_4840 = "EV_GOLDE_4840";
+    public const string EV_GOLDE_4845 = "EV_GOLDE_4845";
+    public const string EV_GOLDE_7500 = "EV_GOLDE_7500";
+    public const string EV_GOLDE_7501 = "EV_GOLDE_7501";
+    public const string EV_GOLDE_7502 = "EV_GOLDE_7502";
+    public const string EV_GOLDE_7503 = "EV_GOLDE_7503";
+    public const string EV_GOLDE_7504 = "EV_GOLDE_7504";
+    public const string EV_GOLDE_7505 = "EV_GOLDE_7505";
+    public const string EV_GOLDE_7530 = "EV_GOLDE_7530";
+    public const string EV_GOLDE_7540 = "EV_GOLDE_7540";
+    public const string EV_GOLDE_7545 = "EV_GOLDE_7545";
+    public const string EV_GOLDE_7550 = "EV_GOLDE_7550";
+    public const string EV_GOLDE_7560 = "EV_GOLDE_7560";
+    public const string EV_GOLDE_7565 = "EV_GOLDE_7565";
+    public const string EV_GOLDE_7570 = "EV_GOLDE_7570";
+    public const string EV_GOLDE_7575 = "EV_GOLDE_7575";
+    public const string EV_GOLDE_7580 = "EV_GOLDE_7580";
+    public const string EV_GOLDE_7585 = "EV_GOLDE_7585";
+    public const string EV_GOLDE_7590 = "EV_GOLDE_7590";
+    public const string EV_GOLDE_7595 = "EV_GOLDE_7595";
+    public const string EV_GOLDE_7600 = "EV_GOLDE_7600";
+    public const string EV_GOLDE_7610 = "EV_GOLDE_7610";
+    public const string EV_GOLDE_7620 = "EV_GOLDE_7620";
+    public const string EV_GOLDE_7630 = "EV_GOLDE_7630";
+    public const string EV_JUNOE_2224 = "EV_JUNOE_2224";
+    public const string EV_JUNOE_2420 = "EV_JUNOE_2420";
+    public const string EV_JUNOE_2552 = "EV_JUNOE_2552";
+    public const string EV_JUNOE_2553 = "EV_JUNOE_2553";
+    public const string EV_JUNOE_2554 = "EV_JUNOE_2554";
+    public const string EV_JUNOE_2555 = "EV_JUNOE_2555";
+    public const string EV_JUNOE_2558 = "EV_JUNOE_2558";
+    public const string EV_JUNOE_2558_1 = "EV_JUNOE_2558#1";
+    public const string EV_JUNOE_2558_2 = "EV_JUNOE_2558#2";
+}

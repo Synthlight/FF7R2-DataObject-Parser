@@ -1,0 +1,57 @@
+// ReSharper disable All
+namespace FF7R2.Constants;
+
+public static class ChocoboCaptureDistanceParameterRows {
+    public const string _1200_GRASA_M100 = "1200-GRASA_M100";
+    public const string _1200_GRASA_M15 = "1200-GRASA_M15";
+    public const string _1200_GRASA_M25 = "1200-GRASA_M25";
+    public const string _1200_GRASA_M3 = "1200-GRASA_M3";
+    public const string _1200_GRASA_M40 = "1200-GRASA_M40";
+    public const string _1200_GRASA_M60 = "1200-GRASA_M60";
+    public const string _1200_GRASA_M8 = "1200-GRASA_M8";
+    public const string _1200_GRASA_TEST_M100 = "1200-GRASA_TEST_M100";
+    public const string _1200_GRASA_TEST_M15 = "1200-GRASA_TEST_M15";
+    public const string _1200_GRASA_TEST_M25 = "1200-GRASA_TEST_M25";
+    public const string _1200_GRASA_TEST_M3 = "1200-GRASA_TEST_M3";
+    public const string _1200_GRASA_TEST_M40 = "1200-GRASA_TEST_M40";
+    public const string _1200_GRASA_TEST_M60 = "1200-GRASA_TEST_M60";
+    public const string _1200_GRASA_TEST_M8 = "1200-GRASA_TEST_M8";
+    public const string _1300_JUNOA_M100 = "1300-JUNOA_M100";
+    public const string _1300_JUNOA_M15 = "1300-JUNOA_M15";
+    public const string _1300_JUNOA_M25 = "1300-JUNOA_M25";
+    public const string _1300_JUNOA_M3 = "1300-JUNOA_M3";
+    public const string _1300_JUNOA_M40 = "1300-JUNOA_M40";
+    public const string _1300_JUNOA_M60 = "1300-JUNOA_M60";
+    public const string _1300_JUNOA_M8 = "1300-JUNOA_M8";
+    public const string Default = "Default";
+    public const string N10_EASY = "N10_EASY";
+    public const string N10_EASY_DASH = "N10_EASY_DASH";
+    public const string N10_HARD = "N10_HARD";
+    public const string N10_HARD_DASH = "N10_HARD_DASH";
+    public const string N10_NORMAL = "N10_NORMAL";
+    public const string N10_NORMAL_DASH = "N10_NORMAL_DASH";
+    public const string N100_EASY = "N100_EASY";
+    public const string N100_EASY_DASH = "N100_EASY_DASH";
+    public const string N100_HARD = "N100_HARD";
+    public const string N100_HARD_DASH = "N100_HARD_DASH";
+    public const string N100_NORMAL = "N100_NORMAL";
+    public const string N100_NORMAL_DASH = "N100_NORMAL_DASH";
+    public const string N20_EASY = "N20_EASY";
+    public const string N20_EASY_DASH = "N20_EASY_DASH";
+    public const string N20_HARD = "N20_HARD";
+    public const string N20_HARD_DASH = "N20_HARD_DASH";
+    public const string N20_NORMAL = "N20_NORMAL";
+    public const string N20_NORMAL_DASH = "N20_NORMAL_DASH";
+    public const string N5_EASY = "N5_EASY";
+    public const string N5_EASY_DASH = "N5_EASY_DASH";
+    public const string N5_HARD = "N5_HARD";
+    public const string N5_HARD_DASH = "N5_HARD_DASH";
+    public const string N5_NORMAL = "N5_NORMAL";
+    public const string N5_NORMAL_DASH = "N5_NORMAL_DASH";
+    public const string N50_EASY = "N50_EASY";
+    public const string N50_EASY_DASH = "N50_EASY_DASH";
+    public const string N50_HARD = "N50_HARD";
+    public const string N50_HARD_DASH = "N50_HARD_DASH";
+    public const string N50_NORMAL = "N50_NORMAL";
+    public const string N50_NORMAL_DASH = "N50_NORMAL_DASH";
+}

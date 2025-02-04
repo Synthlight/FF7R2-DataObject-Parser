@@ -1,0 +1,56 @@
+// ReSharper disable All
+namespace FF7R2.Constants;
+
+public static class DebugPartyListRows {
+    public const string Chapt_0002 = "Chapt_0002";
+    public const string Chapt_0002_1 = "Chapt_0002_1";
+    public const string Chapt_0002_Boss1 = "Chapt_0002_Boss1";
+    public const string Chapt_0003 = "Chapt_0003";
+    public const string Chapt_0003_Boss1 = "Chapt_0003_Boss1";
+    public const string Chapt_0003_Boss2 = "Chapt_0003_Boss2";
+    public const string Chapt_0004 = "Chapt_0004";
+    public const string Chapt_0004_Boss1 = "Chapt_0004_Boss1";
+    public const string Chapt_0004_Boss2 = "Chapt_0004_Boss2";
+    public const string Chapt_0004_Kebihei = "Chapt_0004_Kebihei";
+    public const string Chapt_0005 = "Chapt_0005";
+    public const string Chapt_0005_Boss1 = "Chapt_0005_Boss1";
+    public const string Chapt_0006 = "Chapt_0006";
+    public const string Chapt_0006_Boss1 = "Chapt_0006_Boss1";
+    public const string Chapt_0007 = "Chapt_0007";
+    public const string Chapt_0007_Boss1 = "Chapt_0007_Boss1";
+    public const string Chapt_0007_Boss2 = "Chapt_0007_Boss2";
+    public const string Chapt_0008 = "Chapt_0008";
+    public const string Chapt_0008_Boss1 = "Chapt_0008_Boss1";
+    public const string Chapt_0009 = "Chapt_0009";
+    public const string Chapt_0009_1 = "Chapt_0009_1";
+    public const string Chapt_0009_Boss1 = "Chapt_0009_Boss1";
+    public const string Chapt_0009_Boss2 = "Chapt_0009_Boss2";
+    public const string Chapt_0010 = "Chapt_0010";
+    public const string Chapt_0010_Boss1 = "Chapt_0010_Boss1";
+    public const string Chapt_0011 = "Chapt_0011";
+    public const string Chapt_0011_Boss1 = "Chapt_0011_Boss1";
+    public const string Chapt_0011_Boss2 = "Chapt_0011_Boss2";
+    public const string Chapt_0011_Boss3 = "Chapt_0011_Boss3";
+    public const string Chapt_0011_Boss4 = "Chapt_0011_Boss4";
+    public const string Chapt_0012 = "Chapt_0012";
+    public const string Chapt_0013 = "Chapt_0013";
+    public const string Chapt_0013_Boss1 = "Chapt_0013_Boss1";
+    public const string Chapt_0013_Boss2 = "Chapt_0013_Boss2";
+    public const string Chapt_0013_Boss3 = "Chapt_0013_Boss3";
+    public const string Chapt_0013_Boss4 = "Chapt_0013_Boss4";
+    public const string Chapt_0014 = "Chapt_0014";
+    public const string Chapt_0014_Boss1 = "Chapt_0014_Boss1";
+    public const string Chapt_0014_Boss2 = "Chapt_0014_Boss2";
+    public const string Chapt_0015 = "Chapt_0015";
+    public const string Chapt_BattleTest = "Chapt_BattleTest";
+    public const string Chapt_DEMO_001 = "Chapt_DEMO_001";
+    public const string Chapt_DEMO_002 = "Chapt_DEMO_002";
+    public const string Chapt_DEMO_003 = "Chapt_DEMO_003";
+    public const string Chapt_VRTST_001 = "Chapt_VRTST_001";
+    public const string Chapt_VRTST_002 = "Chapt_VRTST_002";
+    public const string DEBUG_GROUP_Bahamut = "DEBUG_GROUP_Bahamut";
+    public const string DEBUG_GROUP_DebuChoco = "DEBUG_GROUP_DebuChoco";
+    public const string DEBUG_GROUP_Default = "DEBUG_GROUP_Default";
+    public const string DEBUG_GROUP_Leviathan = "DEBUG_GROUP_Leviathan";
+    public const string DEBUG_GROUP_Shiva = "DEBUG_GROUP_Shiva";
+}

@@ -1,0 +1,50 @@
+// ReSharper disable All
+namespace FF7R2.Constants;
+
+public static class CardGameRows {
+    public const string cardgame_Dummy = "cardgame_Dummy";
+    public const string cgResult1110_01 = "cgResult1110_01";
+    public const string cgResult1110_02 = "cgResult1110_02";
+    public const string cgResult1110_03 = "cgResult1110_03";
+    public const string cgResult1110_04 = "cgResult1110_04";
+    public const string cgResult1110_05 = "cgResult1110_05";
+    public const string cgResult1200_01 = "cgResult1200_01";
+    public const string cgResult1300_01 = "cgResult1300_01";
+    public const string cgResult1300_02 = "cgResult1300_02";
+    public const string cgResult1300_03 = "cgResult1300_03";
+    public const string cgResult1310_01 = "cgResult1310_01";
+    public const string cgResult1310_02 = "cgResult1310_02";
+    public const string cgResult1310_03 = "cgResult1310_03";
+    public const string cgResult1360_01 = "cgResult1360_01";
+    public const string cgResult1360_02 = "cgResult1360_02";
+    public const string cgResult1360_03 = "cgResult1360_03";
+    public const string cgResult1360_04 = "cgResult1360_04";
+    public const string cgResult1360_05 = "cgResult1360_05";
+    public const string cgResult1360_06 = "cgResult1360_06";
+    public const string cgResult1360_07 = "cgResult1360_07";
+    public const string cgResult1360_08 = "cgResult1360_08";
+    public const string cgResult1360_09 = "cgResult1360_09";
+    public const string cgResult2110_01 = "cgResult2110_01";
+    public const string cgResult2110_02 = "cgResult2110_02";
+    public const string cgResult2110_03 = "cgResult2110_03";
+    public const string cgResult2260_01 = "cgResult2260_01";
+    public const string cgResult2260_02 = "cgResult2260_02";
+    public const string cgResult2260_03 = "cgResult2260_03";
+    public const string cgResult2350_01 = "cgResult2350_01";
+    public const string cgResult2350_02 = "cgResult2350_02";
+    public const string cgResult2350_Qst36 = "cgResult2350_Qst36";
+    public const string cgResult2360_01 = "cgResult2360_01";
+    public const string cgResult2360_02 = "cgResult2360_02";
+    public const string cgResult2360_03 = "cgResult2360_03";
+    public const string cgResult2360_04 = "cgResult2360_04";
+    public const string cgResult2400_01 = "cgResult2400_01";
+    public const string cgResult2410_01 = "cgResult2410_01";
+    public const string cgResult2410_02 = "cgResult2410_02";
+    public const string cgResult2410_03 = "cgResult2410_03";
+    public const string cgResult2500_01 = "cgResult2500_01";
+    public const string cgResult2500_02 = "cgResult2500_02";
+    public const string cgResult2500_03 = "cgResult2500_03";
+    public const string cgResult2610_01 = "cgResult2610_01";
+    public const string cgResult2610_02 = "cgResult2610_02";
+    public const string cgResult2610_03 = "cgResult2610_03";
+}

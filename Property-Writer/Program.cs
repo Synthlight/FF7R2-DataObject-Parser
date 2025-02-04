@@ -24,13 +24,12 @@ public static class Program {
 
             CreateConstantsFile(props, Path.GetFileNameWithoutExtension(file) + "Properties");
 
-            if (file.Contains("ResidentParameter")) {
-                var rows = from key in data.innerAsset.frozenObject.DataTable.Keys
-                           where key.index != 1339 && key.index != 1342
-                           orderby key.name.Text
-                           select key.name.Text;
-                CreateConstantsFile(rows, Path.GetFileNameWithoutExtension(file) + "Rows");
-            }
+            var rows = (from key in data.innerAsset.frozenObject.DataTable.Keys
+                        let name = key.name.Text
+                        where name != "." && name != "None"
+                        orderby name
+                        select name).Distinct();
+            CreateConstantsFile(rows, Path.GetFileNameWithoutExtension(file) + "Rows");
         }
     }
 
@@ -61,7 +60,8 @@ public static class Program {
                                 .Replace('{', '_')
                                 .Replace('}', '_')
                                 .Replace('[', '_')
-                                .Replace(']', '_');
+                                .Replace(']', '_')
+                                .Replace('#', '_');
 
             if (regex.Match(constName).Success) constName = $"_{constName}";
 

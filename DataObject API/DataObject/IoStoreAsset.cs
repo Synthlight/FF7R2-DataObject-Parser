@@ -16,6 +16,8 @@ public class IoStoreAsset {
     internal byte[]                bytes;
     private  FPackageSummary       packageSummary;
     internal FName[]               names;
+    private  long                  namesJunkStart = -1;
+    private  byte[]                remainingNameBytes;
     private  byte[]                startOfHashBytes; // Seems to always be `00 00 64 C1 00 00 00 00` in all the data object files.
     private  FPackageObjectIndex[] imports;
     private  FExportMapEntry[]     exports;
@@ -80,8 +82,17 @@ public class IoStoreAsset {
         var nameCount = packageSummary.NameMapHashesSize / sizeof(ulong) - 1;
         names = new FName[nameCount];
         for (var i = 0; i < nameCount; i++) {
-            var text = reader.ReadString();
-            reader.BaseStream.Seek(1, SeekOrigin.Current); // Null term.
+            var text     = reader.ReadString();
+            var nullTerm = reader.ReadChar();
+            if (nullTerm != '\0') {
+                // Some files seem to just have junk name data at the end.
+                // It's still technically part of the names block given the offsets and size, it's just unprintable garbage.
+                reader.BaseStream.Seek(-1, SeekOrigin.Current); // Null term.
+                namesJunkStart = reader.BaseStream.Position;
+                var remainingNameBytesSize = (int) (packageSummary.NameMapNamesSize + TypeSize<FPackageSummary>.Size - reader.BaseStream.Position);
+                remainingNameBytes = reader.ReadBytes(remainingNameBytesSize);
+                break;
+            }
             names[i] = new(text, i);
         }
 
@@ -140,6 +151,11 @@ public class IoStoreAsset {
         writer.BaseStream.Seek(1, SeekOrigin.Current); // Padding.
         foreach (var name in names) {
             writer.Write(name.Text);
+            if (namesJunkStart > -1 && writer.BaseStream.Position == namesJunkStart) {
+                writer.Write(remainingNameBytes);
+                writer.BaseStream.Seek(1, SeekOrigin.Current); // `NameMapNamesSize` winds up being off by one on write without this.
+                break;
+            }
             writer.BaseStream.Seek(1, SeekOrigin.Current); // Null term.
         }
         packageSummary.NameMapNamesSize = (int) (writer.BaseStream.Position - packageSummary.NameMapNamesOffset) - 1; // -1 because of the one byte we skip.

@@ -12,11 +12,11 @@ public static class SubtitleChangeProperties {
     public const string LogFromCinema = "LogFromCinema";
     public const string LogFromLog = "LogFromLog";
     public const string LowerBound = "LowerBound";
+    public const string None = "None";
     public const string UpperBound = "UpperBound";
     public const string VoiceFromCaption = "VoiceFromCaption";
     public const string VoiceFromCinema = "VoiceFromCinema";
     public const string VoiceFromLog = "VoiceFromLog";
     public const string VolumeFromCaption = "VolumeFromCaption";
     public const string VolumeFromCinema = "VolumeFromCinema";
-    public const string VolumeFromLog = "VolumeFromLog";
 }

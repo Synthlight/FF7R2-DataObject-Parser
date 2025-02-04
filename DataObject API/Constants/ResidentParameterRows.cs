@@ -1889,5 +1889,4 @@ public static class ResidentParameterRows {
     public const string WorldItemRespawnExcludeCameraDistance = "WorldItemRespawnExcludeCameraDistance";
     public const string WorldItemRespawnExcludeRadius = "WorldItemRespawnExcludeRadius";
     public const string WorldLayoutMaxNum = "WorldLayoutMaxNum";
-    public const string WorldNavGridSize = "WorldNavGridSize";
 }

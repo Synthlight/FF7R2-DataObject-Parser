@@ -1,0 +1,53 @@
+// ReSharper disable All
+namespace FF7R2.Constants;
+
+public static class MultiByteStringRows {
+    public const string mbs_aiueo = "mbs_aiueo";
+    public const string mbs_GUREnd = "mbs_GUREnd";
+    public const string mbs0110_GilgContact_05 = "mbs0110_GilgContact_05";
+    public const string mbs0110_GilgContact_ChaPV01_NIBLA = "mbs0110_GilgContact_ChaPV01_NIBLA";
+    public const string mbs0110_GilgContact_ChaPV02_NIBLA = "mbs0110_GilgContact_ChaPV02_NIBLA";
+    public const string mbs0110_GilgContact_ChaPV03_NIBLA = "mbs0110_GilgContact_ChaPV03_NIBLA";
+    public const string mbs0110_GilgContact_ChaPV04_NIBLA = "mbs0110_GilgContact_ChaPV04_NIBLA";
+    public const string mbs0110_GilgContact_ChaPV05_CORLA = "mbs0110_GilgContact_ChaPV05_CORLA";
+    public const string mbs0110_GilgContact_ChaPV05_NIBLA = "mbs0110_GilgContact_ChaPV05_NIBLA";
+    public const string mbs0110_GilgStory_1500 = "mbs0110_GilgStory_1500";
+    public const string mbs0110_GilgStory_1550 = "mbs0110_GilgStory_1550";
+    public const string mbs0110_GilgStory_1600 = "mbs0110_GilgStory_1600";
+    public const string mbs0110_GilgStory_200 = "mbs0110_GilgStory_200";
+    public const string mbs0110_GilgStory_Log_1_1_Tent = "mbs0110_GilgStory_Log_1_1_Tent";
+    public const string mbs0110_GilgStory_Log_1_1_Tent2 = "mbs0110_GilgStory_Log_1_1_Tent2";
+    public const string mbs0110_GilgStory_Log_1_2_Tent = "mbs0110_GilgStory_Log_1_2_Tent";
+    public const string mbs0110_GilgStory_Log_1_2_Tent2 = "mbs0110_GilgStory_Log_1_2_Tent2";
+    public const string mbs0110_GilgStory_Log_1_3_Tent = "mbs0110_GilgStory_Log_1_3_Tent";
+    public const string mbs0110_GilgStory_Log_1_3_Tent2 = "mbs0110_GilgStory_Log_1_3_Tent2";
+    public const string mbs0110_GilgStory_Log_1_5_Tent = "mbs0110_GilgStory_Log_1_5_Tent";
+    public const string mbs0110_GilgStory_Log_1_5_Tent2 = "mbs0110_GilgStory_Log_1_5_Tent2";
+    public const string mbs1300_Story01_Tu = "mbs1300_Story01_Tu";
+    public const string mbs1300_Story01_Tu_2 = "mbs1300_Story01_Tu_2";
+    public const string mbs2200_worldstory_Shield_1 = "mbs2200_worldstory_Shield_1";
+    public const string mbs2400_VR_out = "mbs2400_VR_out";
+    public const string mbs2500_Story01_CutMovie_1 = "mbs2500_Story01_CutMovie_1";
+    public const string mbs2500_Story01_CutMovie_2 = "mbs2500_Story01_CutMovie_2";
+    public const string mbs2500_Story01_CutMovie_3 = "mbs2500_Story01_CutMovie_3";
+    public const string mbs2500_Story02_CutMovie_1 = "mbs2500_Story02_CutMovie_1";
+    public const string mbs2500_Story03_CutMovie_1 = "mbs2500_Story03_CutMovie_1";
+    public const string mbs2500_Story04_CutMovie_1 = "mbs2500_Story04_CutMovie_1";
+    public const string mbs2500_Story04_CutScene_1 = "mbs2500_Story04_CutScene_1";
+    public const string mbs2600_Story01_CutScene = "mbs2600_Story01_CutScene";
+    public const string mbs2600_Story01_Door = "mbs2600_Story01_Door";
+    public const string mbs2600_Story03_CutScene = "mbs2600_Story03_CutScene";
+    public const string mbs2600_Story03_CutScene_2 = "mbs2600_Story03_CutScene_2";
+    public const string mbs2600_Story03_CutScene_3 = "mbs2600_Story03_CutScene_3";
+    public const string mbs2600_Story03_CutScene_4 = "mbs2600_Story03_CutScene_4";
+    public const string mbs2600_Story03_Door = "mbs2600_Story03_Door";
+    public const string mbs2600_Story03_Door_2 = "mbs2600_Story03_Door_2";
+    public const string mbs2600_Story04_CutScene = "mbs2600_Story04_CutScene";
+    public const string mbs2600_Story04_CutScene_2 = "mbs2600_Story04_CutScene_2";
+    public const string mbsHub_GRASA_ChadleyStory_1 = "mbsHub_GRASA_ChadleyStory_1";
+    public const string mbsHub_GRASA_Chocobo_MiniGame_Fail = "mbsHub_GRASA_Chocobo_MiniGame_Fail";
+    public const string mbsHub_GRASA_Moogle_MiniGame_Fail = "mbsHub_GRASA_Moogle_MiniGame_Fail";
+    public const string mbsHub_GRASA_Summon_MiniGame = "mbsHub_GRASA_Summon_MiniGame";
+    public const string mbsHub_Moogle_MiniGame_EV_COMON_3000 = "mbsHub_Moogle_MiniGame_EV_COMON_3000";
+    public const string mbsHub_Moogle_MiniGame_EV_COMON_3010 = "mbsHub_Moogle_MiniGame_EV_COMON_3010";
+}

@@ -1,0 +1,53 @@
+// ReSharper disable All
+namespace FF7R2.Constants;
+
+public static class ResponseAreaInOutRows {
+    public const string raioDefault = "raioDefault";
+    public const string raioTweet_NoRayTrace = "raioTweet_NoRayTrace";
+    public const string raioTweet1000cm = "raioTweet1000cm";
+    public const string raioTweet1000cm_NoRayTrace = "raioTweet1000cm_NoRayTrace";
+    public const string raioTweet100cm = "raioTweet100cm";
+    public const string raioTweet100cm_NoRayTrace = "raioTweet100cm_NoRayTrace";
+    public const string raioTweet1500cm = "raioTweet1500cm";
+    public const string raioTweet1500cm_NoRayTrace = "raioTweet1500cm_NoRayTrace";
+    public const string raioTweet1700cm = "raioTweet1700cm";
+    public const string raioTweet2000cm = "raioTweet2000cm";
+    public const string raioTweet2000cm_NoRayTrace = "raioTweet2000cm_NoRayTrace";
+    public const string raioTweet200cm = "raioTweet200cm";
+    public const string raioTweet200cm_NoRayTrace = "raioTweet200cm_NoRayTrace";
+    public const string raioTweet2500cm = "raioTweet2500cm";
+    public const string raioTweet2500cm_NoRayTrace = "raioTweet2500cm_NoRayTrace";
+    public const string raioTweet3000cm = "raioTweet3000cm";
+    public const string raioTweet3000cm_NoRayTrace = "raioTweet3000cm_NoRayTrace";
+    public const string raioTweet300cm = "raioTweet300cm";
+    public const string raioTweet300cm_NoRayTrace = "raioTweet300cm_NoRayTrace";
+    public const string raioTweet4000cm = "raioTweet4000cm";
+    public const string raioTweet4000cm_NoRayTrace = "raioTweet4000cm_NoRayTrace";
+    public const string raioTweet400cm = "raioTweet400cm";
+    public const string raioTweet400cm_NoRayTrace = "raioTweet400cm_NoRayTrace";
+    public const string raioTweet5000cm = "raioTweet5000cm";
+    public const string raioTweet5000cm_NoRayTrace = "raioTweet5000cm_NoRayTrace";
+    public const string raioTweet500cm = "raioTweet500cm";
+    public const string raioTweet500cm_NoRayTrace = "raioTweet500cm_NoRayTrace";
+    public const string raioTweet6000cm = "raioTweet6000cm";
+    public const string raioTweet6000cm_NoRayTrace = "raioTweet6000cm_NoRayTrace";
+    public const string raioTweet600cm = "raioTweet600cm";
+    public const string raioTweet600cm_NoRayTrace = "raioTweet600cm_NoRayTrace";
+    public const string raioTweet7000cm = "raioTweet7000cm";
+    public const string raioTweet7000cm_NoRayTrace = "raioTweet7000cm_NoRayTrace";
+    public const string raioTweet700cm = "raioTweet700cm";
+    public const string raioTweet700cm_NoRayTrace = "raioTweet700cm_NoRayTrace";
+    public const string raioTweet800cm = "raioTweet800cm";
+    public const string raioTweet800cm_NoRayTrace = "raioTweet800cm_NoRayTrace";
+    public const string raioTweet900cm = "raioTweet900cm";
+    public const string raioTweet900cm_NoRayTrace = "raioTweet900cm_NoRayTrace";
+    public const string raioTweetNarrow = "raioTweetNarrow";
+    public const string raioTweetNarrow_NoRayTrace = "raioTweetNarrow_NoRayTrace";
+    public const string raioTweetSandGiant_NoRayTrace = "raioTweetSandGiant_NoRayTrace";
+    public const string raioTweetSuperNarrow = "raioTweetSuperNarrow";
+    public const string raioTweetSuperNarrow_NoRayTrace = "raioTweetSuperNarrow_NoRayTrace";
+    public const string raioTweetSuperWide = "raioTweetSuperWide";
+    public const string raioTweetSuperWide_NoRayTrace = "raioTweetSuperWide_NoRayTrace";
+    public const string raioTweetWide = "raioTweetWide";
+    public const string raioTweetWide_NoRayTrace = "raioTweetWide_NoRayTrace";
+}

@@ -1,0 +1,53 @@
+// ReSharper disable All
+namespace FF7R2.Constants;
+
+public static class CharaSpecUseListRows {
+    public const string Alexander = "Alexander";
+    public const string Communicator = "Communicator";
+    public const string DefaultNpc = "DefaultNpc";
+    public const string FA0185_00_BarretSunglass_Standard = "FA0185_00_BarretSunglass_Standard";
+    public const string Forest = "Forest";
+    public const string Forest_Race = "Forest_Race";
+    public const string Kjata = "Kjata";
+    public const string Moogle = "Moogle";
+    public const string Mountain = "Mountain";
+    public const string MounTain_Race = "MounTain_Race";
+    public const string NeoBahamut = "NeoBahamut";
+    public const string Ocean = "Ocean";
+    public const string Ocean_Race = "Ocean_Race";
+    public const string Odin = "Odin";
+    public const string Phenix = "Phenix";
+    public const string Sand = "Sand";
+    public const string Sand_Race = "Sand_Race";
+    public const string Secret = "Secret";
+    public const string Secret_Race = "Secret_Race";
+    public const string Sky = "Sky";
+    public const string Sky_Race = "Sky_Race";
+    public const string Standard = "Standard";
+    public const string Standard_Race = "Standard_Race";
+    public const string SU0000_00_Ifrit_Standard = "SU0000_00_Ifrit_Standard";
+    public const string SU0001_00_Chocobo_Standard = "SU0001_00_Chocobo_Standard";
+    public const string SU0002_00_Shiva_Standard = "SU0002_00_Shiva_Standard";
+    public const string SU0003_00_DebuChoco_Standard = "SU0003_00_DebuChoco_Standard";
+    public const string SU0004_00_Leviathan_Standard = "SU0004_00_Leviathan_Standard";
+    public const string SU0006_04_Moogle_BardEnd2 = "SU0006_04_Moogle_BardEnd2";
+    public const string SU0008_00_Cactuar_Standard = "SU0008_00_Cactuar_Standard";
+    public const string SU0009_01_Hinachocobo_VariationEND2 = "SU0009_01_Hinachocobo_VariationEND2";
+    public const string SU1000_00_Ramuh_Standard = "SU1000_00_Ramuh_Standard";
+    public const string SU2000_00_Titan_Standard = "SU2000_00_Titan_Standard";
+    public const string SU2001_00_Titan_Rock = "SU2001_00_Titan_Rock";
+    public const string SU2002_00_Titan_ThrowRock = "SU2002_00_Titan_ThrowRock";
+    public const string SU2015_00_Sleipnir_Standard = "SU2015_00_Sleipnir_Standard";
+    public const string SU2020_00_Kjata_Standard = "SU2020_00_Kjata_Standard";
+    public const string SU2021_00_Kjata_FireCrystal = "SU2021_00_Kjata_FireCrystal";
+    public const string SU2021_10_Kjata_IceCrystal = "SU2021_10_Kjata_IceCrystal";
+    public const string SU2021_20_Kjata_ThunderCrystal = "SU2021_20_Kjata_ThunderCrystal";
+    public const string SU2030_00_Alexander_Standard = "SU2030_00_Alexander_Standard";
+    public const string SU2040_00_Phoenix_Standard = "SU2040_00_Phoenix_Standard";
+    public const string SU2050_00_NeoBahamut_Standard = "SU2050_00_NeoBahamut_Standard";
+    public const string SU2060_00_Gilgamesh_Standard = "SU2060_00_Gilgamesh_Standard";
+    public const string SU2070_00_Magicpot_StandardEND2 = "SU2070_00_Magicpot_StandardEND2";
+    public const string Titan = "Titan";
+    public const string Touhoufuhai = "Touhoufuhai";
+    public const string Touhoufuhai_Race = "Touhoufuhai_Race";
+}

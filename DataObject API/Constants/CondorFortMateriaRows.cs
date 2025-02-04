@@ -1,0 +1,53 @@
+// ReSharper disable All
+namespace FF7R2.Constants;
+
+public static class CondorFortMateriaRows {
+    public const string CF_Materia_Aero1 = "CF_Materia_Aero1";
+    public const string CF_Materia_Aero2 = "CF_Materia_Aero2";
+    public const string CF_Materia_Aero3 = "CF_Materia_Aero3";
+    public const string CF_Materia_Blizzard1 = "CF_Materia_Blizzard1";
+    public const string CF_Materia_Blizzard2 = "CF_Materia_Blizzard2";
+    public const string CF_Materia_Blizzard3 = "CF_Materia_Blizzard3";
+    public const string CF_Materia_Buff_Barrier = "CF_Materia_Buff_Barrier";
+    public const string CF_Materia_Buff_Barrier_Opponent = "CF_Materia_Buff_Barrier_Opponent";
+    public const string CF_Materia_Buff_Haste = "CF_Materia_Buff_Haste";
+    public const string CF_Materia_Buff_Haste_Opponent = "CF_Materia_Buff_Haste_Opponent";
+    public const string CF_Materia_Buff_MagicBarrier = "CF_Materia_Buff_MagicBarrier";
+    public const string CF_Materia_Buff_Regen = "CF_Materia_Buff_Regen";
+    public const string CF_Materia_Buff_Regen_Opponent = "CF_Materia_Buff_Regen_Opponent";
+    public const string CF_Materia_Buff_Wall = "CF_Materia_Buff_Wall";
+    public const string CF_Materia_Debuff_Poison = "CF_Materia_Debuff_Poison";
+    public const string CF_Materia_Debuff_Poison_Opponent = "CF_Materia_Debuff_Poison_Opponent";
+    public const string CF_Materia_Debuff_Slow = "CF_Materia_Debuff_Slow";
+    public const string CF_Materia_Debuff_Slow_Opponent = "CF_Materia_Debuff_Slow_Opponent";
+    public const string CF_Materia_Debuff_Stop = "CF_Materia_Debuff_Stop";
+    public const string CF_Materia_Debuff_Stop_Opponent = "CF_Materia_Debuff_Stop_Opponent";
+    public const string CF_Materia_Fire1 = "CF_Materia_Fire1";
+    public const string CF_Materia_Fire2 = "CF_Materia_Fire2";
+    public const string CF_Materia_Fire3 = "CF_Materia_Fire3";
+    public const string CF_Materia_Heal1 = "CF_Materia_Heal1";
+    public const string CF_Materia_Heal2 = "CF_Materia_Heal2";
+    public const string CF_Materia_Heal3 = "CF_Materia_Heal3";
+    public const string CF_Materia_HPUp = "CF_Materia_HPUp";
+    public const string CF_Materia_Thumder1 = "CF_Materia_Thumder1";
+    public const string CF_Materia_Thumder2 = "CF_Materia_Thumder2";
+    public const string CF_Materia_Thumder3 = "CF_Materia_Thumder3";
+    public const string teatMateria_Aero01 = "teatMateria_Aero01";
+    public const string teatMateria_Aero02 = "teatMateria_Aero02";
+    public const string teatMateria_Aero03 = "teatMateria_Aero03";
+    public const string testMateria_Blizzard = "testMateria_Blizzard";
+    public const string testMateria_Buff_Regen = "testMateria_Buff_Regen";
+    public const string testMateria_Debuff_Stop = "testMateria_Debuff_Stop";
+    public const string testMateria_Fire = "testMateria_Fire";
+    public const string testMateria_Fire01 = "testMateria_Fire01";
+    public const string testMateria_Heal = "testMateria_Heal";
+    public const string testMateria_Heal01 = "testMateria_Heal01";
+    public const string testMateria_Thumder = "testMateria_Thumder";
+    public const string testMateria0 = "testMateria0";
+    public const string testMateria1 = "testMateria1";
+    public const string testMateria2 = "testMateria2";
+    public const string testMateria3 = "testMateria3";
+    public const string testMateria4 = "testMateria4";
+    public const string testMateria5 = "testMateria5";
+    public const string testMateria6 = "testMateria6";
+}

@@ -1,0 +1,53 @@
+// ReSharper disable All
+namespace FF7R2.Constants;
+
+public static class HubStoryListRows {
+    public const string Area_0110_Hub_1_1_Story1 = "Area_0110_Hub_1_1_Story1";
+    public const string Area_0110_Hub_1_2_Story2 = "Area_0110_Hub_1_2_Story2";
+    public const string Area_0110_Hub_1_3_Story3 = "Area_0110_Hub_1_3_Story3";
+    public const string Area_0110_Hub_1_4_Story4 = "Area_0110_Hub_1_4_Story4";
+    public const string Area_1200_Hub_2_2_Story1 = "Area_1200_Hub_2_2_Story1";
+    public const string Area_1200_Hub_2_4_Story1 = "Area_1200_Hub_2_4_Story1";
+    public const string Area_1200_Hub_4_4_Story2 = "Area_1200_Hub_4_4_Story2";
+    public const string Area_1200_Hub_5_1_Story4 = "Area_1200_Hub_5_1_Story4";
+    public const string Area_1200_Hub_6_4_Story3 = "Area_1200_Hub_6_4_Story3";
+    public const string Area_1300_Hub_2_3_Story1 = "Area_1300_Hub_2_3_Story1";
+    public const string Area_1300_Hub_2_3_Story1_Hard = "Area_1300_Hub_2_3_Story1_Hard";
+    public const string Area_1300_Hub_3_1_Story2 = "Area_1300_Hub_3_1_Story2";
+    public const string Area_1300_Hub_3_1_Story2_Hard = "Area_1300_Hub_3_1_Story2_Hard";
+    public const string Area_1300_Hub_3_4_Story1 = "Area_1300_Hub_3_4_Story1";
+    public const string Area_1300_Hub_4_2_Story4 = "Area_1300_Hub_4_2_Story4";
+    public const string Area_1300_Hub_4_2_Story4_Hard = "Area_1300_Hub_4_2_Story4_Hard";
+    public const string Area_1300_Hub_5_1_Story3 = "Area_1300_Hub_5_1_Story3";
+    public const string Area_1300_Hub_5_1_Story3_Hard = "Area_1300_Hub_5_1_Story3_Hard";
+    public const string Area_2200_Hub_2_4_Story1 = "Area_2200_Hub_2_4_Story1";
+    public const string Area_2200_Hub_3_3_Story1 = "Area_2200_Hub_3_3_Story1";
+    public const string Area_2200_Hub_3_3_Story1_Hard = "Area_2200_Hub_3_3_Story1_Hard";
+    public const string Area_2200_Hub_3_4_Story3 = "Area_2200_Hub_3_4_Story3";
+    public const string Area_2200_Hub_3_4_Story3_Hard = "Area_2200_Hub_3_4_Story3_Hard";
+    public const string Area_2200_Hub_5_4_Story2 = "Area_2200_Hub_5_4_Story2";
+    public const string Area_2200_Hub_5_4_Story2_Hard = "Area_2200_Hub_5_4_Story2_Hard";
+    public const string Area_2200_Hub_6_3_Story4 = "Area_2200_Hub_6_3_Story4";
+    public const string Area_2200_Hub_6_3_Story4_Hard = "Area_2200_Hub_6_3_Story4_Hard";
+    public const string Area_2200_Hub_6_4_Story1 = "Area_2200_Hub_6_4_Story1";
+    public const string Area_2400_Hub_1_4_Story3 = "Area_2400_Hub_1_4_Story3";
+    public const string Area_2400_Hub_2_3_Story2 = "Area_2400_Hub_2_3_Story2";
+    public const string Area_2400_Hub_3_2_Story4 = "Area_2400_Hub_3_2_Story4";
+    public const string Area_2400_Hub_5_2_Story1 = "Area_2400_Hub_5_2_Story1";
+    public const string Area_2400_Hub_5_4_Story1 = "Area_2400_Hub_5_4_Story1";
+    public const string Area_2500_Hub_2_2_Story1 = "Area_2500_Hub_2_2_Story1";
+    public const string Area_2500_Hub_2_2_Story1_Hard = "Area_2500_Hub_2_2_Story1_Hard";
+    public const string Area_2500_Hub_2_6_Story4 = "Area_2500_Hub_2_6_Story4";
+    public const string Area_2500_Hub_2_6_Story4_Hard = "Area_2500_Hub_2_6_Story4_Hard";
+    public const string Area_2500_Hub_4_3_Story1 = "Area_2500_Hub_4_3_Story1";
+    public const string Area_2500_Hub_5_3_Story2 = "Area_2500_Hub_5_3_Story2";
+    public const string Area_2500_Hub_5_3_Story2_Hard = "Area_2500_Hub_5_3_Story2_Hard";
+    public const string Area_2500_Hub_6_3_Story3 = "Area_2500_Hub_6_3_Story3";
+    public const string Area_2500_Hub_6_3_Story3_Hard = "Area_2500_Hub_6_3_Story3_Hard";
+    public const string Area_2600_Hub_2_2_Story1 = "Area_2600_Hub_2_2_Story1";
+    public const string Area_2600_Hub_2_5_Story1 = "Area_2600_Hub_2_5_Story1";
+    public const string Area_2600_Hub_3_2_Story3 = "Area_2600_Hub_3_2_Story3";
+    public const string Area_2600_Hub_4_5_Story2 = "Area_2600_Hub_4_5_Story2";
+    public const string Area_2600_Hub_4_6_Story4 = "Area_2600_Hub_4_6_Story4";
+    public const string DummyStory = "DummyStory";
+}
