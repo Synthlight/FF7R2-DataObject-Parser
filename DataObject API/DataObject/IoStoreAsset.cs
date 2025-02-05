@@ -63,7 +63,7 @@ public class IoStoreAsset {
             }
             case Mode.WRITE_PARSED_DATA: {
                 Directory.CreateDirectory(Path.GetDirectoryName(file)!);
-                var       stream = File.Open(file, FileMode.Create, FileAccess.Write, FileShare.None);
+                var       stream = File.Open(file, FileMode.Create, FileAccess.Write, FileShare.Read);
                 using var writer = new BinaryWriter(stream);
                 Write(writer);
                 break;

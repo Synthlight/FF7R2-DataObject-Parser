@@ -127,8 +127,10 @@ public class FrozenObject(InnerAsset asset) {
         }
         //writer.WriteData(entries, entry => writer.Write(entry, PropertyWriteMode.SUB_OBJECTS_ONLY));
 
+        writer.BaseStream.Position = writer.BaseStream.Position.Align(8);
+
         var frozenEnd = writer.BaseStream.Position;
-        frozenSize                 = (int) (frozenEnd - frozenSizePos - 20); // TODO: Figure out why 20.
+        frozenSize                 = (int) (frozenEnd - frozenObjectStart);
         writer.BaseStream.Position = frozenSizePos;
         writer.Write(frozenSize);
 
