@@ -144,15 +144,53 @@ public class FrozenObject(InnerAsset asset) {
             writer.Write(scriptName);
         }
 
-        // TODO: Update the offsets used of wherever we're writing out a name.
-        // Our expansion of the data *should* be creating more name offsets, and we're not updating the list here with them.
-        foreach (var minimalName in minimalNames) {
-            //minimalName.offsets.Clear();
+        // Re-create the whole minimal name map thing.
+        // Our expansion of the data *should* be creating more name offsets, so we need to be updating the list here with them.
+        minimalNames.Clear();
+        foreach (var key in keys.data) {
+            var offset = (uint) (key.offset - frozenObjectStart);
+            AddOffsetToMinimalNames(key.name, offset);
+        }
+        foreach (var property in properties.data) {
+            var offset = (uint) (property.offset - frozenObjectStart);
+            AddOffsetToMinimalNames(property.name, offset);
+        }
+        foreach (var entry in entries.data) {
+            UpdateMinimalNamesRecursively(entry.propertyValues);
         }
 
-        foreach (var minimalName in minimalNames) {
+        foreach (var minimalName in (from name in minimalNames
+                                     orderby name.name
+                                     select name)) {
+            //Debug.Assert(minimalName.offsets.Count > 0);
             writer.Write(minimalName);
         }
+    }
+
+    public void UpdateMinimalNamesRecursively(IEnumerable<PropertyValue> data) {
+        foreach (var value in data) {
+            switch (value) {
+                case NameProperty nameProp: {
+                    if (nameProp.Data == null) continue;
+                    var offset = (uint) (nameProp.Offset - frozenObjectStart);
+                    AddOffsetToMinimalNames((FName) nameProp.Data, offset);
+                    break;
+                }
+                case ArrayPropertyValue arrayProp:
+                    UpdateMinimalNamesRecursively(arrayProp.Data!);
+                    break;
+            }
+        }
+    }
+
+    private void AddOffsetToMinimalNames(FName name, uint offset) {
+        var minimalName = minimalNames.FirstOrDefault(imageName => imageName.name == name);
+        if (minimalName == null) {
+            minimalName = new(asset) {name = name};
+            minimalNames.Add(minimalName);
+        }
+
+        if (!minimalName.offsets.Contains(offset)) minimalName.offsets.Add(offset);
     }
 }
 

@@ -5,7 +5,7 @@ public abstract class PropertyValue(FrozenObject obj, Property property) {
     public readonly    Property     property = property;
 
     protected abstract object? GenericData { get; }
-    protected          long    Offset      { get; set; }
+    protected internal long    Offset      { get; protected set; }
 
     internal abstract void Read(BinaryReader  reader);
     internal abstract void Write(BinaryWriter writer, PropertyWriteMode mode);
@@ -16,7 +16,7 @@ public abstract class PropertyValue(FrozenObject obj, Property property) {
 }
 
 public abstract class PropertyValue<T>(FrozenObject obj, Property property) : PropertyValue(obj, property) {
-    public abstract T?      Data        { get; set; }
+    public abstract    T?      Data        { get; set; }
     protected override object? GenericData => Data;
 
     public virtual T? DataAsByteProxy {
@@ -34,6 +34,6 @@ public abstract class PropertyValue<T>(FrozenObject obj, Property property) : Pr
 
     public override string ToString() =>
         DataAsByteProxy != null
-            ? $"{property.Name}: {DataAsByteProxy.ToString()} ({property.UnderlyingType}) ------ {Offset}"
-            : $"{property.Name}: (null) ({property.UnderlyingType}) ------ {Offset}";
+            ? $"{property.name}: {DataAsByteProxy.ToString()} ({property.UnderlyingType}) ------ {Offset}"
+            : $"{property.name}: (null) ({property.UnderlyingType}) ------ {Offset}";
 }

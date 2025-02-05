@@ -9,7 +9,7 @@ public class Entry(FrozenObject obj, Property[] properties) {
     public void Read(BinaryReader reader) {
         propertyValues = [];
         foreach (var property in properties) {
-            if (property.Name.ToString().EndsWith("_Array")) {
+            if (property.name.ToString().EndsWith("_Array")) {
                 var propertyValue = new ArrayPropertyValue(obj, property);
                 propertyValue.Read(reader);
                 propertyValues.Add(propertyValue);
@@ -25,10 +25,6 @@ public class Entry(FrozenObject obj, Property[] properties) {
         foreach (var propertyValue in propertyValues) {
             propertyValue.Write(writer, mode);
         }
-    }
-
-    public class PropertyValues : List<PropertyValue> {
-        public PropertyValue? this[string key] => this.FirstOrDefault(value => value.property.Name.Text == key);
     }
 }
 

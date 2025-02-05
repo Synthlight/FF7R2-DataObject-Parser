@@ -17,7 +17,7 @@ public class NameProperty(FrozenObject obj, Property property) : PropertyValue<F
 
     internal override void Write(BinaryWriter writer, PropertyWriteMode mode) {
         writer.BaseStream.Position = writer.BaseStream.Position.Align(4, obj.frozenObjectStart);
+        Offset                     = writer.BaseStream.Position;
         writer.BaseStream.Seek(8, SeekOrigin.Current); // Skip the placeholder FName bytes.
-        // TODO: Do something to update the offset map entries of the obj here.◘
     }
 }

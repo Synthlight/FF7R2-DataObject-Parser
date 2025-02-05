@@ -19,8 +19,8 @@ public static class Program {
             }
 
             var props = from property in data.innerAsset.frozenObject.properties.data
-                        orderby property.Name.Text
-                        select property.Name.Text;
+                        orderby property.name.Text
+                        select property.name.Text;
 
             CreateConstantsFile(props, Path.GetFileNameWithoutExtension(file) + "Properties");
 

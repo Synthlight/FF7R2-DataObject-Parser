@@ -17,6 +17,7 @@ public class IoStoreAsset {
     internal byte[]                bytes;
     private  FPackageSummary       packageSummary;
     internal FName[]               names;
+    internal long[]                nameOffsets = [];
     private  byte[]                startOfHashBytes; // Seems to always be `00 00 64 C1 00 00 00 00` in all the data object files.
     private  FPackageObjectIndex[] imports;
     private  FExportMapEntry[]     exports;
@@ -146,6 +147,7 @@ public class IoStoreAsset {
 
     internal void Write(BinaryWriter writer) {
         // Write names.
+        nameOffsets = [];
         writer.BaseStream.Seek(packageSummary.NameMapNamesOffset, SeekOrigin.Begin); // Should always be 64, but I'm just assuming the file has it right to begin with.
         foreach (var name in names) {
             var nameHeader = new FSerializedNameHeader();

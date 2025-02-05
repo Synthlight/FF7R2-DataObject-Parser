@@ -5,22 +5,26 @@ using CUE4Parse.UE4.Objects.UObject;
 namespace FF7R2.DataObject.Properties;
 
 public class Property(FrozenObject obj) {
-    public FName           Name;
+    public FName           name;
     public FF7propertyType UnderlyingType;
 
+    internal long offset; // For updating minimal names.
+
     internal void Read(BinaryReader reader) {
-        Name = obj.OffsetToNameLookup[reader.BaseStream.Position - obj.frozenObjectStart];
+        offset = reader.BaseStream.Position;
+        name   = obj.OffsetToNameLookup[reader.BaseStream.Position - obj.frozenObjectStart];
         reader.BaseStream.Seek(8, SeekOrigin.Current); // Skip the placeholder FName bytes.
         UnderlyingType = (FF7propertyType) reader.ReadInt32();
     }
 
     internal void Write(BinaryWriter writer) {
+        offset = writer.BaseStream.Position;
         writer.BaseStream.Seek(8, SeekOrigin.Current); // Skip the placeholder FName bytes.
         writer.Write((int) UnderlyingType);
     }
 
     public override string ToString() {
-        return $"{Name} :: {UnderlyingType}";
+        return $"{name} :: {UnderlyingType}";
     }
 
     public PropertyValue Create() {
