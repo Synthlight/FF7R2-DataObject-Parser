@@ -1,0 +1,557 @@
+//------------------------------------------------
+//--- 010 Editor v15.0.1 Binary Template
+//
+//      File: DataObject/*.uasset
+//   Authors:
+//   Version:
+//   Purpose:
+//  Category:
+// File Mask:
+//  ID Bytes:
+//   History:
+//------------------------------------------------
+
+struct ArrayProxy;
+struct BitArrayData;
+struct BitField;
+struct Entries;
+struct Entry;
+struct Export;
+struct FExportBundleEntry;
+struct FExportBundleHeader;
+struct FExportMapEntry;
+struct FF7Property;
+struct FFrozenMemoryImagePtr;
+struct FKey;
+struct FMappedName;
+struct FMemoryImageName;
+struct FMemoryImageVTable;
+struct FMemoryImageVTablePatch;
+struct FName;
+struct FPackageObjectIndex;
+struct FPackageSummary;
+struct FrozenArchive;
+struct FSerializedName;
+struct FSerializedNameHeader;
+struct FString;
+struct Indexes;
+struct IntArray;
+struct Keys;
+struct Properties;
+struct SparseArrayProxy;
+struct StringArray;
+struct StringPropertyValue;
+struct WString;
+
+//***********************//
+//*********Enums*********//
+//***********************//
+
+enum <uint> EExportCommandType {
+    ExportCommandType_Create,
+    ExportCommandType_Serialize,
+    ExportCommandType_Count
+};
+
+enum EObjectFlags {
+    // Do not add new flags unless they truly belong here. There are alternatives.
+    // if you change any the bit of any of the RF_Load flags, then you will need legacy serialization
+    RF_NoFlags                          = 0x00000000,   ///< No flags, used to avoid a cast
+
+    // This first group of flags mostly has to do with what kind of object it is. Other than transient, these are the persistent object flags.
+    // The garbage collector also tends to look at these.
+    RF_Public                           = 0x00000001,    ///< Object is visible outside its package.
+    RF_Standalone                       = 0x00000002,    ///< Keep object around for editing even if unreferenced.
+    RF_MarkAsNative                     = 0x00000004,    ///< Object (UField) will be marked as native on construction (DO NOT USE THIS FLAG in HasAnyFlags() etc)
+    RF_Transactional                    = 0x00000008,    ///< Object is transactional.
+    RF_ClassDefaultObject               = 0x00000010,    ///< This object is its class's default object
+    RF_ArchetypeObject                  = 0x00000020,    ///< This object is a template for another object - treat like a class default object
+    RF_Transient                        = 0x00000040,    ///< Don't save object.
+
+    // This group of flags is primarily concerned with garbage collection.
+    RF_MarkAsRootSet                    = 0x00000080,    ///< Object will be marked as root set on construction and not be garbage collected, even if unreferenced (DO NOT USE THIS FLAG in HasAnyFlags() etc)
+    RF_TagGarbageTemp                   = 0x00000100,    ///< This is a temp user flag for various utilities that need to use the garbage collector. The garbage collector itself does not interpret it.
+
+    // The group of flags tracks the stages of the lifetime of a uobject
+    RF_NeedInitialization               = 0x00000200,    ///< This object has not completed its initialization process. Cleared when ~FObjectInitializer completes
+    RF_NeedLoad                         = 0x00000400,    ///< During load, indicates object needs loading.
+    RF_KeepForCooker                    = 0x00000800,    ///< Keep this object during garbage collection because it's still being used by the cooker
+    RF_NeedPostLoad                     = 0x00001000,    ///< Object needs to be postloaded.
+    RF_NeedPostLoadSubobjects           = 0x00002000,    ///< During load, indicates that the object still needs to instance subobjects and fixup serialized component references
+    RF_NewerVersionExists               = 0x00004000,    ///< Object has been consigned to oblivion due to its owner package being reloaded, and a newer version currently exists
+    RF_BeginDestroyed                   = 0x00008000,    ///< BeginDestroy has been called on the object.
+    RF_FinishDestroyed                  = 0x00010000,    ///< FinishDestroy has been called on the object.
+
+    // Misc. Flags
+    RF_BeingRegenerated                 = 0x00020000,    ///< Flagged on UObjects that are used to create UClasses (e.g. Blueprints) while they are regenerating their UClass on load (See FLinkerLoad::CreateExport())
+    RF_DefaultSubObject                 = 0x00040000,    ///< Flagged on subobjects that are defaults
+    RF_WasLoaded                        = 0x00080000,    ///< Flagged on UObjects that were loaded
+    RF_TextExportTransient              = 0x00100000,    ///< Do not export object to text form (e.g. copy/paste). Generally used for sub-objects that can be regenerated from data in their parent object.
+    RF_LoadCompleted                    = 0x00200000,    ///< Object has been completely serialized by linkerload at least once. DO NOT USE THIS FLAG, It should be replaced with RF_WasLoaded.
+    RF_InheritableComponentTemplate     = 0x00400000, ///< Archetype of the object can be in its super class
+    RF_DuplicateTransient               = 0x00800000, ///< Object should not be included in any type of duplication (copy/paste, binary duplication, etc.)
+    RF_StrongRefOnFrame                 = 0x01000000,   ///< References to this object from persistent function frame are handled as strong ones.
+    RF_NonPIEDuplicateTransient         = 0x02000000,  ///< Object should not be included for duplication unless it's being duplicated for a PIE session
+    RF_Dynamic                          = 0x04000000, // Field Only. Dynamic field - doesn't get constructed during static initialization, can be constructed multiple times
+    RF_WillBeLoaded                     = 0x08000000, // This object was constructed during load and will be loaded shortly
+};
+
+enum <uint> EPackageFlags {
+    PKG_None                        = 0x00000000,  ///< No flags
+    PKG_NewlyCreated                = 0x00000001,  ///< Newly created package, not saved yet. In editor only.
+    PKG_ClientOptional              = 0x00000002,  ///< Purely optional for clients.
+    PKG_ServerSideOnly              = 0x00000004,  ///< Only needed on the server side.
+    PKG_CompiledIn                  = 0x00000010,  ///< This package is from "compiled in" classes.
+    PKG_ForDiffing                  = 0x00000020,  ///< This package was loaded just for the purposes of diffing
+    PKG_EditorOnly                  = 0x00000040,  ///< This is editor-only package (for example: editor module script package)
+    PKG_Developer                   = 0x00000080,  ///< Developer module
+    PKG_UncookedOnly                = 0x00000100,  ///< Loaded only in uncooked builds (i.e. runtime in editor)
+    PKG_Cooked                      = 0x00000200,  ///< Package is cooked
+    PKG_ContainsNoAsset             = 0x00000400,  ///< Package doesn't contain any asset object (although asset tags can be present)
+    PKG_NotExternallyReferenceable  = 0x00000800,  ///< Objects in this package cannot be referenced in a different plugin or mount point (i.e /Game -> /Engine)
+//  PKG_Unused                      = 0x00001000,
+    PKG_UnversionedProperties       = 0x00002000,  ///< Uses unversioned property serialization instead of versioned tagged property serialization
+    PKG_ContainsMapData             = 0x00004000,  ///< Contains map data (UObjects only referenced by a single ULevel) but is stored in a different package
+    PKG_IsSaving                    = 0x00008000,  ///< Temporarily set on a package while it is being saved.
+    PKG_Compiling                   = 0x00010000,  ///< package is currently being compiled
+    PKG_ContainsMap                 = 0x00020000,  ///< Set if the package contains a ULevel/ UWorld object
+    PKG_RequiresLocalizationGather  = 0x00040000,  ///< Set if the package contains any data to be gathered by localization
+//  PKG_Unused                      = 0x00080000,
+    PKG_PlayInEditor                = 0x00100000,  ///< Set if the package was created for the purpose of PIE
+    PKG_ContainsScript              = 0x00200000,  ///< Package is allowed to contain UClass objects
+    PKG_DisallowExport              = 0x00400000,  ///< Editor should not export asset in this package
+//  PKG_Unused                      = 0x00800000,
+//  PKG_Unused                      = 0x01000000,
+//  PKG_Unused                      = 0x02000000,
+//  PKG_Unused                      = 0x04000000,
+    PKG_CookGenerated               = 0x08000000,  ///< This package was generated by the cooker and does not exist in the WorkspaceDomain
+    PKG_DynamicImports              = 0x10000000,  ///< This package should resolve dynamic imports from its export at runtime.
+    PKG_RuntimeGenerated            = 0x20000000,  ///< This package contains elements that are runtime generated, and may not follow standard loading order rules
+    PKG_ReloadingForCooker          = 0x40000000,  ///< This package is reloading in the cooker, try to avoid getting data we will never need. We won't save this package.
+    PKG_FilterEditorOnly            = 0x80000000,  ///< Package has editor-only data filtered out
+};
+
+// FF7PropertyType
+enum <int> FF7PropertyType {
+    BoolProperty = 1,
+    ByteProperty = 2,
+    Int8Property = 3,
+    UInt16Property = 4,
+    Int16Property = 5,
+    UIntProperty = 6,
+    IntProperty = 7,
+    Int64Property = 8,
+    FloatProperty = 9,
+    StrProperty = 10,
+    NameProperty = 11,
+};
+
+//***********************//
+//********Structs********//
+//***********************//
+
+// FExportBundleHeader
+typedef struct {
+//  uint64 SerialOffset; // Only got 5.0+ games.
+    uint FirstEntryIndex;
+    uint EntryCount;
+} FExportBundleHeader;
+
+// FExportBundleEntry
+typedef struct {
+    uint LocalExportIndex;
+    EExportCommandType CommandType;
+} FExportBundleEntry;
+
+// FExportMapEntry
+typedef struct {
+    uint64 CookedSerialOffset;
+    uint64 CookedSerialSize;
+    FName ObjectName;
+    FPackageObjectIndex OuterIndex;
+    FPackageObjectIndex ClassIndex;
+    FPackageObjectIndex SuperIndex;
+    FPackageObjectIndex TemplateIndex;
+    FPackageObjectIndex GlobalImportIndex;
+//  ulong PublicExportHash; // Only got 5.0+ games.
+    EObjectFlags ObjectFlags;
+    uint FilterFlags; // EExportFilterFlags: client/server flags
+} FExportMapEntry<read=(GetFNameString(ObjectName))>;
+
+// FName
+typedef struct {
+    uint index;
+    uint number;
+} FName<read=(names[index].value)>;
+
+// FPackageId
+typedef struct {
+    uint64 id;
+    uint unk1;
+    uint unk2;
+    uint unk3;
+} FPackageId;
+
+// FPackageObjectIndex
+typedef struct {
+    int64 TypeAndId;
+} FPackageObjectIndex<read=(TypeAndId)>;
+
+// FPackageSummary
+typedef struct {
+    FName Name;
+    FName SourceName;
+    EPackageFlags PackageFlags;
+    uint CookedHeaderSize;
+    int NameMapNamesOffset;
+    int NameMapNamesSize;
+    int NameMapHashesOffset;
+    int NameMapHashesSize;
+    int ImportMapOffset;
+    int ExportMapOffset;
+    int ExportBundlesOffset;
+    int GraphDataOffset;
+    int GraphDataSize;
+    int pad1<hidden=true>;
+} FPackageSummary;
+
+// FString
+typedef struct {
+    uint size;
+    char value[size]<optimize=false>;
+} FString<read=(value)>;
+
+// FSerializedNameHeader
+typedef struct {
+    byte data0;
+    byte data1;
+    local byte isUtf16 = (data0 & 0x80u) != 0;
+    local uint16 length = (uint16) (((data0 & 0x7Fu) << 8) + data1);
+} FSerializedNameHeader<read=(Str("%d : %d", isUtf16, length))>;
+
+// FSerializedName
+typedef struct {
+    FSerializedNameHeader header;
+    if (header.isUtf16) {
+        wchar_t value[header.length * 2];
+    } else {
+        char value[header.length]<optimize=false>;
+    }
+} FSerializedName<read=(value)>;
+
+// WString
+typedef struct {
+    uint size;
+    wchar_t value[size]<optimize=false>;
+} WString<read=(value)>;
+
+// WStringNulTermHolder
+typedef struct {
+    wstring value;
+} WStringNulTermHolder<read=(value)>;
+
+// Export
+typedef struct {
+    FName tag;
+    if (GetFNameString(tag) != "None") {
+        // TODO: Read GUID.
+    }
+    int someBool;
+
+    FrozenArchive archive;
+} Export;
+
+// FKey
+typedef struct {
+    local uint64 nameOffset = FTell();
+    uint64 namePlaceholder; // Reverse search the name map with the position.
+    int index;
+    int nextIndex;
+    uint priority;
+    //Printf("MinimalNames[i].name type: %d\n", parentof(parentof(this)).MinimalNames[1].name.index);
+} FKey<read=(GetNameFromOffset(parentof(parentof(this)), nameOffset))>;
+
+// FMemoryImageVTablePatch
+typedef struct {
+    int VTableOffset;
+    int Offset;
+} FMemoryImageVTablePatch;
+
+// FMemoryImageVTable
+typedef struct {
+    FName name;
+    uint count;
+    FMemoryImageVTablePatch patches[count]<optimize=false>;
+} FMemoryImageVTable<read=(GetFNameString(name))>;
+
+// FMemoryImageName
+typedef struct {
+    FName name;
+    uint count;
+    uint patches[count]<optimize=false>;
+} FMemoryImageName<read=(GetFNameString(name))>;
+
+// FFrozenMemoryImagePtr
+typedef struct {
+    //int OffsetFromThis : 8;
+    int64 packed;
+    local int Frozen = packed & 1; // Bool
+    local int64 OffsetFromThis = packed >> 1;
+} FFrozenMemoryImagePtr<read=(Str("%d", OffsetFromThis))>;
+
+// FrozenArchive
+local uint64 frozenObjectStart;
+typedef struct {
+    uint frozenSize;
+    uint size;
+    uint16 unk1;
+    uint16 padding;
+    FSkip(padding);
+    // This is where the frozen archive 'begins' and what it considers pos 0 internally when reading.
+    frozenObjectStart = FTell();
+    Printf("FrozenArchive pos: %d\n", frozenObjectStart);
+    FSkip(frozenSize);
+    int numVTables;
+    int numScriptNames;
+    int numMinimalNames;
+    FMemoryImageVTable VTables[numVTables]<optimize=false>;
+    FMemoryImageName ScriptNames[numScriptNames]<optimize=false>;
+    FMemoryImageName MinimalNames[numMinimalNames]<optimize=false>;
+
+    FSeek(frozenObjectStart);
+    Keys keys;
+    Indexes indexes;
+    Properties properties;
+    Entries entries;
+} FrozenArchive;
+
+// Keys
+typedef struct {
+    SparseArrayProxy base;
+    if (base.dataNum > 0) {
+        FKey keys[base.dataNum]<optimize=false>;
+        FSeek(base.continuePos);
+    }
+} Keys;
+
+// Indexes
+typedef struct {
+    ArrayProxy base;
+    if (base.dataNum > 0) {
+        int32 indexes[base.dataNum]<optimize=false>;
+        FSeek(base.continuePos);
+    }
+} Indexes;
+
+// Properties
+typedef struct {
+    ArrayProxy base;
+    if (base.dataNum > 0) {
+        FF7Property properties[base.dataNum]<optimize=false>;
+        FSeek(base.continuePos);
+    }
+} Properties;
+
+// Entries
+typedef struct {
+    SparseArrayProxy base;
+    if (base.dataNum > 0) {
+        Entry entries[base.dataNum]<optimize=false>;
+        FSeek(base.continuePos);
+    }
+} Entries;
+
+// Entry
+typedef struct {
+    // Hard-coding for Equipment.uasset.
+    StringArray SkillTextLabel_Array;
+    byte placeholder1[112];
+    IntArray SkillCoreSlotMax_Array;
+    byte placeholder2[528 - 172];
+    int SkillCoreSlotNum;
+    byte placeholder3[24];
+} Entry;
+
+//***********************//
+//********Arrays*********//
+//***********************//
+
+// BitField
+typedef struct {
+    byte a : 1;
+    byte b : 1;
+    byte c : 1;
+    byte d : 1;
+    byte e : 1;
+    byte f : 1;
+    byte g : 1;
+    byte h : 1;
+} BitField;
+
+// BitArrayData
+typedef struct {
+    local uint64 initialPos;
+    local uint64 continuePos;
+
+    initialPos = FTell();
+    FFrozenMemoryImagePtr dataPtr;
+    int numBits;
+    int maxBits;
+
+    if (numBits > 0) {
+        continuePos = FTell();
+        FSeek(initialPos + dataPtr.OffsetFromThis);
+        local int bitByteCount = (int) (numBits + 8 - 1) / 8;
+        BitField allocationFlags[bitByteCount]<optimize=false>;
+        FSeek(continuePos);
+    }
+} BitArrayData;
+
+// SparseArrayProxy
+typedef struct {
+    local uint64 continuePos;
+    local uint64 initialPos;
+
+    initialPos = FTell();
+    FFrozenMemoryImagePtr dataPtr;
+    int dataNum;
+    int dataMax;
+    BitArrayData allocationFlags;
+    int firstFreeIndex;
+    int numFreeIndices;
+
+    if (dataNum > 0) {
+        continuePos = FTell();
+        FSeek(initialPos + dataPtr.OffsetFromThis);
+    }
+} SparseArrayProxy;
+
+// ArrayProxy
+typedef struct {
+    local uint64 continuePos;
+    local uint64 initialPos;
+
+    initialPos = FTell();
+    FFrozenMemoryImagePtr dataPtr;
+    int dataNum;
+    int dataMax;
+
+    if (dataNum > 0) {
+        continuePos = FTell();
+        FSeek(initialPos + dataPtr.OffsetFromThis);
+    }
+} ArrayProxy<read=(Str("%d", initialPos + dataPtr.OffsetFromThis))>;
+
+// StringArray
+typedef struct {
+    ArrayProxy base;
+    if (base.dataNum > 0) {
+        StringPropertyValue propertyValues[base.dataNum]<optimize=false>;
+        FSeek(base.continuePos);
+    }
+} StringArray<read=(Str("%d", base.initialPos + base.dataPtr.OffsetFromThis))>;
+
+// IntArray
+typedef struct {
+    ArrayProxy base;
+    if (base.dataNum > 0) {
+        int propertyValues[base.dataNum]<optimize=false>;
+        FSeek(base.continuePos);
+    }
+} IntArray<read=(Str("%d", base.initialPos + base.dataPtr.OffsetFromThis))>;
+
+//***********************//
+//******Properties*******//
+//***********************//
+
+// FF7Property
+typedef struct {
+    local uint64 nameOffset = FTell();
+    uint64 namePlaceholder; // Reverse search the name map with the position.
+    FF7PropertyType underlyingType;
+} FF7Property<read=(GetNameFromOffset(parentof(parentof(this)), nameOffset))>;
+
+// StringPropertyValue
+typedef struct {
+    FSeek(Align(FTell(), 8, frozenObjectStart));
+    local uint64 initialPos = FTell();
+    FFrozenMemoryImagePtr dataPtr;
+    int charNum;
+    int charMax;
+
+    local uint64 continuePos = FTell();
+    FSeek(initialPos + dataPtr.OffsetFromThis);
+
+    wchar_t data[charNum];
+
+    FSeek(continuePos);
+} StringPropertyValue;
+
+//***********************//
+//*******Functions*******//
+//***********************//
+
+string GetFNameString(FName& name) {
+    if (name.number > 0) {
+        return Str("%s_%d", names[name.index].value, name.number);
+    } else {
+        return names[name.index].value;
+    }
+}
+
+string GetNameFromOffset(FrozenArchive& obj, uint64& offset) {
+    local int mapOffset;
+    local int i, s;
+    for (i = 0; i < obj.numMinimalNames; i++) {
+        for (s = 0; s < obj.MinimalNames[i].count; s++) {
+            mapOffset = offset - frozenObjectStart;
+            if (obj.MinimalNames[i].patches[s] == mapOffset) {
+                return GetFNameString(obj.MinimalNames[i].name);
+            }
+        }
+    }
+    return "";
+}
+
+int64 Align(int64 ptr, int64 alignment, int64 offset) {
+    ptr -= offset;
+    return (ptr + alignment - 1 & ~(alignment - 1)) + offset;
+}
+
+//***********************//
+//*********Data**********//
+//***********************//
+
+FSeek(0);
+FPackageSummary packageSummary;
+
+FSeek(packageSummary.NameMapNamesOffset);
+local int nameCount = packageSummary.NameMapHashesSize / sizeof(uint64) - 1;
+FSerializedName names[nameCount]<optimize=false>;
+
+// NameHashes
+FSeek(packageSummary.NameMapHashesOffset);
+struct {
+    uint64 unk1;
+    uint64 hashes[nameCount];
+} NameHashes;
+
+FSeek(packageSummary.ImportMapOffset);
+local int importCount = (packageSummary.ExportMapOffset - packageSummary.ImportMapOffset) / sizeof(FPackageObjectIndex);
+FPackageObjectIndex imports[importCount];
+
+FSeek(packageSummary.ExportMapOffset);
+local int exportCount = (packageSummary.ExportBundlesOffset - packageSummary.ExportMapOffset) / sizeof(FExportMapEntry);
+FExportMapEntry exports[exportCount];
+
+FSeek(packageSummary.ExportBundlesOffset);
+FExportBundleHeader bundleHeader;
+FExportBundleEntry bundles[bundleHeader.EntryCount];
+
+FSeek(packageSummary.GraphDataOffset);
+int packageCount;
+FPackageId packages[packageCount];
+
+FSeek(packageSummary.GraphDataOffset + packageSummary.GraphDataSize);
+Export export[exportCount]<optimize=false>;
+uint whereAmI;
