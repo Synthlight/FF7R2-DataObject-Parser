@@ -1,9 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
-using CUE4Parse.UE4.Exceptions;
 using CUE4Parse.UE4.Objects.UObject;
-using FF7R2.DataObject;
 
 namespace FF7R2;
 
@@ -38,10 +36,17 @@ public static class Extensions {
         return (ptr + alignment - 1 & ~(alignment - 1)) + offset;
     }
 
-    public static T Read<T>(this BinaryReader reader) {
+    public static T Read<T>(this BinaryReader reader) where T : struct {
         var size   = Unsafe.SizeOf<T>();
         var buffer = reader.ReadBytes(size);
         return Unsafe.ReadUnaligned<T>(ref buffer[0]);
+    }
+
+    public static void Write<T>(this BinaryWriter writer, T obj) where T : struct {
+        var size   = Unsafe.SizeOf<T>();
+        var buffer = new byte[size];
+        Unsafe.WriteUnaligned(ref buffer[0], obj);
+        writer.Write(buffer);
     }
 
     public static T[] Subsequence<T>(this IEnumerable<T> arr, int startIndex, int length) {
@@ -78,5 +83,10 @@ public static class Extensions {
         } finally {
             if (handle.IsAllocated) handle.Free();
         }
+    }
+
+    public static bool ContainsUnicodeCharacter(this string input) {
+        const int maxAnsiCode = 255;
+        return input.Any(c => c > maxAnsiCode);
     }
 }

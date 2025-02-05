@@ -3,25 +3,24 @@
 namespace FF7R2.DataObject;
 
 public class MemoryImageName(InnerAsset asset) {
-    public FName                      name;
-    public List<MemoryImageNamePatch> patches = [];
+    public FName      name;
+    public List<uint> offsets = [];
 
     internal void Read(BinaryReader reader) {
         name = reader.ReadFName(asset.ioStoreAsset.names);
         var count = reader.ReadUInt32();
-        patches = [];
+        offsets = [];
         for (var i = 0; i < count; i++) {
-            var patch = new MemoryImageNamePatch();
-            patch.Read(reader);
-            patches.Add(patch);
+            var offset = reader.ReadUInt32();
+            offsets.Add(offset);
         }
     }
 
     internal void Write(BinaryWriter writer) {
         writer.Write(name);
-        writer.Write(patches.Count);
-        foreach (var patch in patches) {
-            writer.Write(patch);
+        writer.Write(offsets.Count);
+        foreach (var offset in offsets) {
+            writer.Write(offset);
         }
     }
 

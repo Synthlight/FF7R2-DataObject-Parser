@@ -5,6 +5,7 @@ using CUE4Parse.UE4.Objects.UObject;
 using FExportBundleHeader = FF7R2.Enums.FExportBundleHeader;
 using FExportMapEntry = FF7R2.Enums.FExportMapEntry;
 using FPackageSummary = FF7R2.Enums.FPackageSummary;
+using FSerializedNameHeader = FF7R2.Enums.FSerializedNameHeader;
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
 namespace FF7R2.DataObject;
@@ -16,8 +17,6 @@ public class IoStoreAsset {
     internal byte[]                bytes;
     private  FPackageSummary       packageSummary;
     internal FName[]               names;
-    private  long                  namesJunkStart = -1;
-    private  byte[]                remainingNameBytes;
     private  byte[]                startOfHashBytes; // Seems to always be `00 00 64 C1 00 00 00 00` in all the data object files.
     private  FPackageObjectIndex[] imports;
     private  FExportMapEntry[]     exports;
@@ -78,21 +77,21 @@ public class IoStoreAsset {
 
         // Read names.
         reader.BaseStream.Seek(packageSummary.NameMapNamesOffset, SeekOrigin.Begin);
-        reader.BaseStream.Seek(1, SeekOrigin.Current); // Padding.
         var nameCount = packageSummary.NameMapHashesSize / sizeof(ulong) - 1;
         names = new FName[nameCount];
         for (var i = 0; i < nameCount; i++) {
-            var text     = reader.ReadString();
-            var nullTerm = reader.ReadChar();
-            if (nullTerm != '\0') {
-                // Some files seem to just have junk name data at the end.
-                // It's still technically part of the names block given the offsets and size, it's just unprintable garbage.
-                reader.BaseStream.Seek(-1, SeekOrigin.Current); // Null term.
-                namesJunkStart = reader.BaseStream.Position;
-                var remainingNameBytesSize = (int) (packageSummary.NameMapNamesSize + TypeSize<FPackageSummary>.Size - reader.BaseStream.Position);
-                remainingNameBytes = reader.ReadBytes(remainingNameBytesSize);
-                break;
+            var nameHeader = reader.Read<FSerializedNameHeader>();
+
+            string text;
+            // ReSharper disable once ConvertIfStatementToConditionalTernaryExpression
+            if (nameHeader.IsUtf16) {
+                var stringBytes = reader.ReadBytes(nameHeader.Length * 2);
+                text = Encoding.Unicode.GetString(stringBytes);
+            } else {
+                var stringBytes = reader.ReadBytes(nameHeader.Length);
+                text = Encoding.ASCII.GetString(stringBytes);
             }
+
             names[i] = new(text, i);
         }
 
@@ -148,17 +147,25 @@ public class IoStoreAsset {
     internal void Write(BinaryWriter writer) {
         // Write names.
         writer.BaseStream.Seek(packageSummary.NameMapNamesOffset, SeekOrigin.Begin); // Should always be 64, but I'm just assuming the file has it right to begin with.
-        writer.BaseStream.Seek(1, SeekOrigin.Current); // Padding.
         foreach (var name in names) {
-            writer.Write(name.Text);
-            if (namesJunkStart > -1 && writer.BaseStream.Position == namesJunkStart) {
-                writer.Write(remainingNameBytes);
-                writer.BaseStream.Seek(1, SeekOrigin.Current); // `NameMapNamesSize` winds up being off by one on write without this.
-                break;
+            var nameHeader = new FSerializedNameHeader();
+            if (name.Text.ContainsUnicodeCharacter()) {
+                nameHeader.IsUtf16 = true;
             }
-            writer.BaseStream.Seek(1, SeekOrigin.Current); // Null term.
+            nameHeader.Length = (byte) name.Text.Length;
+            writer.Write(nameHeader);
+
+            byte[] bytes;
+            // ReSharper disable once ConvertIfStatementToConditionalTernaryExpression
+            if (nameHeader.IsUtf16) {
+                bytes = Encoding.Unicode.GetBytes(name.Text);
+            } else {
+                bytes = Encoding.ASCII.GetBytes(name.Text);
+            }
+
+            writer.Write(bytes);
         }
-        packageSummary.NameMapNamesSize = (int) (writer.BaseStream.Position - packageSummary.NameMapNamesOffset) - 1; // -1 because of the one byte we skip.
+        packageSummary.NameMapNamesSize = (int) (writer.BaseStream.Position - packageSummary.NameMapNamesOffset);
 
         // Write name hashes.
         writer.BaseStream.Position         = writer.BaseStream.Position.Align(8);

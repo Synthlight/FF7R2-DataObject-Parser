@@ -61,8 +61,8 @@ public class FrozenObject(InnerAsset asset) {
             var imageName = new MemoryImageName(asset);
             imageName.Read(reader);
             minimalNames.Add(imageName);
-            foreach (var patch in imageName.patches) {
-                OffsetToNameLookup[patch.offset] = imageName.name;
+            foreach (var offset in imageName.offsets) {
+                OffsetToNameLookup[offset] = imageName.name;
             }
         }
 
@@ -143,6 +143,13 @@ public class FrozenObject(InnerAsset asset) {
         foreach (var scriptName in scriptNames) {
             writer.Write(scriptName);
         }
+
+        // TODO: Update the offsets used of wherever we're writing out a name.
+        // Our expansion of the data *should* be creating more name offsets, and we're not updating the list here with them.
+        foreach (var minimalName in minimalNames) {
+            //minimalName.offsets.Clear();
+        }
+
         foreach (var minimalName in minimalNames) {
             writer.Write(minimalName);
         }
