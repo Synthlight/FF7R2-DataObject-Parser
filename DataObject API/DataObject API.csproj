@@ -6,6 +6,19 @@
 		<RootNamespace>FF7R2</RootNamespace>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<PackageId>FF7R2.DataObject.API</PackageId>
+		<Title>FF7R2 DataObject API</Title>
+		<Authors>LordGregory</Authors>
+		<Company>None</Company>
+		<Description>An FF7R2 DataObject API.</Description>
+		<PackageProjectUrl>https://github.com/Synthlight/FF7R2-DataObject-Parser</PackageProjectUrl>
+		<PackageReadmeFile>Readme.md</PackageReadmeFile>
+		<PackageLicenseFile>License.txt</PackageLicenseFile>
+		<RepositoryUrl>https://github.com/Synthlight/FF7R2-DataObject-Parser</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<AssemblyVersion>0.1.1</AssemblyVersion>
+		<Version>$(AssemblyVersion)</Version>
+		<Copyright>All rights reserved</Copyright>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="CUE4Parse" Version="1.2.1"/>
@@ -16,4 +29,17 @@
 			<_Parameter1>Tests</_Parameter1>
 		</AssemblyAttribute>
 	</ItemGroup>
+	<ItemGroup>
+		<None Include="..\Readme.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\License.txt">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	</PropertyGroup>
 </Project>

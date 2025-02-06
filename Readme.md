@@ -1,5 +1,11 @@
 A C# parser for FF7 Rebirth's DataObject files.
 
+# Installation
+![NuGet Version](https://img.shields.io/nuget/v/FF7R2.DataObject.API)<br>
+[https://www.nuget.org/packages/FF7R2.DataObject.API](https://www.nuget.org/packages/FF7R2.DataObject.API)<br>
+Eitehr install the NuGet package, or clone this and add the "DataObject API" project as a project reference to your own project.
+
+# Description
 To say this works would be a massive overstatement.<br>
 There's layers and layers of compression and re-use here, and whilst this can *read* the files, writing is experimental at best.
 
