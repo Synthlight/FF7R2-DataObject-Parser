@@ -11,16 +11,12 @@
 //   History:
 //------------------------------------------------
 
-struct ArrayProxy;
-struct BitArrayData;
-struct BitField;
 struct Entries;
 struct Entry;
 struct Export;
 struct FExportBundleEntry;
 struct FExportBundleHeader;
 struct FExportMapEntry;
-struct FF7Property;
 struct FFrozenMemoryImagePtr;
 struct FKey;
 struct FMappedName;
@@ -35,13 +31,37 @@ struct FSerializedName;
 struct FSerializedNameHeader;
 struct FString;
 struct Indexes;
-struct IntArray;
 struct Keys;
 struct Properties;
-struct SparseArrayProxy;
-struct StringArray;
-struct StringPropertyValue;
+struct Property;
 struct WString;
+
+struct BitField;
+struct BitArrayData;
+struct SparseArrayProxy;
+struct ArrayProxy;
+struct StringArray;
+struct NameArray;
+struct UInt8Array;
+struct Int8Array;
+struct UInt16Array;
+struct Int16Array;
+struct UInt32Array;
+struct Int32Array;
+struct Int64Array;
+struct FloatArray;
+
+struct PropertyValue;
+struct StringPropertyValue;
+struct NamePropertyValue;
+struct UInt8PropertyValue;
+struct Int8PropertyValue;
+struct UInt16PropertyValue;
+struct Int16PropertyValue;
+struct UInt32PropertyValue;
+struct Int32PropertyValue;
+struct Int64PropertyValue;
+struct FloatPropertyValue;
 
 //***********************//
 //*********Enums*********//
@@ -131,15 +151,15 @@ enum <uint> EPackageFlags {
     PKG_FilterEditorOnly            = 0x80000000,  ///< Package has editor-only data filtered out
 };
 
-// FF7PropertyType
-enum <int> FF7PropertyType {
+// PropertyType
+enum <int> PropertyType {
     BoolProperty = 1,
-    ByteProperty = 2,
+    UInt8Property = 2,
     Int8Property = 3,
     UInt16Property = 4,
     Int16Property = 5,
-    UIntProperty = 6,
-    IntProperty = 7,
+    UInt32Property = 6,
+    Int32Property = 7,
     Int64Property = 8,
     FloatProperty = 9,
     StrProperty = 10,
@@ -343,11 +363,18 @@ typedef struct {
     }
 } Indexes;
 
+// Property
+typedef struct {
+    local uint64 nameOffset = FTell();
+    uint64 namePlaceholder; // Reverse search the name map with the position.
+    PropertyType underlyingType;
+} Property<read=(GetNameFromOffset(parentof(parentof(this)), nameOffset))>;
+
 // Properties
 typedef struct {
     ArrayProxy base;
     if (base.dataNum > 0) {
-        FF7Property properties[base.dataNum]<optimize=false>;
+        Property properties[base.dataNum]<optimize=false>;
         FSeek(base.continuePos);
     }
 } Properties;
@@ -370,6 +397,16 @@ typedef struct {
     //byte placeholder2[528 - 172];
     //int SkillCoreSlotNum;
     //byte placeholder3[24];
+
+    local int i;
+    local string propName;
+    local PropertyType underlyingType;
+    for (i = 0; i < parentof(parentof(this)).properties.base.dataNum; i++) {
+        propName = GetNameFromOffset(parentof(parentof(this)), parentof(parentof(this)).properties.properties[i].nameOffset);
+        underlyingType = parentof(parentof(this)).properties.properties[i].underlyingType;
+        //Printf("propName: %s, underlyingType: %s\n", propName, EnumToString(underlyingType));
+        PropertyValue propValue;
+    }
 } Entry;
 
 //***********************//
@@ -428,6 +465,7 @@ typedef struct {
 
 // ArrayProxy
 typedef struct {
+    FSeek(Align(FTell(), 8, frozenObjectStart));
     local uint64 continuePos;
     local uint64 initialPos;
 
@@ -451,25 +489,179 @@ typedef struct {
     }
 } StringArray<read=(Str("%d", base.initialPos + base.dataPtr.OffsetFromThis))>;
 
-// IntArray
+// NameArray
 typedef struct {
     ArrayProxy base;
     if (base.dataNum > 0) {
-        int propertyValues[base.dataNum]<optimize=false>;
+        NamePropertyValue propertyValues[base.dataNum]<optimize=false>;
         FSeek(base.continuePos);
     }
-} IntArray<read=(Str("%d", base.initialPos + base.dataPtr.OffsetFromThis))>;
+} NameArray<read=(Str("%d", base.initialPos + base.dataPtr.OffsetFromThis))>;
+
+// UInt8Array
+typedef struct {
+    ArrayProxy base;
+    if (base.dataNum > 0) {
+        uint8 propertyValues[base.dataNum]<optimize=false>;
+        FSeek(base.continuePos);
+    }
+} UInt8Array<read=(Str("%d", base.initialPos + base.dataPtr.OffsetFromThis))>;
+
+// Int8Array
+typedef struct {
+    ArrayProxy base;
+    if (base.dataNum > 0) {
+        int8 propertyValues[base.dataNum]<optimize=false>;
+        FSeek(base.continuePos);
+    }
+} Int8Array<read=(Str("%d", base.initialPos + base.dataPtr.OffsetFromThis))>;
+
+// UInt16Array
+typedef struct {
+    ArrayProxy base;
+    if (base.dataNum > 0) {
+        uint16 propertyValues[base.dataNum]<optimize=false>;
+        FSeek(base.continuePos);
+    }
+} UInt16Array<read=(Str("%d", base.initialPos + base.dataPtr.OffsetFromThis))>;
+
+// Int16Array
+typedef struct {
+    ArrayProxy base;
+    if (base.dataNum > 0) {
+        int16 propertyValues[base.dataNum]<optimize=false>;
+        FSeek(base.continuePos);
+    }
+} Int16Array<read=(Str("%d", base.initialPos + base.dataPtr.OffsetFromThis))>;
+
+// UInt32Array
+typedef struct {
+    ArrayProxy base;
+    if (base.dataNum > 0) {
+        FSeek(Align(FTell(), 4, frozenObjectStart));
+        uint32 propertyValues[base.dataNum]<optimize=false>;
+        FSeek(base.continuePos);
+    }
+} UInt32Array<read=(Str("%d", base.initialPos + base.dataPtr.OffsetFromThis))>;
+
+// Int32Array
+typedef struct {
+    ArrayProxy base;
+    if (base.dataNum > 0) {
+        FSeek(Align(FTell(), 4, frozenObjectStart));
+        int32 propertyValues[base.dataNum]<optimize=false>;
+        FSeek(base.continuePos);
+    }
+} Int32Array<read=(Str("%d", base.initialPos + base.dataPtr.OffsetFromThis))>;
+
+// Int64Array
+typedef struct {
+    ArrayProxy base;
+    if (base.dataNum > 0) {
+        FSeek(Align(FTell(), 4, frozenObjectStart));
+        int64 propertyValues[base.dataNum]<optimize=false>;
+        FSeek(base.continuePos);
+    }
+} Int64Array<read=(Str("%d", base.initialPos + base.dataPtr.OffsetFromThis))>;
+
+// FloatArray
+typedef struct {
+    ArrayProxy base;
+    if (base.dataNum > 0) {
+        FSeek(Align(FTell(), 4, frozenObjectStart));
+        float propertyValues[base.dataNum]<optimize=false>;
+        FSeek(base.continuePos);
+    }
+} FloatArray<read=(Str("%d", base.initialPos + base.dataPtr.OffsetFromThis))>;
 
 //***********************//
 //******Properties*******//
 //***********************//
 
-// FF7Property
 typedef struct {
-    local uint64 nameOffset = FTell();
-    uint64 namePlaceholder; // Reverse search the name map with the position.
-    FF7PropertyType underlyingType;
-} FF7Property<read=(GetNameFromOffset(parentof(parentof(this)), nameOffset))>;
+    local string propName = parentof(this).propName;
+    local int isArray = RegExMatch(parentof(this).propName, ".*_Array");
+    //Printf("Is array?: %d\n", isArray);
+    if (isArray) {
+        switch (parentof(this).underlyingType) {
+            case BoolProperty:
+                UInt8Array boolArray;
+                break;
+            case UInt8Property:
+                UInt8Array uInt8Array;
+                break;
+            case Int8Property:
+                Int8Array int8Array;
+                break;
+            case UInt16Property:
+                UInt16Array uInt16Array;
+                break;
+            case Int16Property:
+                Int16Array int16Array;
+                break;
+            case UInt32Property:
+                UInt32Array uInt32Array;
+                break;
+            case Int32Property:
+                Int32Array int32Array;
+                break;
+            case Int64Property:
+                Int64Array int64Array;
+                break;
+            case FloatProperty:
+                FloatArray floatArray;
+                break;
+            case StrProperty:
+                StringArray stringArray;
+                break;
+            case NameProperty:
+                NameArray nameArray;
+                break;
+            default:
+                Printf("Unable to determine property type for:");
+                Exit(-1);
+        }
+    } else {
+        switch (parentof(this).underlyingType) {
+            case BoolProperty:
+                UInt8PropertyValue boolValue;
+                break;
+            case UInt8Property:
+                UInt8PropertyValue uInt8Value;
+                break;
+            case Int8Property:
+                Int8PropertyValue int8Value;
+                break;
+            case UInt16Property:
+                UInt16PropertyValue uInt16Value;
+                break;
+            case Int16Property:
+                Int16PropertyValue int16Value;
+                break;
+            case UInt32Property:
+                UInt32PropertyValue uInt32Value;
+                break;
+            case Int32Property:
+                Int32PropertyValue int32Value;
+                break;
+            case Int64Property:
+                Int64PropertyValue int64Value;
+                break;
+            case FloatProperty:
+                FloatPropertyValue floatValue;
+                break;
+            case StrProperty:
+                StringPropertyValue stringValue;
+                break;
+            case NameProperty:
+                NamePropertyValue nameValue;
+                break;
+            default:
+                Printf("Unable to determine property type for:");
+                Exit(-1);
+        }
+    }
+} PropertyValue<read=(propName)>;
 
 // StringPropertyValue
 typedef struct {
@@ -486,6 +678,57 @@ typedef struct {
 
     FSeek(continuePos);
 } StringPropertyValue;
+
+// NamePropertyValue
+typedef struct {
+    FSeek(Align(FTell(), 4, frozenObjectStart));
+    local uint64 nameOffset = FTell();
+    uint64 namePlaceholder; // Reverse search the name map with the position.
+} NamePropertyValue<read=(GetNameFromOffset(export[0].archive, nameOffset))>;
+
+// UInt8PropertyValue
+typedef struct {
+    uint8 value;
+} UInt8PropertyValue;
+
+// Int8PropertyValue
+typedef struct {
+    int8 value;
+} Int8PropertyValue;
+
+// UInt16PropertyValue
+typedef struct {
+    uint16 value;
+} UInt16PropertyValue;
+
+// Int16PropertyValue
+typedef struct {
+    int16 value;
+} Int16PropertyValue;
+
+// UInt32PropertyValue
+typedef struct {
+    FSeek(Align(FTell(), 4, frozenObjectStart));
+    uint32 value;
+} UInt32PropertyValue;
+
+// Int32PropertyValue
+typedef struct {
+    FSeek(Align(FTell(), 4, frozenObjectStart));
+    int32 value;
+} Int32PropertyValue;
+
+// Int64PropertyValue
+typedef struct {
+    FSeek(Align(FTell(), 4, frozenObjectStart));
+    int64 value;
+} Int64PropertyValue;
+
+// FloatPropertyValue
+typedef struct {
+    FSeek(Align(FTell(), 4, frozenObjectStart));
+    float value;
+} FloatPropertyValue;
 
 //***********************//
 //*******Functions*******//
@@ -554,4 +797,5 @@ FPackageId packages[packageCount];
 
 FSeek(packageSummary.GraphDataOffset + packageSummary.GraphDataSize);
 Export export[exportCount]<optimize=false>;
-uint whereAmI;
+
+Printf("EoF: %d", FTell());
