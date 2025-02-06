@@ -18,7 +18,7 @@ There's two save modes. I'm just gonna copy the doc because I'm lazy:
 /// Tests pass for few files, and the ones that do (like equipment) just result in the items being gone in-game.
 ```
 
-Example usage (for the edit-via-bytes method, though switching is fairly simple:
+Example usage (for the edit-via-bytes method, though switching is fairly simple):
 ```cs
 var asset = IoStoreAsset.Load(@"path\to\in\Equipment.uasset");
 
@@ -28,4 +28,15 @@ foreach (var (key, value) in asset.innerAsset.frozenObject.DataTable) {
 }
 
 asset.Save(@"path\to\out\Equipment.uasset", IoStoreAsset.Mode.OG_MODIFIED_BYTES);
+```
+
+And another example used to make all spells cast instantly:
+```cs
+var asset = IoStoreAsset.Load(@"in\path\BattleAbility.uasset");
+foreach (var (_, value) in asset.innerAsset.frozenObject.DataTable) {
+    foreach (var entry in value.propertyValues[BattleAbilityProperties.AnimationParameter_Array]!.As<ArrayPropertyValue>()!.Data!) {
+        entry.As<FloatProperty>()!.DataAsByteProxy = 0;
+    }
+}
+asset.Save(@"out\path\BattleAbility.uasset", IoStoreAsset.Mode.OG_MODIFIED_BYTES);
 ```
