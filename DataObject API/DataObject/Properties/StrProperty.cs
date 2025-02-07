@@ -7,7 +7,10 @@ public class StrProperty(FrozenObject obj, Property property) : PropertyValue<st
         set => internalData.data = value;
     }
 
-    public override string? DataAsByteProxy => Data;
+    public override string? DataAsByteProxy {
+        get => Data;
+        set => Data = value;
+    }
 
     internal override void Read(BinaryReader reader) {
         reader.BaseStream.Position = reader.BaseStream.Position.Align(8, obj.frozenObjectStart);

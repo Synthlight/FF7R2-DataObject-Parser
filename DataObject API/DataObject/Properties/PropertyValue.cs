@@ -16,9 +16,15 @@ public abstract class PropertyValue(FrozenObject obj, Property property) {
 }
 
 public abstract class PropertyValue<T>(FrozenObject obj, Property property) : PropertyValue(obj, property) {
+    // ReSharper disable once MemberCanBeProtected.Global
     public abstract    T?      Data        { get; set; }
     protected override object? GenericData => Data;
 
+    /// <summary>
+    /// This acts as a proxy to hex editing. Setting a value through this will directly change bytes at this given offset without writing the whole parsed file.
+    /// This requires you save with <see cref="IoStoreAsset.Mode.OG_MODIFIED_BYTES"/> and don't mix/match with <see cref="IoStoreAsset.Mode.WRITE_PARSED_DATA"/>!
+    /// Use one or the other!
+    /// </summary>
     public virtual T? DataAsByteProxy {
         get {
             var length = TypeSize<T>.Size;
@@ -26,7 +32,9 @@ public abstract class PropertyValue<T>(FrozenObject obj, Property property) : Pr
             Array.Copy(obj.asset.ioStoreAsset.bytes, Offset, buffer, 0, length);
             return buffer.GetDataAs<T>();
         }
+        // ReSharper disable once UnusedMember.Global
         set {
+            Data = value;
             var bytes = value.GetBytes();
             Array.Copy(bytes, 0, obj.asset.ioStoreAsset.bytes, Offset, TypeSize<T>.Size);
         }

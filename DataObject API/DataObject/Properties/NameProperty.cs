@@ -5,7 +5,10 @@ namespace FF7R2.DataObject.Properties;
 public class NameProperty(FrozenObject obj, Property property) : PropertyValue<FName?>(obj, property) {
     public override FName? Data { get; set; }
 
-    public override FName? DataAsByteProxy => Data;
+    public override FName? DataAsByteProxy {
+        get => Data;
+        set => Data = value;
+    }
 
     internal override void Read(BinaryReader reader) {
         reader.BaseStream.Position = reader.BaseStream.Position.Align(4, obj.frozenObjectStart);

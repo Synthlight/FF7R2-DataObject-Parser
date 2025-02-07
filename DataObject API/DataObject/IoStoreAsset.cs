@@ -49,8 +49,7 @@ public class IoStoreAsset {
     /// <see cref="Mode.OG_MODIFIED_BYTES"/> works in conjunction with the `DataAsByteProxy` property and just reads/writes to/from the bytes at specific offsets.
     /// This works, at the cost of immutable array sizes.
     /// <see cref="Mode.WRITE_PARSED_DATA"/>
-    /// This tries to write out the parsed file, and results are buggy in-game at best.
-    /// Tests pass for few files, and the ones that do (like equipment) just result in the items being gone in-game.
+    /// This tries to write out the parsed file, and whilst not all files pass write tests, does actually work and is the only one to allow changing array sizes.
     /// </summary>
     /// <param name="file"></param>
     /// <param name="mode"></param>
