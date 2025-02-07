@@ -677,7 +677,14 @@ typedef struct {
     wchar_t data[charNum];
 
     FSeek(continuePos);
-} StringPropertyValue;
+} StringPropertyValue<read=ReadStringPropertyValue>;
+string ReadStringPropertyValue(StringPropertyValue& stringPropertyValue) {
+    if (stringPropertyValue.charNum > 0) {
+        return stringPropertyValue.data;
+    } else {
+        return "{null}";
+    }
+}
 
 // NamePropertyValue
 typedef struct {
@@ -689,46 +696,46 @@ typedef struct {
 // UInt8PropertyValue
 typedef struct {
     uint8 value;
-} UInt8PropertyValue;
+} UInt8PropertyValue<read=(value)>;
 
 // Int8PropertyValue
 typedef struct {
     int8 value;
-} Int8PropertyValue;
+} Int8PropertyValue<read=(value)>;
 
 // UInt16PropertyValue
 typedef struct {
     uint16 value;
-} UInt16PropertyValue;
+} UInt16PropertyValue<read=(value)>;
 
 // Int16PropertyValue
 typedef struct {
     int16 value;
-} Int16PropertyValue;
+} Int16PropertyValue<read=(value)>;
 
 // UInt32PropertyValue
 typedef struct {
     FSeek(Align(FTell(), 4, frozenObjectStart));
     uint32 value;
-} UInt32PropertyValue;
+} UInt32PropertyValue<read=(value)>;
 
 // Int32PropertyValue
 typedef struct {
     FSeek(Align(FTell(), 4, frozenObjectStart));
     int32 value;
-} Int32PropertyValue;
+} Int32PropertyValue<read=(value)>;
 
 // Int64PropertyValue
 typedef struct {
     FSeek(Align(FTell(), 4, frozenObjectStart));
     int64 value;
-} Int64PropertyValue;
+} Int64PropertyValue<read=(value)>;
 
 // FloatPropertyValue
 typedef struct {
     FSeek(Align(FTell(), 4, frozenObjectStart));
     float value;
-} FloatPropertyValue;
+} FloatPropertyValue<read=(value)>;
 
 //***********************//
 //*******Functions*******//
@@ -753,7 +760,7 @@ string GetNameFromOffset(FrozenArchive& obj, uint64& offset) {
             }
         }
     }
-    return "";
+    return "{null}";
 }
 
 int64 Align(int64 ptr, int64 alignment, int64 offset) {
