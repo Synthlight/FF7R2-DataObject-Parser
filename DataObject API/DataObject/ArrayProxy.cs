@@ -2,7 +2,7 @@
 
 public class ArrayProxy<T> {
     private MemoryImagePtr dataPtr = new();
-    public  T[]            data    = [];
+    public  List<T>        data    = [];
     private int            dataMax;
 
     private long headerPos;
@@ -19,14 +19,13 @@ public class ArrayProxy<T> {
         var continuePos = reader.BaseStream.Position;
         reader.BaseStream.Position = initialPos + dataPtr.OffsetFromThis;
 
-        var data = new List<T>(dataNum);
+        data = new(dataNum);
         for (var i = 0; i < dataNum; ++i) {
             data.Add(readEntry());
             if (align != null) {
                 reader.BaseStream.Position = reader.BaseStream.Position.Align((int) align, alignOffset);
             }
         }
-        this.data = data.ToArray();
 
         reader.BaseStream.Position = continuePos;
     }
@@ -34,12 +33,12 @@ public class ArrayProxy<T> {
     internal void WriteHeader(BinaryWriter writer) {
         headerPos = writer.BaseStream.Position;
         writer.Write(dataPtr); // Update later.
-        writer.Write(data.Length);
+        writer.Write(data.Count);
         writer.Write(dataMax);
     }
 
     internal void WriteDataHeaders(BinaryWriter writer, Action<T> writeEntry) {
-        if (data.Length == 0) return;
+        if (data.Count == 0) return;
 
         var initialPos = writer.BaseStream.Position;
 

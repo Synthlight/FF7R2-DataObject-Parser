@@ -11,7 +11,7 @@ public abstract class PropertyValue(FrozenObject obj, Property property) {
     internal abstract void Write(BinaryWriter writer, PropertyWriteMode mode);
 
     public T? As<T>() where T : class {
-        return this as T;
+        return (T) (object) this;
     }
 }
 

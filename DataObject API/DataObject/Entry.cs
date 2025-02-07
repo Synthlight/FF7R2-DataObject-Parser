@@ -2,15 +2,15 @@
 
 namespace FF7R2.DataObject;
 
-public class Entry(FrozenObject obj, Property[] properties) {
-    public readonly Property[]     properties     = properties;
+public class Entry(FrozenObject obj, List<Property> properties) {
+    public readonly List<Property> properties     = properties;
     public          PropertyValues propertyValues = [];
 
     public void Read(BinaryReader reader) {
         propertyValues = [];
         foreach (var property in properties) {
             if (property.name.ToString().EndsWith("_Array")) {
-                var propertyValue = new ArrayPropertyValue(obj, property);
+                var propertyValue = new ArrayProperty(obj, property);
                 propertyValue.Read(reader);
                 propertyValues.Add(propertyValue);
             } else {

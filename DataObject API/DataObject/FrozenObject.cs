@@ -161,9 +161,9 @@ public class FrozenObject(InnerAsset asset) {
             UpdateMinimalNamesRecursively(entry.propertyValues);
         }
 
-        foreach (var minimalName in (from name in minimalNames
-                                     orderby name.name
-                                     select name)) {
+        foreach (var minimalName in from name in minimalNames
+                                    orderby name.name
+                                    select name) {
             //Debug.Assert(minimalName.offsets.Count > 0);
             writer.Write(minimalName);
         }
@@ -178,7 +178,7 @@ public class FrozenObject(InnerAsset asset) {
                     AddOffsetToMinimalNames((FName) nameProp.Data, offset);
                     break;
                 }
-                case ArrayPropertyValue arrayProp:
+                case ArrayProperty arrayProp:
                     UpdateMinimalNamesRecursively(arrayProp.Data!);
                     break;
             }

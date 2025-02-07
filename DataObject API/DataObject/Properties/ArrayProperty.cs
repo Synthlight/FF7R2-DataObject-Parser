@@ -2,15 +2,20 @@
 
 namespace FF7R2.DataObject.Properties;
 
-public class ArrayPropertyValue(FrozenObject obj, Property property) : PropertyValue<PropertyValue[]>(obj, property) {
+public class ArrayProperty(FrozenObject obj, Property property) : PropertyValue<List<PropertyValue>>(obj, property) {
     protected ArrayProxy<PropertyValue> data = new();
-    public override PropertyValue[]? Data {
+    public override List<PropertyValue>? Data {
         get => data.data;
         set {
+            value     ??= [];
+            data.data =   value;
         }
     }
 
-    public override PropertyValue[]? DataAsByteProxy => Data;
+    public override List<PropertyValue>? DataAsByteProxy {
+        get => Data;
+        set => Data = value;
+    }
 
     internal override void Read(BinaryReader reader) {
         reader.BaseStream.Position = reader.BaseStream.Position.Align(8, obj.frozenObjectStart);
