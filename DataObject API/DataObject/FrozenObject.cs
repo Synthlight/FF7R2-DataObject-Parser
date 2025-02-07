@@ -20,7 +20,9 @@ public class FrozenObject(InnerAsset asset) {
     public  ArrayProxy<Property>    properties   = new();
     private ArrayProxy<Entry>       entries      = new();
 
-    public Dictionary<long, FName> OffsetToNameLookup = [];
+    // ReSharper disable once CollectionNeverQueried.Global
+    public Dictionary<FName, HashSet<uint>> NameToOffsetLookup = [];
+    public Dictionary<uint, FName>          OffsetToNameLookup = [];
     [SuppressMessage("ReSharper", "CollectionNeverQueried.Global")]
     public Dictionary<FName, Entry> DataTable = [];
 
@@ -57,6 +59,7 @@ public class FrozenObject(InnerAsset asset) {
 
         minimalNames       = [];
         OffsetToNameLookup = [];
+        NameToOffsetLookup = [];
         for (var i = 0; i < numMinimalNames; i++) {
             var imageName = new MemoryImageName(asset);
             imageName.Read(reader);
@@ -64,6 +67,7 @@ public class FrozenObject(InnerAsset asset) {
             foreach (var offset in imageName.offsets) {
                 OffsetToNameLookup[offset] = imageName.name;
             }
+            NameToOffsetLookup[imageName.name] = imageName.offsets;
         }
 
         // Might need to read as a linked list?
@@ -134,18 +138,6 @@ public class FrozenObject(InnerAsset asset) {
         writer.BaseStream.Position = frozenSizePos;
         writer.Write(frozenSize);
 
-        writer.BaseStream.Seek(frozenEnd, SeekOrigin.Begin);
-        writer.Write(vTables.Count);
-        writer.Write(scriptNames.Count);
-        writer.Write(minimalNames.Count);
-
-        foreach (var vTable in vTables) {
-            writer.Write(vTable);
-        }
-        foreach (var scriptName in scriptNames) {
-            writer.Write(scriptName);
-        }
-
         // Re-create the whole minimal name map thing.
         // Our expansion of the data *should* be creating more name offsets, so we need to be updating the list here with them.
         minimalNames.Clear();
@@ -159,6 +151,18 @@ public class FrozenObject(InnerAsset asset) {
         }
         foreach (var entry in entries.data) {
             UpdateMinimalNamesRecursively(entry.propertyValues);
+        }
+
+        writer.BaseStream.Seek(frozenEnd, SeekOrigin.Begin);
+        writer.Write(vTables.Count);
+        writer.Write(scriptNames.Count);
+        writer.Write(minimalNames.Count);
+
+        foreach (var vTable in vTables) {
+            writer.Write(vTable);
+        }
+        foreach (var scriptName in scriptNames) {
+            writer.Write(scriptName);
         }
 
         foreach (var minimalName in from name in minimalNames

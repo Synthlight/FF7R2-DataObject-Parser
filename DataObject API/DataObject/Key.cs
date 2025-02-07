@@ -12,7 +12,7 @@ public class Key(FrozenObject obj) {
 
     internal void Read(BinaryReader reader) {
         offset = reader.BaseStream.Position;
-        name   = obj.OffsetToNameLookup[offset - obj.frozenObjectStart];
+        name   = obj.OffsetToNameLookup[(uint) (offset - obj.frozenObjectStart)];
         reader.BaseStream.Seek(8, SeekOrigin.Current); // Skip the placeholder FName bytes.
         index     = reader.ReadInt32();
         nextIndex = reader.ReadInt32();

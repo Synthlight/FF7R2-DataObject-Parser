@@ -12,7 +12,7 @@ public class Property(FrozenObject obj) {
 
     internal void Read(BinaryReader reader) {
         offset = reader.BaseStream.Position;
-        name   = obj.OffsetToNameLookup[reader.BaseStream.Position - obj.frozenObjectStart];
+        name   = obj.OffsetToNameLookup[(uint) (reader.BaseStream.Position - obj.frozenObjectStart)];
         reader.BaseStream.Seek(8, SeekOrigin.Current); // Skip the placeholder FName bytes.
         UnderlyingType = (FF7propertyType) reader.ReadInt32();
     }

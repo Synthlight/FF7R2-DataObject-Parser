@@ -16,7 +16,7 @@ public class IoStoreAsset {
     // These are sort-of in the order they appear in the file.
     internal byte[]                bytes;
     private  FPackageSummary       packageSummary;
-    internal FName[]               names;
+    public   FName[]               names;
     internal long[]                nameOffsets = [];
     private  byte[]                startOfHashBytes; // Seems to always be `00 00 64 C1 00 00 00 00` in all the data object files.
     private  FPackageObjectIndex[] imports;

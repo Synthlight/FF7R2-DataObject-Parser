@@ -3,8 +3,8 @@
 namespace FF7R2.DataObject;
 
 public class MemoryImageName(InnerAsset asset) {
-    public FName      name;
-    public List<uint> offsets = [];
+    public FName         name;
+    public HashSet<uint> offsets = [];
 
     internal void Read(BinaryReader reader) {
         name = reader.ReadFName(asset.ioStoreAsset.names);

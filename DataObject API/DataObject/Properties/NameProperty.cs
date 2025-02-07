@@ -13,7 +13,7 @@ public class NameProperty(FrozenObject obj, Property property) : PropertyValue<F
     internal override void Read(BinaryReader reader) {
         reader.BaseStream.Position = reader.BaseStream.Position.Align(4, obj.frozenObjectStart);
         Offset                     = reader.BaseStream.Position;
-        if (obj.OffsetToNameLookup.ContainsKey(reader.BaseStream.Position - obj.frozenObjectStart)) Data = obj.OffsetToNameLookup[reader.BaseStream.Position - obj.frozenObjectStart];
+        if (obj.OffsetToNameLookup.ContainsKey((uint) (reader.BaseStream.Position - obj.frozenObjectStart))) Data = obj.OffsetToNameLookup[(uint) (reader.BaseStream.Position - obj.frozenObjectStart)];
         reader.BaseStream.Seek(8, SeekOrigin.Current); // Skip the placeholder FName bytes.
     }
 
