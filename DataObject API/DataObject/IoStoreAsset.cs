@@ -16,7 +16,7 @@ public class IoStoreAsset {
     // These are sort-of in the order they appear in the file.
     internal byte[]                bytes;
     private  FPackageSummary       packageSummary;
-    public   FName[]               names;
+    internal List<FName>           names;
     internal long[]                nameOffsets = [];
     private  byte[]                startOfHashBytes; // Seems to always be `00 00 64 C1 00 00 00 00` in all the data object files.
     private  FPackageObjectIndex[] imports;
@@ -26,8 +26,17 @@ public class IoStoreAsset {
     private  FPackageId[]          packages;
     public   InnerAsset            innerAsset;
 
+    public List<FName> Names => [..names];
+
     private IoStoreAsset(byte[] bytes) {
         this.bytes = bytes;
+    }
+
+    // ReSharper disable once UnusedMethodReturnValue.Global
+    public FName AddFName(string name) {
+        var fName = new FName(name, names.Count);
+        names.Add(fName);
+        return fName;
     }
 
     public static IoStoreAsset Load(string file) {
@@ -78,7 +87,7 @@ public class IoStoreAsset {
         // Read names.
         reader.BaseStream.Seek(packageSummary.NameMapNamesOffset, SeekOrigin.Begin);
         var nameCount = packageSummary.NameMapHashesSize / sizeof(ulong) - 1;
-        names = new FName[nameCount];
+        names = new(nameCount);
         for (var i = 0; i < nameCount; i++) {
             var nameHeader = reader.Read<FSerializedNameHeader>();
 
@@ -92,7 +101,7 @@ public class IoStoreAsset {
                 text = Encoding.ASCII.GetString(stringBytes);
             }
 
-            names[i] = new(text, i);
+            names.Add(new(text, i));
         }
 
         // Read the magic 8 bytes at the start of the hash section.
@@ -146,6 +155,7 @@ public class IoStoreAsset {
 
     internal void Write(BinaryWriter writer) {
         // Write names.
+        // Never sort them! Index is important!
         nameOffsets = [];
         writer.BaseStream.Seek(packageSummary.NameMapNamesOffset, SeekOrigin.Begin); // Should always be 64, but I'm just assuming the file has it right to begin with.
         foreach (var name in names) {

@@ -6,10 +6,10 @@ using CUE4Parse.UE4.Objects.UObject;
 namespace FF7R2;
 
 public static class Extensions {
-    public static FName ReadFName(this BinaryReader reader, FName[] names) {
+    public static FName ReadFName(this BinaryReader reader, List<FName> names) {
         var index  = reader.ReadInt32();
         var number = reader.ReadInt32();
-        var text   = index > names.Length ? "" : names[index].Text;
+        var text   = index > names.Count ? "" : names[index].Text;
         return new(text, index, number);
     }
 
