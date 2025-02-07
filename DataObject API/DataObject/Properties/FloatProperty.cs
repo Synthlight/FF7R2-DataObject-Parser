@@ -10,6 +10,7 @@ public class FloatProperty(FrozenObject obj, Property property) : PropertyValue<
     }
 
     internal override void Write(BinaryWriter writer, PropertyWriteMode mode) {
+        if (mode == PropertyWriteMode.SUB_OBJECTS_ONLY) return;
         writer.BaseStream.Position = writer.BaseStream.Position.Align(4, obj.frozenObjectStart);
         writer.Write(Data);
     }

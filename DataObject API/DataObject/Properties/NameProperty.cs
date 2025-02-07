@@ -1,5 +1,4 @@
 ﻿using CUE4Parse.UE4.Objects.UObject;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FF7R2.DataObject.Properties;
 
@@ -16,6 +15,7 @@ public class NameProperty(FrozenObject obj, Property property) : PropertyValue<F
     }
 
     internal override void Write(BinaryWriter writer, PropertyWriteMode mode) {
+        if (mode == PropertyWriteMode.SUB_OBJECTS_ONLY) return;
         writer.BaseStream.Position = writer.BaseStream.Position.Align(4, obj.frozenObjectStart);
         Offset                     = writer.BaseStream.Position;
         writer.BaseStream.Seek(8, SeekOrigin.Current); // Skip the placeholder FName bytes.

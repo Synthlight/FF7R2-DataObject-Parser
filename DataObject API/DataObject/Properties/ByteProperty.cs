@@ -9,6 +9,7 @@ public class ByteProperty(FrozenObject obj, Property property) : PropertyValue<b
     }
 
     internal override void Write(BinaryWriter writer, PropertyWriteMode mode) {
+        if (mode == PropertyWriteMode.SUB_OBJECTS_ONLY) return;
         writer.Write(Data);
     }
 }
