@@ -30,7 +30,7 @@ public class FStringProxy {
     internal void WriteHeader(BinaryWriter writer) {
         headerPos = writer.BaseStream.Position;
         writer.Write(dataPtr); // Update later.
-        writer.Write(data?.Length ?? 0);
+        writer.Write(data?.Length + 1 ?? 0); // +1 for null term.
         writer.Write(charMax);
     }
 
