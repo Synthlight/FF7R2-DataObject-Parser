@@ -175,6 +175,7 @@ public class FrozenObject(InnerAsset asset) {
                 case NameProperty nameProp: {
                     if (nameProp.Data == null) continue;
                     var offset = (uint) (nameProp.Offset - frozenObjectStart);
+                    if (nameProp.Data == null) continue;
                     AddOffsetToMinimalNames((FName) nameProp.Data, offset);
                     break;
                 }
