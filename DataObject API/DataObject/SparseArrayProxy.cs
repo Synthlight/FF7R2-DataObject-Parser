@@ -53,7 +53,7 @@ public class SparseArrayProxy<T> {
         writer.Write(numFreeIndices);
     }
 
-    internal void WriteData(BinaryWriter writer, Action<T> writeEntry) {
+    internal void WriteData(BinaryWriter writer, Action<T> writeEntry, long alignOffset) {
         if (data.Length == 0) return;
 
         var initialPos = writer.BaseStream.Position;
@@ -73,7 +73,7 @@ public class SparseArrayProxy<T> {
         }
 
         // Update the offset bitfield data too.
-        writer.WriteData(allocationFlags);
+        writer.WriteData(allocationFlags, alignOffset);
     }
 }
 
@@ -82,7 +82,7 @@ public static class SparseArrayProxyExtensions {
         obj.WriteHeader(writer);
     }
 
-    internal static void WriteData<T>(this BinaryWriter writer, SparseArrayProxy<T> obj, Action<T> writeEntry) {
-        obj.WriteData(writer, writeEntry);
+    internal static void WriteData<T>(this BinaryWriter writer, SparseArrayProxy<T> obj, Action<T> writeEntry, long alignOffset) {
+        obj.WriteData(writer, writeEntry, alignOffset);
     }
 }

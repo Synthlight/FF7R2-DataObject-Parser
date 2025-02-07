@@ -37,7 +37,7 @@ public class BitArrayData {
         writer.Write(maxBits);
     }
 
-    internal void WriteData(BinaryWriter writer) {
+    internal void WriteData(BinaryWriter writer, long alignOffset) {
         if (numBits == 0) return;
 
         var initialPos = writer.BaseStream.Position;
@@ -52,6 +52,7 @@ public class BitArrayData {
         var bytes = new byte[numBits.DivideAndRoundUp(8)];
         Data.CopyTo(bytes, 0);
         writer.Write(bytes);
+        writer.BaseStream.Position = writer.BaseStream.Position.Align(4, alignOffset);
     }
 }
 
@@ -60,7 +61,7 @@ public static class BitArrayDataExtensions {
         obj.WriteHeader(writer);
     }
 
-    internal static void WriteData(this BinaryWriter writer, BitArrayData obj) {
-        obj.WriteData(writer);
+    internal static void WriteData(this BinaryWriter writer, BitArrayData obj, long alignOffset) {
+        obj.WriteData(writer, alignOffset);
     }
 }

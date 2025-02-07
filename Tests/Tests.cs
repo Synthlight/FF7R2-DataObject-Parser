@@ -16,7 +16,7 @@ public sealed class Tests {
     }
 
     [DynamicData(nameof(GetFilesToTest), DynamicDataSourceType.Method)]
-    [DataTestMethod]
+    [DataTestMethod, Timeout(40000)]
     public void TestWriteThenReadParsedFiles(string file) {
         IoStoreAsset asset;
         try {

@@ -116,7 +116,7 @@ public class FrozenObject(InnerAsset asset) {
         writer.WriteHeader(entries);
 
         // TODO: How names are done break my brain. Just write them as-is and make it readonly for now.
-        writer.WriteData(keys, writer.Write);
+        writer.WriteData(keys, writer.Write, frozenObjectStart);
         writer.WriteData(indexes, writer.Write);
         writer.WriteData(properties, writer.Write);
 

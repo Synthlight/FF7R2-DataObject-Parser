@@ -26,6 +26,9 @@ There's two save modes:
 DON'T MIX AND MATCH SAVE TYPES! Don't use `DataAsByteProxy` and then write with `WRITE_PARSED_DATA`. Strange things might happen!<br>
 Most likely, though, you'll probably just wind up not saving some change you intend due to one mode ignoring some change from another.
 
+The are only a few files failing write tests; namely `ChapterReset` & `ResidentPack`.<br>
+Fixing these is low priority.
+
 # Examples
 An example maximizing materia slots (for `OG_MODIFIED_BYTES`):
 ```cs

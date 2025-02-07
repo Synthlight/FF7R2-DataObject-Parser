@@ -16,7 +16,7 @@
 		<PackageLicenseFile>License.txt</PackageLicenseFile>
 		<RepositoryUrl>https://github.com/Synthlight/FF7R2-DataObject-Parser</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<AssemblyVersion>1.0.0</AssemblyVersion>
+		<AssemblyVersion>1.1.0</AssemblyVersion>
 		<Version>$(AssemblyVersion)</Version>
 		<Copyright>All rights reserved</Copyright>
 	</PropertyGroup>
