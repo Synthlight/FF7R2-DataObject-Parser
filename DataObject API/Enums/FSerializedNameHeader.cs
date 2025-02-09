@@ -5,10 +5,8 @@ namespace FF7R2.Enums;
 // Copied from CUE4Parse and added setters.
 // Also because the OG is readonly, and we need to be able to change it.
 
-[StructLayout(LayoutKind.Sequential, Pack = 1, Size = SIZE)]
+[StructLayout(LayoutKind.Sequential)]
 public struct FSerializedNameHeader {
-    public const int SIZE = 2;
-
     private byte data0;
     private byte data1;
 

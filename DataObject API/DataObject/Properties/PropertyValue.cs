@@ -4,7 +4,7 @@ public abstract class PropertyValue(FrozenObject obj, Property property) {
     protected readonly FrozenObject obj      = obj;
     public readonly    Property     property = property;
 
-    protected abstract object? GenericData { get; }
+    public abstract    object? GenericData { get; set; }
     protected internal long    Offset      { get; protected set; }
 
     internal abstract void Read(BinaryReader  reader);
@@ -17,8 +17,11 @@ public abstract class PropertyValue(FrozenObject obj, Property property) {
 
 public abstract class PropertyValue<T>(FrozenObject obj, Property property) : PropertyValue(obj, property) {
     // ReSharper disable once MemberCanBeProtected.Global
-    public abstract    T?      Data        { get; set; }
-    protected override object? GenericData => Data;
+    public abstract T? Data { get; set; }
+    public override object? GenericData {
+        get => Data;
+        set => Data = (T?) value;
+    }
 
     /// <summary>
     /// This acts as a proxy to hex editing. Setting a value through this will directly change bytes at this given offset without writing the whole parsed file.

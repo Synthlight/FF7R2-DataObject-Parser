@@ -9,7 +9,6 @@ public class SparseArrayProxy<T> {
     private  int            numFreeIndices;
 
     private long headerPos;
-    private long allocationFlagsPos;
 
     internal void Read(BinaryReader reader, Func<T> readEntry) {
         var initialPos = reader.BaseStream.Position;
@@ -47,7 +46,6 @@ public class SparseArrayProxy<T> {
         writer.Write(dataPtr); // Update later.
         writer.Write(data.Length);
         writer.Write(dataMax);
-        allocationFlagsPos = writer.BaseStream.Position;
         writer.WriteHeader(allocationFlags);
         writer.Write(firstFreeIndex);
         writer.Write(numFreeIndices);

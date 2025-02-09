@@ -6,7 +6,12 @@ using FExportBundleHeader = FF7R2.Enums.FExportBundleHeader;
 using FExportMapEntry = FF7R2.Enums.FExportMapEntry;
 using FPackageSummary = FF7R2.Enums.FPackageSummary;
 using FSerializedNameHeader = FF7R2.Enums.FSerializedNameHeader;
+
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+
+// ReSharper disable FieldCanBeMadeReadOnly.Global
+// ReSharper disable NotAccessedField.Global
+// ReSharper disable UnusedMember.Global
 
 namespace FF7R2.DataObject;
 
@@ -32,7 +37,6 @@ public class IoStoreAsset {
         this.bytes = bytes;
     }
 
-    // ReSharper disable once UnusedMethodReturnValue.Global
     public FName AddFName(string name) {
         var fName = new FName(name, names.Count);
         names.Add(fName);
@@ -63,14 +67,14 @@ public class IoStoreAsset {
     /// <param name="file"></param>
     /// <param name="mode"></param>
     public void Save(string file, Mode mode) {
+        Directory.CreateDirectory(Path.GetDirectoryName(file)!);
+
         switch (mode) {
             case Mode.OG_MODIFIED_BYTES: {
-                Directory.CreateDirectory(Path.GetDirectoryName(file)!);
                 File.WriteAllBytes(file, bytes);
                 break;
             }
             case Mode.WRITE_PARSED_DATA: {
-                Directory.CreateDirectory(Path.GetDirectoryName(file)!);
                 var       stream = File.Open(file, FileMode.Create, FileAccess.Write, FileShare.Read);
                 using var writer = new BinaryWriter(stream);
                 Write(writer);
@@ -111,7 +115,7 @@ public class IoStoreAsset {
 
         // Read imports.
         reader.BaseStream.Seek(packageSummary.ImportMapOffset, SeekOrigin.Begin);
-        var importCount = (packageSummary.ExportMapOffset - packageSummary.ImportMapOffset) / FPackageObjectIndex.Size;
+        var importCount = (packageSummary.ExportMapOffset - packageSummary.ImportMapOffset) / TypeSize<FPackageObjectIndex>.Size;
         imports = new FPackageObjectIndex[importCount];
         for (var i = 0; i < importCount; i++) {
             imports[i] = reader.Read<FPackageObjectIndex>();
@@ -119,7 +123,7 @@ public class IoStoreAsset {
 
         // Read exports.
         reader.BaseStream.Seek(packageSummary.ExportMapOffset, SeekOrigin.Begin);
-        var exportCount = (packageSummary.ExportBundlesOffset - packageSummary.ExportMapOffset) / FExportMapEntry.SIZE;
+        var exportCount = (packageSummary.ExportBundlesOffset - packageSummary.ExportMapOffset) / TypeSize<FExportMapEntry>.Size;
         exports = new FExportMapEntry[exportCount];
         for (var i = 0; i < exportCount; i++) {
             exports[i] = reader.Read<FExportMapEntry>();

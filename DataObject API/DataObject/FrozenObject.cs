@@ -43,21 +43,21 @@ public class FrozenObject(InnerAsset asset) {
         var numScriptNames  = reader.ReadInt32();
         var numMinimalNames = reader.ReadInt32();
 
-        vTables = [];
+        vTables = new(numVTables);
         for (var i = 0; i < numVTables; i++) {
             var vTable = new MemoryImageVTable(asset);
             vTable.Read(reader);
             vTables.Add(vTable);
         }
 
-        scriptNames = [];
+        scriptNames = new(numScriptNames);
         for (var i = 0; i < numScriptNames; i++) {
             var name = new MemoryImageName(asset);
             name.Read(reader);
             scriptNames.Add(name);
         }
 
-        minimalNames       = [];
+        minimalNames       = new(numMinimalNames);
         OffsetToNameLookup = [];
         NameToOffsetLookup = [];
         for (var i = 0; i < numMinimalNames; i++) {

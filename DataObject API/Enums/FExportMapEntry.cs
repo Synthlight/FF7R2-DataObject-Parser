@@ -8,8 +8,6 @@ namespace FF7R2.Enums;
 
 [StructLayout(LayoutKind.Sequential)]
 public struct FExportMapEntry {
-    public const int SIZE = 72;
-
     public ulong               CookedSerialOffset;
     public ulong               CookedSerialSize;
     public FMappedName         ObjectName;
@@ -19,5 +17,5 @@ public struct FExportMapEntry {
     public FPackageObjectIndex TemplateIndex;
     public FPackageObjectIndex GlobalImportIndex;
     public EObjectFlags        ObjectFlags;
-    public byte                FilterFlags; // EExportFilterFlags: client/server flags
+    public uint                FilterFlags; // EExportFilterFlags: client/server flags
 }

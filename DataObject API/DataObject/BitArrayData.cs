@@ -24,8 +24,7 @@ public class BitArrayData {
         reader.BaseStream.Position = initialPos + dataPtr.OffsetFromThis;
 
         var data = reader.ReadBytes(numBits.DivideAndRoundUp(8));
-        reader.BaseStream.Position = continuePos;
-        Data                       = new(data) {Length = numBits};
+        Data = new(data) {Length = numBits};
 
         reader.BaseStream.Position = continuePos;
     }
