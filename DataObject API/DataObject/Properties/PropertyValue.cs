@@ -6,6 +6,7 @@ public abstract class PropertyValue(FrozenObject obj, Property property) {
 
     public abstract    object? GenericData { get; set; }
     protected internal long    Offset      { get; protected set; }
+    public virtual     bool    IsArray     => false;
 
     internal abstract void Read(BinaryReader  reader);
     internal abstract void Write(BinaryWriter writer, PropertyWriteMode mode);

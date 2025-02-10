@@ -17,6 +17,8 @@ public class ArrayProperty(FrozenObject obj, Property property) : PropertyValue<
         set => Data = value;
     }
 
+    public override bool IsArray => true;
+
     internal override void Read(BinaryReader reader) {
         reader.BaseStream.Position = reader.BaseStream.Position.Align(8, obj.frozenObjectStart);
         Offset                     = reader.BaseStream.Position;
