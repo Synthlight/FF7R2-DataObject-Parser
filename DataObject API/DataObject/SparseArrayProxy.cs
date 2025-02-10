@@ -52,9 +52,16 @@ public class SparseArrayProxy<T> {
     }
 
     internal void WriteData(BinaryWriter writer, Action<T> writeEntry, long alignOffset) {
-        if (data.Length == 0) return;
-
         var initialPos = writer.BaseStream.Position;
+
+        if (data.Length == 0) {
+            if (headerPos == 0) throw new("Header position not set.");
+            writer.BaseStream.Position = headerPos;
+            dataPtr.OffsetFromThis     = 0;
+            writer.Write(dataPtr);
+            writer.BaseStream.Position = initialPos;
+            return;
+        }
 
         if (headerPos == 0) throw new("Header position not set.");
         writer.BaseStream.Position = headerPos;

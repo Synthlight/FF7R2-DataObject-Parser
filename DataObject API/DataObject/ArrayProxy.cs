@@ -38,9 +38,16 @@ public class ArrayProxy<T> {
     }
 
     internal void WriteDataHeaders(BinaryWriter writer, Action<T> writeEntry) {
-        if (data.Count == 0) return;
-
         var initialPos = writer.BaseStream.Position;
+
+        if (data.Count == 0) {
+            if (headerPos == 0) throw new("Header position not set.");
+            writer.BaseStream.Position = headerPos;
+            dataPtr.OffsetFromThis     = 0;
+            writer.Write(dataPtr);
+            writer.BaseStream.Position = initialPos;
+            return;
+        }
 
         if (headerPos == 0) throw new("Header position not set.");
         writer.BaseStream.Position = headerPos;
