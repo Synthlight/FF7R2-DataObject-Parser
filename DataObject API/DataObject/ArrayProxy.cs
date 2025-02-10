@@ -3,7 +3,6 @@
 public class ArrayProxy<T> {
     private MemoryImagePtr dataPtr = new();
     public  List<T>        data    = [];
-    private int            dataMax;
 
     private long headerPos;
 
@@ -12,7 +11,7 @@ public class ArrayProxy<T> {
         dataPtr = new();
         dataPtr.Read(reader);
         var dataNum = reader.ReadInt32();
-        dataMax = reader.ReadInt32();
+        reader.ReadInt32(); // Skip dataMax.
 
         if (dataNum == 0) return;
 
@@ -34,7 +33,7 @@ public class ArrayProxy<T> {
         headerPos = writer.BaseStream.Position;
         writer.Write(dataPtr); // Update later.
         writer.Write(data.Count);
-        writer.Write(dataMax);
+        writer.Write(data.Count);
     }
 
     internal void WriteDataHeaders(BinaryWriter writer, Action<T> writeEntry) {
