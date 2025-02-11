@@ -7,7 +7,7 @@ public class NameProperty(FrozenObject obj, Property property) : PropertyValue<F
 
     public override FName? DataAsByteProxy {
         get => Data;
-        set => Data = value;
+        set => throw new("Not possible to set this data in byte proxy mode.");
     }
 
     internal override void Read(BinaryReader reader) {

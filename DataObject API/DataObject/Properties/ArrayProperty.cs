@@ -14,11 +14,7 @@ public class ArrayProperty(FrozenObject obj, Property property) : PropertyValue<
 
     public override List<PropertyValue>? DataAsByteProxy {
         get => Data;
-        set {
-            var wasFrozen = data.dataPtr.isFrozen;
-            Data                  = value;
-            data.dataPtr.isFrozen = wasFrozen;
-        }
+        set => throw new("Not possible to set this data in byte proxy mode.");
     }
 
     public override bool IsArray => true;
