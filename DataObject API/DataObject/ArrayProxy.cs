@@ -65,10 +65,11 @@ public class ArrayProxy<T>(FrozenObject obj) : ICachableObject {
 
         if (hash != 0) {
             if (obj.objectCache.TryGetValue(hash, out var cachedObj)) {
-                dataPtr.OffsetFromThis = cachedObj.absoluteDataOffset - headerPos;
-                skipDataWrite          = true;
+                // TODO: Works on save, but wound up crashing in-game. Needs more testing.
+                //dataPtr.OffsetFromThis = cachedObj.absoluteDataOffset - headerPos;
+                //skipDataWrite          = true;
             } else {
-                obj.objectCache[hash] = self;
+                //obj.objectCache[hash] = self;
             }
         }
 
