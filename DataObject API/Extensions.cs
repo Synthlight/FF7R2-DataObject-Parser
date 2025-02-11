@@ -89,4 +89,8 @@ public static class Extensions {
         const int maxAnsiCode = 255;
         return input.Any(c => c > maxAnsiCode);
     }
+
+    public static int GetListHashCode<T>(this IEnumerable<T> list) {
+        return list.Aggregate(0, (x, y) => (x.GetHashCode() * 397) ^ (y?.GetHashCode() ?? 0));
+    }
 }

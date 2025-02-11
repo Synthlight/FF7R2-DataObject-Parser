@@ -1,10 +1,11 @@
 ﻿namespace FF7R2.DataObject;
 
-public class ArrayProxy<T> {
-    private MemoryImagePtr dataPtr = new();
-    public  List<T>        data    = [];
+public class ArrayProxy<T>(FrozenObject obj) : ICachableObject {
+    internal MemoryImagePtr dataPtr = new();
+    public   List<T>        data    = [];
 
     private long headerPos;
+    private bool skipDataWrite;
 
     internal void Read(BinaryReader reader, Func<T> readEntry, int? align = null, long alignOffset = 0) {
         var initialPos = reader.BaseStream.Position;
@@ -36,7 +37,12 @@ public class ArrayProxy<T> {
         writer.Write(data.Count);
     }
 
-    internal void WriteDataHeaders(BinaryWriter writer, Action<T> writeEntry) {
+    internal void WriteDataHeaders(BinaryWriter writer, Action<T> writeEntry, int? align = null, long alignOffset = 0) {
+        // Align first so the OffsetFromThis points to the exact start and doesn't rely on reading to align first.
+        if (align != null) {
+            writer.BaseStream.Position = writer.BaseStream.Position.Align((int) align, alignOffset);
+        }
+
         var initialPos = writer.BaseStream.Position;
 
         if (data.Count == 0) {
@@ -51,8 +57,26 @@ public class ArrayProxy<T> {
         if (headerPos == 0) throw new("Header position not set.");
         writer.BaseStream.Position = headerPos;
         dataPtr.OffsetFromThis     = initialPos - headerPos; // This is being updated when we write the inner contents and that's bad.
+
+        var self = new CachedObject(initialPos, this);
+        var hash = self.GetHashCode();
+        skipDataWrite = false;
+
+        if (hash != 0) {
+            if (obj.objectCache.TryGetValue(hash, out var cachedObj)) {
+                dataPtr.OffsetFromThis = cachedObj.absoluteDataOffset - headerPos;
+                skipDataWrite          = true;
+            } else {
+                obj.objectCache[hash] = self;
+            }
+        }
+
         writer.Write(dataPtr);
 
+        if (skipDataWrite) {
+            writer.BaseStream.Position = initialPos;
+            return;
+        }
         writer.BaseStream.Position = headerPos + dataPtr.OffsetFromThis;
 
         foreach (var entry in data) {
@@ -61,12 +85,21 @@ public class ArrayProxy<T> {
     }
 
     internal void WriteData(BinaryWriter writer, Action<T> writeEntry, int? align = null, long alignOffset = 0) {
+        if (skipDataWrite) return;
         foreach (var entry in data) {
             writeEntry(entry);
             if (align != null) {
                 writer.BaseStream.Position = writer.BaseStream.Position.Align((int) align, alignOffset);
             }
         }
+    }
+
+    public override int GetHashCode() {
+        return GetCacheHash();
+    }
+
+    public int GetCacheHash() {
+        return data.GetListHashCode();
     }
 }
 
@@ -79,7 +112,7 @@ public static class ArrayProxyExtensions {
         obj.WriteData(writer, writeEntry, align, alignOffset);
     }
 
-    internal static void WriteDataHeaders<T>(this BinaryWriter writer, ArrayProxy<T> obj, Action<T> writeEntry) {
-        obj.WriteDataHeaders(writer, writeEntry);
+    internal static void WriteDataHeaders<T>(this BinaryWriter writer, ArrayProxy<T> obj, Action<T> writeEntry, int? align = null, long alignOffset = 0) {
+        obj.WriteDataHeaders(writer, writeEntry, align, alignOffset);
     }
 }

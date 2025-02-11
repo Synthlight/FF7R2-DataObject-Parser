@@ -3,7 +3,7 @@
 namespace FF7R2.DataObject.Properties;
 
 public class ArrayProperty(FrozenObject obj, Property property) : PropertyValue<List<PropertyValue>>(obj, property) {
-    protected ArrayProxy<PropertyValue> data = new();
+    internal ArrayProxy<PropertyValue> data = new(obj);
     public override List<PropertyValue>? Data {
         get => data.data;
         set {
@@ -14,7 +14,11 @@ public class ArrayProperty(FrozenObject obj, Property property) : PropertyValue<
 
     public override List<PropertyValue>? DataAsByteProxy {
         get => Data;
-        set => Data = value;
+        set {
+            var wasFrozen = data.dataPtr.isFrozen;
+            Data                  = value;
+            data.dataPtr.isFrozen = wasFrozen;
+        }
     }
 
     public override bool IsArray => true;
@@ -23,7 +27,7 @@ public class ArrayProperty(FrozenObject obj, Property property) : PropertyValue<
         reader.BaseStream.Position = reader.BaseStream.Position.Align(8, obj.frozenObjectStart);
         Offset                     = reader.BaseStream.Position;
         var align = GetEntryAlignment();
-        data = new();
+        data = new(obj);
         data.Read(reader, () => {
             var propertyValue = property.Create();
             propertyValue.Read(reader);
@@ -32,13 +36,14 @@ public class ArrayProperty(FrozenObject obj, Property property) : PropertyValue<
     }
 
     internal override void Write(BinaryWriter writer, PropertyWriteMode mode) {
-        writer.BaseStream.Position = writer.BaseStream.Position.Align(8, obj.frozenObjectStart);
         switch (mode) {
             case PropertyWriteMode.MAIN_OBJ_ONLY:
+                writer.BaseStream.Position = writer.BaseStream.Position.Align(8, obj.frozenObjectStart);
                 writer.WriteHeader(data);
                 break;
             case PropertyWriteMode.SUB_OBJECTS_ONLY:
                 var align = GetEntryAlignment();
+                writer.BaseStream.Position = writer.BaseStream.Position.Align(align, obj.frozenObjectStart);
                 writer.WriteDataHeaders(data, value => { value.Write(writer, PropertyWriteMode.MAIN_OBJ_ONLY); });
                 writer.WriteData(data, value => { value.Write(writer, PropertyWriteMode.SUB_OBJECTS_ONLY); }, align, obj.frozenObjectStart);
                 break;
@@ -53,6 +58,7 @@ public class ArrayProperty(FrozenObject obj, Property property) : PropertyValue<
             FF7propertyType.Int8Property => 1,
             FF7propertyType.UInt16Property => 2,
             FF7propertyType.Int16Property => 2,
+            FF7propertyType.StrProperty => 4,
             _ => 4
         };
     }

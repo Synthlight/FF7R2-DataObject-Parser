@@ -390,13 +390,7 @@ typedef struct {
 
 // Entry
 typedef struct {
-    // Hard-coding for Equipment.uasset.
-    //StringArray SkillTextLabel_Array;
-    //byte placeholder1[112];
-    //IntArray SkillCoreSlotMax_Array;
-    //byte placeholder2[528 - 172];
-    //int SkillCoreSlotNum;
-    //byte placeholder3[24];
+    FSeek(Align(FTell(), 8, frozenObjectStart));
 
     local int i;
     local string propName;

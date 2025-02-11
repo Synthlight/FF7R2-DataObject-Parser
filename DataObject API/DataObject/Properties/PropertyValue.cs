@@ -14,6 +14,10 @@ public abstract class PropertyValue(FrozenObject obj, Property property) {
     public T? As<T>() where T : class {
         return (T) (object) this;
     }
+
+    public override int GetHashCode() {
+        return GenericData != null ? GenericData.GetHashCode() : 0;
+    }
 }
 
 public abstract class PropertyValue<T>(FrozenObject obj, Property property) : PropertyValue(obj, property) {

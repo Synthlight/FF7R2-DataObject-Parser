@@ -2,12 +2,13 @@
 
 namespace FF7R2.DataObject;
 
-public class FStringProxy {
+public class FStringProxy(FrozenObject obj) : ICachableObject {
     private  MemoryImagePtr dataPtr = new();
     internal string?        data;
     private  int            charMax;
 
     private long headerPos;
+    private bool skipDataWrite;
 
     internal void Read(BinaryReader reader) {
         var initialPos = reader.BaseStream.Position;
@@ -49,13 +50,29 @@ public class FStringProxy {
         if (headerPos == 0) throw new("Header position not set.");
         writer.BaseStream.Position = headerPos;
         dataPtr.OffsetFromThis     = initialPos - headerPos;
+
+        var self = new CachedObject(dataPtr.OffsetFromThis, this);
+        var hash = self.GetHashCode();
+        skipDataWrite = false;
+        if (obj.objectCache.TryGetValue(hash, out var cachedObj)) {
+            //dataPtr.OffsetFromThis = cachedObj.offset;
+            //skipDataWrite          = true;
+        } else {
+            //obj.objectCache[hash] = self;
+        }
+
         writer.Write(dataPtr);
 
+        if (skipDataWrite) return;
         writer.BaseStream.Position = headerPos + dataPtr.OffsetFromThis;
 
         var bytes = Encoding.Unicode.GetBytes(data!);
         Array.Resize(ref bytes, bytes.Length + 2);
         writer.Write(bytes);
+    }
+
+    public int GetCacheHash() {
+        return data?.GetHashCode() ?? 0;
     }
 }
 

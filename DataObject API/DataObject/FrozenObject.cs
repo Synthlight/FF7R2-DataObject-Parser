@@ -5,8 +5,8 @@ using FF7R2.DataObject.Properties;
 
 namespace FF7R2.DataObject;
 
-public class FrozenObject(InnerAsset asset) {
-    public readonly InnerAsset asset = asset;
+public class FrozenObject {
+    public readonly InnerAsset asset;
     internal        long       frozenObjectStart; // What's added to pos when aligning.
 
     private uint                    size;
@@ -16,15 +16,24 @@ public class FrozenObject(InnerAsset asset) {
     private List<MemoryImageName>   scriptNames  = [];
     private List<MemoryImageName>   minimalNames = [];
     private SparseArrayProxy<Key>   keys         = new();
-    private ArrayProxy<int>         indexes      = new();
-    public  ArrayProxy<Property>    properties   = new();
-    private ArrayProxy<Entry>       entries      = new();
+    private ArrayProxy<int>         indexes;
+    public  ArrayProxy<Property>    properties;
+    private ArrayProxy<Entry>       entries;
 
     // ReSharper disable once CollectionNeverQueried.Global
     public Dictionary<FName, HashSet<uint>> NameToOffsetLookup = [];
     public Dictionary<uint, FName>          OffsetToNameLookup = [];
     [SuppressMessage("ReSharper", "CollectionNeverQueried.Global")]
     public Dictionary<FName, Entry> DataTable = [];
+
+    internal Dictionary<int, CachedObject> objectCache = [];
+
+    public FrozenObject(InnerAsset asset) {
+        this.asset = asset;
+        indexes    = new(this);
+        properties = new(this);
+        entries    = new(this);
+    }
 
     internal void Read(BinaryReader reader) {
         var frozenSize = reader.ReadUInt32();
@@ -79,17 +88,17 @@ public class FrozenObject(InnerAsset asset) {
             return key;
         });
 
-        indexes = new();
+        indexes = new(this);
         indexes.Read(reader, reader.ReadInt32);
 
-        properties = new();
+        properties = new(this);
         properties.Read(reader, () => {
             var property = new Property(this);
             property.Read(reader);
             return property;
         });
 
-        entries = new();
+        entries = new(this);
         entries.Read(reader, () => {
             var value = new Entry(this, properties.data);
             value.Read(reader);
@@ -125,8 +134,10 @@ public class FrozenObject(InnerAsset asset) {
         writer.WriteData(properties, writer.Write);
 
         // Write all the base entries, *then* go back and write all the array data.
+        objectCache = [];
         writer.WriteData(entries, entry => writer.Write(entry, PropertyWriteMode.MAIN_OBJ_ONLY));
         foreach (var entry in entries.data) {
+            writer.BaseStream.Position = writer.BaseStream.Position.Align(8);
             writer.Write(entry, PropertyWriteMode.SUB_OBJECTS_ONLY);
         }
         //writer.WriteData(entries, entry => writer.Write(entry, PropertyWriteMode.SUB_OBJECTS_ONLY));
@@ -196,7 +207,7 @@ public class FrozenObject(InnerAsset asset) {
             minimalNames.Add(minimalName);
         }
 
-        if (!minimalName.offsets.Contains(offset)) minimalName.offsets.Add(offset);
+        minimalName.offsets.Add(offset);
     }
 }
 
