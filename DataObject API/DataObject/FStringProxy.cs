@@ -29,7 +29,8 @@ public class FStringProxy(FrozenObject obj) : ICachableObject {
     }
 
     internal void WriteHeader(BinaryWriter writer) {
-        headerPos = writer.BaseStream.Position;
+        dataPtr.hasData = data is {Length: > 0};
+        headerPos       = writer.BaseStream.Position;
         writer.Write(dataPtr); // Update later.
         writer.Write(data?.Length + 1 ?? 0); // +1 for null term.
         writer.Write(charMax);

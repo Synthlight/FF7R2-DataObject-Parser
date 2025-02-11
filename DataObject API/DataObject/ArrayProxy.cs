@@ -31,7 +31,8 @@ public class ArrayProxy<T>(FrozenObject obj) : ICachableObject {
     }
 
     internal void WriteHeader(BinaryWriter writer) {
-        headerPos = writer.BaseStream.Position;
+        dataPtr.hasData = data.Count > 0;
+        headerPos       = writer.BaseStream.Position;
         writer.Write(dataPtr); // Update later.
         writer.Write(data.Count);
         writer.Write(data.Count);

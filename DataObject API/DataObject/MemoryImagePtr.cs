@@ -5,7 +5,7 @@ namespace FF7R2.DataObject;
 public class MemoryImagePtr {
     public ulong packed;
 
-    internal bool isFrozen {
+    internal bool hasData {
         get => (packed & 1) == 1;
         set {
             if (value) {
@@ -18,7 +18,7 @@ public class MemoryImagePtr {
 
     public long OffsetFromThis {
         get => (long) packed >> 1;
-        set => packed = (isFrozen ? 1UL : 0UL) | (ulong) (value << 1);
+        set => packed = (hasData ? 1UL : 0UL) | (ulong) (value << 1);
     }
 
     internal void Read(BinaryReader reader) {
