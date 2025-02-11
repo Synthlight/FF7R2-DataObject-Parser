@@ -17,6 +17,7 @@ public sealed class OtherTests {
         Debug.Assert(a[0].GetHashCode() == b[0].GetHashCode());
         Debug.Assert(a.GetListHashCode() == b.GetListHashCode());
 
+        // Using `GetHashCode` by itself wound up with this being 0. Adding the prime multiplier fixed it.
         var data = new List<byte> {0, 1, 2, 3, 4, 5, 6, 7};
         Debug.Assert(data.GetListHashCode() != 0);
     }
@@ -25,12 +26,8 @@ public sealed class OtherTests {
     public void TestAssignArrayData() {
         var asset     = IoStoreAsset.Load(@"V:\FF7R2\End\Content\DataObject\Resident\Equipment.uasset");
         var equipment = asset.innerAsset.frozenObject.DataTable[EquipmentRows.E_ACC_1002];
-        var prop      = equipment.propertyValues[EquipmentProperties.StatusChangeResist_Array];
-        if (prop == null) {
-            throw new("`prop` is null.");
-        }
-
-        var accessory = asset.innerAsset.frozenObject.DataTable[EquipmentRows.E_ACC_0008]; // E_ACC_0001, E_ACC_0003
+        var prop      = equipment.propertyValues[EquipmentProperties.StatusChangeResist_Array]!;
+        var accessory = asset.innerAsset.frozenObject.DataTable[EquipmentRows.E_ACC_0001];
         accessory.propertyValues[EquipmentProperties.StatusChangeResist_Array]!.As<ArrayProperty>()!.Data = prop.As<ArrayProperty>()!.Data;
 
         var tempFile = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName() + ".Equipment.uasset");
@@ -44,29 +41,16 @@ public sealed class OtherTests {
 
     [TestMethod]
     public void TestAssignArrayDataLoop() {
-        var asset       = IoStoreAsset.Load(@"V:\FF7R2\End\Content\DataObject\Resident\Equipment.uasset");
-        var equipment   = asset.innerAsset.frozenObject.DataTable[EquipmentRows.E_ACC_1002];
-        var ogArrayProp = equipment.propertyValues[EquipmentProperties.StatusChangeResist_Array]?.As<ArrayProperty>();
-        if (ogArrayProp == null) {
-            throw new("`prop` is null.");
-        }
+        var asset          = IoStoreAsset.Load(@"V:\FF7R2\End\Content\DataObject\Resident\Equipment.uasset");
+        var ribbon         = asset.innerAsset.frozenObject.DataTable[EquipmentRows.E_ACC_1002];
+        var ribbonStatuses = ribbon.propertyValues[EquipmentProperties.StatusChangeResist_Array]!.As<ArrayProperty>()!;
 
-        for (var i = 1; i <= 9999; i++) {
-            var key = $"E_ACC_{i:D4}";
-            if (i is 1 or 3 or 214 or 256) {
-                Debug.WriteLine($"Skipping acc: {key}");
-                continue;
-            }
-            if (key == nameof(EquipmentRows.E_ACC_1002)) continue;
-            if (!asset.innerAsset.frozenObject.DataTable.TryGetValue(key, out var accessory)) continue;
-            Debug.WriteLine($"Changing acc: {key}");
-            var arrayProp = accessory.propertyValues[EquipmentProperties.StatusChangeResist_Array]!.As<ArrayProperty>()!;
-            /*
-            if (ogArrayProp.data.dataPtr.isFrozen != arrayProp.data.dataPtr.isFrozen) {
-                throw new("`isFrozen` doesn't match.");
-            }
-            */
-            arrayProp.Data = ogArrayProp.Data;
+        // Apply ribbon resistances to everything!
+        foreach (var (key, value) in asset.innerAsset.frozenObject.DataTable) {
+            if (key == nameof(EquipmentRows.E_ACC_1002)) continue; // Skip self.
+            Debug.WriteLine($"Changing: {key}");
+            var arrayProp = value.propertyValues[EquipmentProperties.StatusChangeResist_Array]!.As<ArrayProperty>()!;
+            arrayProp.Data = ribbonStatuses.Data;
         }
 
         var tempFile = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName() + ".Equipment.uasset");
