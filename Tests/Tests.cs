@@ -1,4 +1,7 @@
-﻿using FF7R2.DataObject;
+﻿using System.Diagnostics;
+using CUE4Parse.GameTypes.FF7.Assets.Objects.Properties;
+using FF7R2.DataObject;
+using FF7R2.DataObject.Properties;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FF7R2.Tests;
@@ -12,7 +15,33 @@ public sealed class Tests {
     [DynamicData(nameof(GetFilesToTest), DynamicDataSourceType.Method)]
     [DataTestMethod]
     public void TestReadFiles(string file) {
-        IoStoreAsset.Load(file);
+        var asset = IoStoreAsset.Load(file);
+        Debug.Assert(asset != null);
+    }
+
+    [DynamicData(nameof(GetFilesToTest), DynamicDataSourceType.Method)]
+    [DataTestMethod]
+    public void CheckForEmptyVsNullStrings(string file) {
+        IoStoreAsset asset;
+        try {
+            asset = IoStoreAsset.Load(file);
+        } catch (Exception e) {
+            Assert.Inconclusive($"{e.Message}\n{e.StackTrace}");
+            return;
+        }
+
+        foreach (var (_, value) in asset.innerAsset.frozenObject.DataTable) {
+            foreach (var propertyValue in value.propertyValues) {
+                if (propertyValue is StrProperty strProp) {
+                    if (strProp.Data == "") throw new("Empty string found.");
+                } else if (propertyValue is ArrayProperty {property.UnderlyingType: FF7propertyType.StrProperty} arrProp) {
+                    foreach (var arrData in arrProp.Data!) {
+                        var data = (StrProperty) arrData;
+                        if (data.Data == "") throw new("Empty string found.");
+                    }
+                }
+            }
+        }
     }
 
     [DynamicData(nameof(GetFilesToTest), DynamicDataSourceType.Method)]
@@ -28,7 +57,9 @@ public sealed class Tests {
         // Just write to a temp file for easy comparison.
         var tempFile = file.Replace(PathHelper.BASE_PATH, PathHelper.TEST_WRITE_PATH);
         asset.Save(tempFile, IoStoreAsset.Mode.WRITE_PARSED_DATA);
-        IoStoreAsset.Load(tempFile);
+
+        asset = IoStoreAsset.Load(tempFile);
+        Debug.Assert(asset != null);
     }
 
     [DynamicData(nameof(GetFilesToTest), DynamicDataSourceType.Method)]
@@ -44,6 +75,8 @@ public sealed class Tests {
         // Just write to a temp file for easy comparison.
         var tempFile = file.Replace(PathHelper.BASE_PATH, PathHelper.TEST_WRITE_PATH);
         asset.Save(tempFile, IoStoreAsset.Mode.OG_MODIFIED_BYTES);
-        IoStoreAsset.Load(tempFile);
+
+        asset = IoStoreAsset.Load(tempFile);
+        Debug.Assert(asset != null);
     }
 }

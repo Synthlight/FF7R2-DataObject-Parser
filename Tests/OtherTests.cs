@@ -78,4 +78,44 @@ public sealed class OtherTests {
         asset = IoStoreAsset.Load(tempFile);
         Debug.Assert(asset != null);
     }
+
+    [TestMethod]
+    public void TestBattleCharaSpec() {
+        var asset = IoStoreAsset.Load(@"V:\FF7R2\End\Content\DataObject\Resident\BattleCharaSpec.uasset");
+
+        foreach (var (_, value) in asset.innerAsset.frozenObject.DataTable) {
+            var hp = value.propertyValues[BattleCharaSpecProperties.HP]!.As<Int32Property>()!;
+            hp.Data = (int) (hp.Data * CalculateMultiplier(hp.Data));
+
+            var hpDirect = value.propertyValues[BattleCharaSpecProperties.HPDirect]!.As<Int32Property>()!;
+            hpDirect.Data = (int) (hpDirect.Data * CalculateMultiplier(hpDirect.Data));
+        }
+
+        var tempFile = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName() + ".Equipment.uasset");
+        //const string tempFile = @"R:\Games\Final Fantasy VII Remake Rebirth\Mods\GMod\Content\End\Content\DataObject\Resident\BattleCharaSpec.uasset";
+        Debug.WriteLine($"Writing temp file: {tempFile}");
+        asset.Save(tempFile, IoStoreAsset.Mode.WRITE_PARSED_DATA);
+
+        asset = IoStoreAsset.Load(tempFile);
+        Debug.Assert(asset != null);
+    }
+
+    // Constants for multipliers and HP values
+    private const double MIN_MULTIPLIER = 3.0; // Multiplier for values <= MIN_HP
+    private const double MAX_MULTIPLIER = 1.5; // Multiplier for values >= MAX_HP
+    private const int    MIN_HP         = 100; // Values <= MIN_HP get MIN_MULTIPLIER
+    private const int    MAX_HP         = 4000; // Values >= MAX_HP get MAX_MULTIPLIER
+
+    // Method to calculate the dynamic multiplier
+    public static double CalculateMultiplier(int value) {
+        // Multiplier ranges from MIN_MULTIPLIER to MAX_MULTIPLIER
+        if (value <= MIN_HP) {
+            return MIN_MULTIPLIER;
+        } else if (value >= MAX_HP) {
+            return MAX_MULTIPLIER;
+        } else {
+            // Linear interpolation between MIN_MULTIPLIER and MAX_MULTIPLIER
+            return MIN_MULTIPLIER - ((MIN_MULTIPLIER - MAX_MULTIPLIER) * (value - MIN_HP) / (MAX_HP - MIN_HP));
+        }
+    }
 }

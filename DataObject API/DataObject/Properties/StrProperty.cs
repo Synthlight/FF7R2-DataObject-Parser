@@ -4,7 +4,10 @@ public class StrProperty(FrozenObject obj, Property property) : PropertyValue<st
     private FStringProxy internalData = new(obj);
     public override string? Data {
         get => internalData.data;
-        set => internalData.data = value;
+        set {
+            if (value == "") value = null;
+            internalData.data = value;
+        }
     }
 
     public override string? DataAsByteProxy {
