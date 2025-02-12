@@ -737,7 +737,7 @@ typedef struct {
 
 string GetFNameString(FName& name) {
     if (name.number > 0) {
-        return Str("%s_%d", names[name.index].value, name.number);
+        return Str("%s_%d", names[name.index].value, name.number - 1);
     } else {
         return names[name.index].value;
     }
